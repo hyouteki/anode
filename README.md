@@ -25,3 +25,4 @@ git clone --depth 1 --recursive https://github.com/Hyouteki/BTP-project.git
   > Launch this within the `OutlierDetectionYOLO` directory
 ### References
 - https://github.com/patrick013/Object-Detection---Yolov3
+- https://www.kaggle.com/code/yw6916/how-to-build-yolo-v3/notebook
