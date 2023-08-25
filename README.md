@@ -15,13 +15,13 @@ git clone --depth 1 --recursive https://github.com/Hyouteki/BTP-project.git
   pip install numpy
   pip install matplotlib
   ```
+- Download `yolov3.weights` from [here](https://www.kaggle.com/datasets/aruchomu/data-for-yolo-v3-kernel?resource=download) and paste it inside `ObjectDetectionYOLO\model`.
 - Build yolov3 model
   <br><br>
   ``` bash
   cd ObjectDetectionYOLO\
   python build_model_v3_h5.py
   ```
-- Download `yolov3.weights` from [here](https://www.kaggle.com/datasets/aruchomu/data-for-yolo-v3-kernel?resource=download) and paste it inside `ObjectDetectionYOLO\model`.
 - Launch
   <br><br>
   ``` bash
