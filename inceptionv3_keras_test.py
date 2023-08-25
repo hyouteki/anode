@@ -1,8 +1,11 @@
 """
-Requirements:
+@requirements
 pip install keras
 pip install numpy
 pip install termcolor
+
+@deprecated 
+because InceptionV3 is made to detect a single class/object in an image
 """
 
 from keras.applications import InceptionV3
@@ -13,7 +16,7 @@ from termcolor import colored
 
 inception_model = InceptionV3(weights='imagenet')
 
-img_path = r"duck.jpeg"
+img_path = r"catdog.jpg"
 img = image.load_img(img_path, target_size=(299, 299))  # InceptionV3 input size
 img_array = image.img_to_array(img)
 img_array = np.expand_dims(img_array, axis=0)
@@ -27,4 +30,4 @@ predictions = inception_model.predict(img_array)
 # This will print out the top 3 predicted labels along with their corresponding scores.
 decoded_predictions = decode_predictions(predictions, top=3)[0]
 for i, (imagenet_id, label, score) in enumerate(decoded_predictions):
-    print(f"{i + 1}: {label} ({score:.2f})")
+    print(colored(f"{i + 1}: {label} ({score:.2f})", "blue"))
