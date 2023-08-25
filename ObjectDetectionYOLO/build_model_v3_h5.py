@@ -162,7 +162,7 @@ class WeightReader:
 #define model
 model = make_yolov3_model()
 # load the model weights
-weight_reader = WeightReader(r"C:\Users\mainl\Downloads\yolov3.weights")
+weight_reader = WeightReader(r"model\yolov3.weights")
 # set the model weights into the model
 weight_reader.load_weights(model)
 # save the model to file
