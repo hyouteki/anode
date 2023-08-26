@@ -16,26 +16,26 @@ def make_annotation(video_capture):
     new_frame_time = 0
     while True:
         new_frame_time = time()
-        success, img = video_capture.read()
-        results = model(img, stream=True)
+        success, frame = video_capture.read()
+        results = model(frame, stream=True)
 
         for result in results:
             boxes = result.boxes
             for box in boxes:
                 x1, y1, x2, y2 = box.xyxy[0]
                 x1, y1, x2, y2 = int(x1), int(y1), int(x2), int(y2)
-                # cv2.rectangle(img,(x1,y1),(x2,y2),(255,0,255),3)
+                # cv2.rectangle(frame,(x1,y1),(x2,y2),(255,0,255),3)
                 w, h = x2 - x1, y2 - y1
-                cornerRect(img, (x1, y1, w, h))
+                cornerRect(frame, (x1, y1, w, h))
                 confidence = ceil((box.conf[0] * 100)) / 100
                 cls = int(box.cls[0])
-                putTextRect(img, f'{classes[cls]} {confidence}', (max(0, x1), max(35, y1)), scale=1, thickness=1)
+                putTextRect(frame, f'{classes[cls]} {confidence}', (max(0, x1), max(35, y1)), scale=1, thickness=1)
 
         fps = 1 / (new_frame_time - prev_frame_time)
         prev_frame_time = new_frame_time
         print(fps)
 
-        imshow("Image", img)
+        imshow("Image", frame)
         waitKey(1)
 
 @app.command()

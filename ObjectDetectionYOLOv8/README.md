@@ -1,3 +1,4 @@
+![Thumbnail](assets/thumbnail.png)
 ## Requirements
 ``` console
 pip install ultralytics
@@ -12,3 +13,5 @@ python object_detection_yolov8.py video <video_path>
 ## References
 - https://www.computervision.zone/courses/object-detection-course/
 - https://youtu.be/WgPbbWmnXJ8?feature=shared
+## Courtesy
+- https://pixabay.com/videos/cat-nature-animal-outdoors-pet-32033/
