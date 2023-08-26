@@ -1,9 +1,12 @@
 ObjectDetectionVideo/model/model.h5
 ObjectDetectionVideo/model/yolov3.weights
 ObjectDetectionVideo/frames/
+ObjectDetectionVideo/__pycache__/
+ObjectDetectionVideo/src/__pycache__/
+
 ObjectDetectionYOLO/model/model.h5
 ObjectDetectionYOLO/model/yolov3.weights
 ObjectDetectionYOLO/__pycache__/
 ObjectDetectionYOLO/src/__pycache__/
-ObjectDetectionVideo/__pycache__/
-ObjectDetectionVideo/src/__pycache__/
+
+ObjectDetectionYOLOv8/model/yolov8l.pt

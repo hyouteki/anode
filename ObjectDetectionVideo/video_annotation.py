@@ -3,6 +3,9 @@
 opencv-python
 openh264-1.8.0-win64.dll
 ffmpeg
+yolov3.weights
+yolov3.cfg
+coco.names
 """
 
 from cv2 import VideoCapture, VideoWriter, VideoWriter_fourcc, rectangle 
