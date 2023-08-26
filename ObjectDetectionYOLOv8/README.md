@@ -3,7 +3,6 @@
 ``` console
 pip install ultralytics
 pip install opencv-python
-pip install cvzone
 pip install typer
 ```
 ## Quick start
