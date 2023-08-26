@@ -8,7 +8,8 @@ pip install typer
 ```
 ## Quick start
 ``` console
-python object_detection_yolov8.py video <video_path>
+python object_detection_yolov8.py video <video_path.mp4>
+python object_detection_yolov8.py video <video_path.mp4> --output-path <output_path.mp4>
 ```
 ## References
 - https://www.computervision.zone/courses/object-detection-course/
