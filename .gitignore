@@ -1,6 +1,6 @@
-ObjectDetectionYOLO/model/model.h5
-ObjectDetectionYOLO/model/yolov3.weights
-ObjectDetectionYOLO/__pycache__/
-ObjectDetectionYOLO/src/__pycache__/
+ObjectDetectionYOLOv3/model/model.h5
+ObjectDetectionYOLOv3/model/yolov3.weights
+ObjectDetectionYOLOv3/__pycache__/
+ObjectDetectionYOLOv3/src/__pycache__/
 
 ObjectDetectionYOLOv8/model/yolov8l.pt

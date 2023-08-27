@@ -5,9 +5,9 @@ from math import ceil
 from time import time
 from typer import Typer
 
-COLOR_RECTANGLE = (223, 65, 80)
-COLOR_TEXT = (255, 255, 255)
-COLOR_OUTLINE = (32, 190, 175)
+COLOR_RECTANGLE = (223, 65, 80)[::-1]
+COLOR_TEXT = (255, 255, 255)[::-1]
+COLOR_OUTLINE = (32, 190, 175)[::-1]
 
 app = Typer()
 
@@ -16,23 +16,21 @@ with open("model/coco.names", "r") as file:
     classes = file.read().rstrip('\n').split('\n')
 
 def make_bounding_rectangle(frame, bounding_box, thickness = 2, color = COLOR_RECTANGLE):
-    x, y, w, h = bounding_box
-    x1, y1 = x + w, y + h
     if thickness != 0:
         rectangle(frame, bounding_box, color = color, thickness = thickness)
     return frame
 
 def make_text_box(frame, text, pos, scale = 0.7, thickness = 2, color_text = COLOR_TEXT,
                 color_rectangle = COLOR_RECTANGLE, font = FONT_HERSHEY_SIMPLEX,
-                offset = 10, border = None, color_outline = COLOR_OUTLINE):
+                offset = 0, border = None, color_outline = COLOR_OUTLINE):
     ox, oy = pos
     (w, h), _ = getTextSize(text, font, scale, thickness)
     x1, y1, x2, y2 = ox - offset, oy + offset, ox + w + offset, oy - h - offset
 
-    rectangle(frame, (x1, y1), (x2, y2), color_rectangle, FILLED)
+    rectangle(frame, (x1, y1), (x2+10, y2-10), color_rectangle, FILLED)
     if border is not None:
         rectangle(frame, (x1, y1), (x2, y2), color_outline, border)
-    putText(frame, text, (ox, oy), font, scale, color_text, thickness)
+    putText(frame, text, (ox+5, oy-5), font, scale, color_text, thickness)
 
     return frame, [x1, y2, x2, y1]
 
