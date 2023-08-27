@@ -1,5 +1,5 @@
 from ultralytics import YOLO
-from cv2 import VideoCapture, imshow, waitKey, VideoWriter, putText, getTextSize
+from cv2 import VideoCapture, imshow, waitKey, VideoWriter, putText, getTextSize, destroyAllWindows
 from cv2 import line, rectangle, VideoWriter_fourcc, FONT_HERSHEY_SIMPLEX, FILLED
 from math import ceil
 from time import time
@@ -76,9 +76,10 @@ def make_annotation(video_capture, output_path: str = None):
             out.write(frame)
         waitKey(1)
 
+    video_capture.release()
     if output_path is not None:
         out.release()
-    video_capture.release()
+    destroyAllWindows()
 
 @app.command()
 def webcam():
