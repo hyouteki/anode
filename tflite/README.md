@@ -3,6 +3,7 @@
 ``` console
 pip install opencv-python
 pip install tensorflow
+pip install keyboard
 ```
 ## Quick start
 ``` console
