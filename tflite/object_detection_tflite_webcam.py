@@ -18,6 +18,7 @@ from cv2 import (
     waitKey,
     destroyAllWindows,
 )
+from keyboard import is_pressed
 from numpy import float32, expand_dims
 from time import sleep
 from threading import Thread
@@ -171,28 +172,29 @@ while True:
             xmin = int(max(1, (boxes[i][1] * imW)))
             ymax = int(min(imH, (boxes[i][2] * imH)))
             xmax = int(min(imW, (boxes[i][3] * imW)))
+            w = xmax - xmin
+            h = ymax - ymin
 
-            rectangle(frame, (xmin, ymin), (xmax, ymax), (10, 255, 0), 2)
+            rectangle(
+                frame, (xmin, ymin, xmax - xmin, ymax - ymin), (223, 65, 80)[::-1], 2
+            )
 
             object_name = labels[int(classes[i])]
             label = f"{object_name} {int(scores[i] * 100)}%"
-            labelSize, baseLine = getTextSize(label, FONT_HERSHEY_SIMPLEX, 0.7, 2)
-            label_ymin = max(ymin, labelSize[1] + 10)
-            rectangle(
-                frame,
-                (xmin, label_ymin - labelSize[1] - 10),
-                (xmin + labelSize[0], label_ymin + baseLine - 10),
-                (255, 255, 255),
-                FILLED,
-            )
+
+            ox, oy = max(0, xmin), max(35, ymin)
+            (w, h), _ = getTextSize(label, FONT_HERSHEY_SIMPLEX, 0.7, 1)
+            x1, y1, x2, y2 = ox, oy, ox + w, oy - h
+
+            rectangle(frame, (x1, y1), (x2 + 10, y2 - 10), (223, 65, 80)[::-1], FILLED)
             putText(
                 frame,
                 label,
-                (xmin, label_ymin - 7),
+                (ox + 5, oy - 5),
                 FONT_HERSHEY_SIMPLEX,
                 0.7,
-                (0, 0, 0),
-                2,
+                (255, 255, 255)[::-1],
+                1,
             )
 
     putText(
@@ -201,7 +203,7 @@ while True:
         (30, 50),
         FONT_HERSHEY_SIMPLEX,
         1,
-        (255, 255, 0),
+        (223, 65, 80)[::-1],
         2,
         LINE_AA,
     )
@@ -210,8 +212,9 @@ while True:
     t2 = getTickCount()
     time1 = (t2 - t1) / freq
     frame_rate_calc = 1 / time1
-    if waitKey(1) & 0xFF == ord("q"):
+    if is_pressed("q"):
         break
+    waitKey(1)
 
 destroyAllWindows()
 videostream.stop()
