@@ -1,4 +1,8 @@
 from ultralytics import YOLO
+from math import ceil
+from time import time
+from typer import Typer
+from json import load
 from cv2 import (
     VideoCapture,
     imshow,
@@ -12,9 +16,6 @@ from cv2 import (
     FONT_HERSHEY_SIMPLEX,
     FILLED,
 )
-from math import ceil
-from time import time
-from typer import Typer
 
 COLOR_RECTANGLE = (223, 65, 80)[::-1]
 COLOR_TEXT = (255, 255, 255)[::-1]
@@ -22,9 +23,12 @@ COLOR_OUTLINE = (32, 190, 175)[::-1]
 
 app = Typer()
 
-model = YOLO("model/yolov8l.pt")
-with open("model/coco.names", "r") as file:
-    classes = file.read().rstrip("\n").split("\n")
+
+def init_model(params):
+    model = YOLO(params["model"])
+    with open(params["coco"], "r") as file:
+        classes = file.read().rstrip("\n").split("\n")
+    return model, classes
 
 
 def make_bounding_rectangle(frame, bounding_box, thickness=2, color=COLOR_RECTANGLE):
@@ -58,7 +62,7 @@ def make_text_box(
     return frame, [x1, y2, x2, y1]
 
 
-def make_annotation(video_capture, output_path: str = None):
+def make_annotation(video_capture, model, classes, output_path: str = None):
     prev_frame_time = 0
     new_frame_time = 0
     frame_count = 1
@@ -109,17 +113,30 @@ def make_annotation(video_capture, output_path: str = None):
 
 
 @app.command()
-def webcam():
-    video_capture = VideoCapture(1)
+def webcam(source: int = 0, params_path: str = "params.json"):
+    with open(params_path, "r") as file:
+        params = load(file)
+    model, classes = init_model(params)
+    video_capture = VideoCapture(source)
     video_capture.set(3, 1280)
     video_capture.set(4, 720)
-    make_annotation(video_capture)
+    make_annotation(
+        video_capture=video_capture, model=model, classes=classes, output_path=None
+    )
 
 
 @app.command()
-def video(path: str, output_path: str = None):
+def video(path: str, params_path: str = "params.json", output_path: str = None):
+    with open(params_path, "r") as file:
+        params = load(file)
+    model, classes = init_model(params)
     video_capture = VideoCapture(path)
-    make_annotation(video_capture, output_path)
+    make_annotation(
+        video_capture=video_capture,
+        model=model,
+        classes=classes,
+        output_path=output_path,
+    )
 
 
 if __name__ == "__main__":

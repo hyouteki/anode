@@ -1,0 +1,4 @@
+{
+    "model": "model/yolov3-tiny.cfg",
+    "coco": "model/coco.names"
+}
