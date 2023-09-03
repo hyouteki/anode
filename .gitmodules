@@ -1,3 +1,0 @@
-[submodule "tflite"]
-	path = tflite
-	url = https://github.com/EdjeElectronics/TensorFlow-Lite-Object-Detection-on-Android-and-Raspberry-Pi.git
