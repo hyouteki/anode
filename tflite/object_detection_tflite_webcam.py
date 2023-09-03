@@ -210,7 +210,7 @@ while True:
     t2 = getTickCount()
     time1 = (t2 - t1) / freq
     frame_rate_calc = 1 / time1
-    if waitKey(0) & 0xFF == ord("q"):
+    if waitKey(1) & 0xFF == ord("q"):
         break
 
 destroyAllWindows()
