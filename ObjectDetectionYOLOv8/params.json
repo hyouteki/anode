@@ -1,4 +1,0 @@
-{
-    "model": "model/yolov8l.pt",
-    "coco": "model/coco.names"
-}
