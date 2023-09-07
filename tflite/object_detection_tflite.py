@@ -175,9 +175,7 @@ while True:
             w = xmax - xmin
             h = ymax - ymin
 
-            rectangle(
-                frame, (xmin, ymin, xmax - xmin, ymax - ymin), (223, 65, 80)[::-1], 2
-            )
+            rectangle(frame, (xmin, ymin), (xmax, ymax), (223, 65, 80)[::-1], 2)
 
             object_name = labels[int(classes[i])]
             label = f"{object_name} {int(scores[i] * 100)}%"

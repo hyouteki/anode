@@ -13,4 +13,5 @@ python object_detection_tflite.py --modeldir=model
 - https://github.com/EdjeElectronics/TensorFlow-Lite-Object-Detection-on-Android-and-Raspberry-Pi/tree/master
 ## References
 - https://youtu.be/aimSGOAUI8Y
-- https://www.tensorflow.org/lite/inference_with_metadata/task_library/object_detector
+- tflite object detection overview: https://www.tensorflow.org/lite/examples/object_detection/overview
+- tflite pretrained object detection models: https://tfhub.dev/s?deployment-format=lite&module-type=image-object-detection&tf-version=tf2   
