@@ -2,15 +2,11 @@ from argparse import ArgumentParser
 from ultralytics import YOLO
 from json import load
 from keyboard import is_pressed
-from time import sleep
 from threading import Thread
 from math import ceil
 from cv2 import (
     VideoCapture,
-    getTickCount,
-    getTickFrequency,
     cvtColor,
-    LINE_AA,
     COLOR_BGR2RGB,
     rectangle,
     getTextSize,
@@ -74,18 +70,12 @@ MODEL = YOLO(params["model"])
 with open(params["coco"], "r") as file:
     CLASSES = file.read().rstrip("\n").split("\n")
 
-frame_rate_calc = 1
-freq = getTickFrequency()
 videostream = VideoStream().start()
-sleep(1)
 
 while True:
-    t1 = getTickCount()
-    frame1 = videostream.read()
-    frame = frame1.copy()
-    frame_rgb = cvtColor(frame, COLOR_BGR2RGB)
+    frame = videostream.read()
 
-    results = MODEL(frame_rgb, stream=True)
+    results = MODEL(cvtColor(frame, COLOR_BGR2RGB), stream=True)
 
     for result in results:
         boxes = result.boxes
@@ -104,21 +94,8 @@ while True:
                 frame, label, (ox + 5, oy - 5), FONT_HERSHEY_SIMPLEX, 0.7, COLOR_TEXT, 1
             )
 
-    putText(
-        frame,
-        "FPS: {0:.2f}".format(frame_rate_calc),
-        (30, 50),
-        FONT_HERSHEY_SIMPLEX,
-        1,
-        (223, 65, 80)[::-1],
-        2,
-        LINE_AA,
-    )
+    imshow("pod yolov8", frame)
 
-    imshow("Object detector", frame)
-    t2 = getTickCount()
-    time1 = (t2 - t1) / freq
-    frame_rate_calc = 1 / time1
     if is_pressed("q"):
         break
     waitKey(1)
