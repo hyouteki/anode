@@ -1,1 +1,2 @@
-yolo/model/yolov8l.pt
+# ignoring any model file
+*.pt
