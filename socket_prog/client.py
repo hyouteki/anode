@@ -1,46 +1,39 @@
-import socket
-import cv2
-import pickle
-import struct
+from socket import socket, gethostname, AF_INET, SOCK_STREAM
+from cv2 import VideoCapture, destroyAllWindows
+from argparse import ArgumentParser
+from json import load
+from pickle import dumps
+from struct import pack
 
-client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-# host_ip = '192.168.43.95'  # Replace with your server's IP address
-host_ip = socket.gethostname()
-port = 9999
-client_socket.connect((host_ip, port))
+if __name__ == "__main__":
 
-camera = cv2.VideoCapture(0)
+    def get_config_file():
+        parser = ArgumentParser()
+        parser.add_argument(
+            "--config",
+            help="where the .config file is located",
+            default=".config",
+        )
 
-# Create a window for displaying the camera feed
-# cv2.namedWindow("Client Camera", cv2.WINDOW_NORMAL)
+        args = parser.parse_args()
+        CONFIG_PATH = args.config
+        with open(CONFIG_PATH, "r") as file:
+            return load(file)
 
-while True:
-    try:
-        # Capture a frame from the webcam
+    CONFIG = get_config_file()
+
+    client_socket = socket(AF_INET, SOCK_STREAM)
+    client_socket.connect((gethostname(), CONFIG["socket"]["port"]))
+
+    camera = VideoCapture(0)
+
+    while True:
         ret, frame = camera.read()
         if not ret:
             break
-        frame = cv2.resize(frame, (640, 480))
-        # Serialize the frame
-        data = pickle.dumps(frame)
-
-        # Send the frame size and then the frame data
-        client_socket.sendall(struct.pack("Q", len(data)) + data)
-
-        # Receive the annotated frame from the server (if needed)
-        # annotated_frame_data = client_socket.recv(4 * 1024)
-        # annotated_frame = pickle.loads(annotated_frame_data)
-
-        # Display the camera frame locally
-        # cv2.imshow("Client Camera", frame)
-
-        # key = cv2.waitKey(1) & 0xFF
-        # if key == ord("q"):
-        #     break
-
-    except Exception as e:
-        print(str(e))
+        data = dumps(frame)
+        client_socket.sendall(pack("Q", len(data)) + data)
 
 camera.release()
-cv2.destroyAllWindows()
+destroyAllWindows()
 client_socket.close()
