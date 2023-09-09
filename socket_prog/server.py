@@ -19,6 +19,7 @@ from cv2 import (
     destroyAllWindows,
 )
 
+
 def object_detection(frame, model):
     frame_rgb = cv2.cvtColor(frame, cv2.COLOR_BGR2RGB)
     results = model(frame_rgb, stream=True)
@@ -35,12 +36,22 @@ def object_detection(frame, model):
             (w, h), _ = cv2.getTextSize(label, FONT_HERSHEY_SIMPLEX, 0.7, 1)
             x1, y1, x2, y2 = x1, y1 - 20, x1 + w, y1
             rectangle(frame, (x1, y1), (x2 + 10, y2 - 10), (223, 65, 80), FILLED)
-            putText(frame, label, (x1 + 5, y1 - 5), FONT_HERSHEY_SIMPLEX, 0.7, (255, 255, 255), 1)
+            putText(
+                frame,
+                label,
+                (x1 + 5, y1 - 5),
+                FONT_HERSHEY_SIMPLEX,
+                0.7,
+                (255, 255, 255),
+                1,
+            )
 
     return frame
 
+
 def open_camera_window(window_name, frame):
     cv2.imshow(window_name, frame)
+
 
 parser = ArgumentParser()
 parser.add_argument(
@@ -60,7 +71,8 @@ with open(params["coco"], "r") as file:
     CLASSES = file.read().rstrip("\n").split("\n")
 
 server_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-host_ip = '192.168.43.95'  # Replace with your server's IP address
+# host_ip = '192.168.43.95'  # Replace with your server's IP address
+host_ip = socket.gethostname()
 port = 9999
 server_socket.bind((host_ip, port))
 server_socket.listen(5)
@@ -68,7 +80,7 @@ print("Listening for incoming connections...")
 
 while True:
     client_socket, addr = server_socket.accept()
-    print('Received connection from', addr)
+    print("Received connection from", addr)
 
     data = b""
     payload_size = struct.calcsize("Q")
@@ -95,11 +107,11 @@ while True:
         open_camera_window("Server Camera", annotated_frame)
 
         # Send the annotated frame back to the client
-        annotated_data = pickle.dumps(annotated_frame)
-        client_socket.sendall(struct.pack("Q", len(annotated_data)) + annotated_data)
+        # annotated_data = pickle.dumps(annotated_frame)
+        # client_socket.sendall(struct.pack("Q", len(annotated_data)) + annotated_data)
 
         key = cv2.waitKey(1) & 0xFF
-        if key == ord('q'):
+        if key == ord("q"):
             break
 
     client_socket.close()

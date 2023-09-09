@@ -4,21 +4,23 @@ import pickle
 import struct
 
 client_socket = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-host_ip = '192.168.43.95'  # Replace with your server's IP address
+# host_ip = '192.168.43.95'  # Replace with your server's IP address
+host_ip = socket.gethostname()
 port = 9999
 client_socket.connect((host_ip, port))
 
 camera = cv2.VideoCapture(0)
 
 # Create a window for displaying the camera feed
-cv2.namedWindow("Client Camera", cv2.WINDOW_NORMAL)
+# cv2.namedWindow("Client Camera", cv2.WINDOW_NORMAL)
 
 while True:
     try:
         # Capture a frame from the webcam
         ret, frame = camera.read()
+        if not ret:
+            break
         frame = cv2.resize(frame, (640, 480))
-
         # Serialize the frame
         data = pickle.dumps(frame)
 
@@ -30,15 +32,14 @@ while True:
         # annotated_frame = pickle.loads(annotated_frame_data)
 
         # Display the camera frame locally
-        cv2.imshow("Client Camera", frame)
+        # cv2.imshow("Client Camera", frame)
 
-        key = cv2.waitKey(1) & 0xFF
-        if key == ord('q'):
-            break
+        # key = cv2.waitKey(1) & 0xFF
+        # if key == ord("q"):
+        #     break
 
     except Exception as e:
         print(str(e))
-        break
 
 camera.release()
 cv2.destroyAllWindows()
