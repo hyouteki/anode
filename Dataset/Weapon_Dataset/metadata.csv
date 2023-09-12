@@ -1,0 +1,715 @@
+imagefile,labelfile,target,train_id
+Automatic Rifle_10.jpeg,Automatic Rifle_10.txt,0,1
+Automatic Rifle_100.jpeg,Automatic Rifle_100.txt,0,1
+Automatic Rifle_11.jpeg,Automatic Rifle_11.txt,0,1
+Automatic Rifle_12.jpeg,Automatic Rifle_12.txt,0,1
+Automatic Rifle_13.jpeg,Automatic Rifle_13.txt,0,0
+Automatic Rifle_14.jpeg,Automatic Rifle_14.txt,0,1
+Automatic Rifle_15.png,Automatic Rifle_15.txt,0,1
+Automatic Rifle_16.png,Automatic Rifle_16.txt,0,1
+Automatic Rifle_17.jpeg,Automatic Rifle_17.txt,0,1
+Automatic Rifle_18.png,Automatic Rifle_18.txt,0,1
+Automatic Rifle_19.jpeg,Automatic Rifle_19.txt,0,0
+Automatic Rifle_20.jpeg,Automatic Rifle_20.txt,0,1
+Automatic Rifle_21.jpeg,Automatic Rifle_21.txt,0,1
+Automatic Rifle_22.jpeg,Automatic Rifle_22.txt,0,1
+Automatic Rifle_23.jpeg,Automatic Rifle_23.txt,0,1
+Automatic Rifle_24.jpeg,Automatic Rifle_24.txt,0,1
+Automatic Rifle_25.jpeg,Automatic Rifle_25.txt,0,1
+Automatic Rifle_26.jpeg,Automatic Rifle_26.txt,0,1
+Automatic Rifle_27.jpeg,Automatic Rifle_27.txt,0,1
+Automatic Rifle_28.png,Automatic Rifle_28.txt,0,0
+Automatic Rifle_29.jpeg,Automatic Rifle_29.txt,0,1
+Automatic Rifle_3.jpeg,Automatic Rifle_3.txt,0,1
+Automatic Rifle_32.jpeg,Automatic Rifle_32.txt,0,1
+Automatic Rifle_33.jpeg,Automatic Rifle_33.txt,0,1
+Automatic Rifle_34.jpeg,Automatic Rifle_34.txt,0,1
+Automatic Rifle_35.jpeg,Automatic Rifle_35.txt,0,0
+Automatic Rifle_37.jpeg,Automatic Rifle_37.txt,0,1
+Automatic Rifle_38.jpeg,Automatic Rifle_38.txt,0,1
+Automatic Rifle_39.jpeg,Automatic Rifle_39.txt,0,1
+Automatic Rifle_4.jpeg,Automatic Rifle_4.txt,0,1
+Automatic Rifle_40.jpeg,Automatic Rifle_40.txt,0,0
+Automatic Rifle_41.png,Automatic Rifle_41.txt,0,0
+Automatic Rifle_42.jpeg,Automatic Rifle_42.txt,0,0
+Automatic Rifle_43.png,Automatic Rifle_43.txt,0,0
+Automatic Rifle_44.jpeg,Automatic Rifle_44.txt,0,1
+Automatic Rifle_45.jpeg,Automatic Rifle_45.txt,0,1
+Automatic Rifle_46.jpeg,Automatic Rifle_46.txt,0,1
+Automatic Rifle_47.jpeg,Automatic Rifle_47.txt,0,1
+Automatic Rifle_48.png,Automatic Rifle_48.txt,0,1
+Automatic Rifle_49.jpeg,Automatic Rifle_49.txt,0,1
+Automatic Rifle_5.jpeg,Automatic Rifle_5.txt,0,1
+Automatic Rifle_50.jpeg,Automatic Rifle_50.txt,0,0
+Automatic Rifle_51.jpeg,Automatic Rifle_51.txt,0,1
+Automatic Rifle_52.jpeg,Automatic Rifle_52.txt,0,1
+Automatic Rifle_53.jpeg,Automatic Rifle_53.txt,0,1
+Automatic Rifle_54.jpeg,Automatic Rifle_54.txt,0,0
+Automatic Rifle_55.jpeg,Automatic Rifle_55.txt,0,1
+Automatic Rifle_56.jpeg,Automatic Rifle_56.txt,0,1
+Automatic Rifle_57.jpeg,Automatic Rifle_57.txt,0,1
+Automatic Rifle_6.jpeg,Automatic Rifle_6.txt,0,1
+Automatic Rifle_61.jpeg,Automatic Rifle_61.txt,0,1
+Automatic Rifle_62.jpeg,Automatic Rifle_62.txt,0,0
+Automatic Rifle_63.jpeg,Automatic Rifle_63.txt,0,1
+Automatic Rifle_64.jpeg,Automatic Rifle_64.txt,0,1
+Automatic Rifle_65.jpeg,Automatic Rifle_65.txt,0,1
+Automatic Rifle_66.jpeg,Automatic Rifle_66.txt,0,1
+Automatic Rifle_67.jpeg,Automatic Rifle_67.txt,0,1
+Automatic Rifle_68.jpeg,Automatic Rifle_68.txt,0,1
+Automatic Rifle_69.jpeg,Automatic Rifle_69.txt,0,1
+Automatic Rifle_7.jpeg,Automatic Rifle_7.txt,0,1
+Automatic Rifle_70.jpeg,Automatic Rifle_70.txt,0,0
+Automatic Rifle_71.jpeg,Automatic Rifle_71.txt,0,1
+Automatic Rifle_72.jpeg,Automatic Rifle_72.txt,0,1
+Automatic Rifle_74.png,Automatic Rifle_74.txt,0,1
+Automatic Rifle_75.png,Automatic Rifle_75.txt,0,1
+Automatic Rifle_77.jpeg,Automatic Rifle_77.txt,0,0
+Automatic Rifle_78.jpeg,Automatic Rifle_78.txt,0,1
+Automatic Rifle_79.jpeg,Automatic Rifle_79.txt,0,1
+Automatic Rifle_80.jpeg,Automatic Rifle_80.txt,0,1
+Automatic Rifle_81.jpeg,Automatic Rifle_81.txt,0,0
+Automatic Rifle_85.jpeg,Automatic Rifle_85.txt,0,1
+Automatic Rifle_9.jpeg,Automatic Rifle_9.txt,0,0
+Automatic Rifle_93.jpeg,Automatic Rifle_93.txt,0,1
+Automatic Rifle_99.jpeg,Automatic Rifle_99.txt,0,1
+Bazooka_10.png,Bazooka_10.txt,1,1
+Bazooka_100.jpeg,Bazooka_100.txt,1,1
+Bazooka_11.png,Bazooka_11.txt,1,1
+Bazooka_12.jpeg,Bazooka_12.txt,1,1
+Bazooka_13.jpeg,Bazooka_13.txt,1,1
+Bazooka_14.jpeg,Bazooka_14.txt,1,1
+Bazooka_15.jpeg,Bazooka_15.txt,1,1
+Bazooka_17.jpeg,Bazooka_17.txt,1,1
+Bazooka_18.jpeg,Bazooka_18.txt,1,0
+Bazooka_19.jpeg,Bazooka_19.txt,1,1
+Bazooka_20.jpeg,Bazooka_20.txt,1,1
+Bazooka_21.jpeg,Bazooka_21.txt,1,1
+Bazooka_24.jpeg,Bazooka_24.txt,1,1
+Bazooka_26.jpeg,Bazooka_26.txt,1,1
+Bazooka_3.jpeg,Bazooka_3.txt,1,1
+Bazooka_30.jpeg,Bazooka_30.txt,1,1
+Bazooka_32.jpeg,Bazooka_32.txt,1,1
+Bazooka_33.jpeg,Bazooka_33.txt,1,1
+Bazooka_34.jpeg,Bazooka_34.txt,1,1
+Bazooka_37.jpeg,Bazooka_37.txt,1,0
+Bazooka_39.jpeg,Bazooka_39.txt,1,1
+Bazooka_4.jpeg,Bazooka_4.txt,1,1
+Bazooka_40.png,Bazooka_40.txt,1,1
+Bazooka_42.jpeg,Bazooka_42.txt,1,1
+Bazooka_43.jpeg,Bazooka_43.txt,1,1
+Bazooka_44.jpeg,Bazooka_44.txt,1,0
+Bazooka_45.jpeg,Bazooka_45.txt,1,1
+Bazooka_47.jpeg,Bazooka_47.txt,1,0
+Bazooka_49.jpeg,Bazooka_49.txt,1,1
+Bazooka_5.jpeg,Bazooka_5.txt,1,1
+Bazooka_50.png,Bazooka_50.txt,1,1
+Bazooka_51.jpeg,Bazooka_51.txt,1,1
+Bazooka_53.jpeg,Bazooka_53.txt,1,1
+Bazooka_55.jpeg,Bazooka_55.txt,1,1
+Bazooka_57.jpeg,Bazooka_57.txt,1,1
+Bazooka_58.jpeg,Bazooka_58.txt,1,1
+Bazooka_59.jpeg,Bazooka_59.txt,1,0
+Bazooka_6.jpeg,Bazooka_6.txt,1,1
+Bazooka_60.jpeg,Bazooka_60.txt,1,1
+Bazooka_61.jpeg,Bazooka_61.txt,1,1
+Bazooka_66.jpeg,Bazooka_66.txt,1,1
+Bazooka_67.jpeg,Bazooka_67.txt,1,1
+Bazooka_68.jpeg,Bazooka_68.txt,1,1
+Bazooka_69.jpeg,Bazooka_69.txt,1,1
+Bazooka_7.jpeg,Bazooka_7.txt,1,1
+Bazooka_70.jpeg,Bazooka_70.txt,1,0
+Bazooka_71.jpeg,Bazooka_71.txt,1,0
+Bazooka_72.jpeg,Bazooka_72.txt,1,0
+Bazooka_73.jpeg,Bazooka_73.txt,1,1
+Bazooka_74.jpeg,Bazooka_74.txt,1,0
+Bazooka_75.png,Bazooka_75.txt,1,1
+Bazooka_76.png,Bazooka_76.txt,1,0
+Bazooka_77.jpeg,Bazooka_77.txt,1,1
+Bazooka_78.jpeg,Bazooka_78.txt,1,0
+Bazooka_79.jpeg,Bazooka_79.txt,1,1
+Bazooka_8.jpeg,Bazooka_8.txt,1,1
+Bazooka_80.jpeg,Bazooka_80.txt,1,1
+Bazooka_81.jpeg,Bazooka_81.txt,1,1
+Bazooka_82.jpeg,Bazooka_82.txt,1,0
+Bazooka_83.jpeg,Bazooka_83.txt,1,1
+Bazooka_84.jpeg,Bazooka_84.txt,1,1
+Bazooka_85.jpeg,Bazooka_85.txt,1,1
+Bazooka_86.jpeg,Bazooka_86.txt,1,0
+Bazooka_87.jpeg,Bazooka_87.txt,1,1
+Bazooka_96.jpeg,Bazooka_96.txt,1,1
+Bazooka_98.jpeg,Bazooka_98.txt,1,1
+Bazooka_99.jpeg,Bazooka_99.txt,1,1
+Grenade Launcher_10.jpeg,Grenade Launcher_10.txt,2,1
+Grenade Launcher_100.png,Grenade Launcher_100.txt,2,0
+Grenade Launcher_11.jpeg,Grenade Launcher_11.txt,2,1
+Grenade Launcher_12.jpeg,Grenade Launcher_12.txt,2,1
+Grenade Launcher_13.jpeg,Grenade Launcher_13.txt,2,0
+Grenade Launcher_15.png,Grenade Launcher_15.txt,2,1
+Grenade Launcher_16.jpeg,Grenade Launcher_16.txt,2,1
+Grenade Launcher_17.jpeg,Grenade Launcher_17.txt,2,1
+Grenade Launcher_18.jpeg,Grenade Launcher_18.txt,2,1
+Grenade Launcher_20.jpeg,Grenade Launcher_20.txt,2,0
+Grenade Launcher_21.jpeg,Grenade Launcher_21.txt,2,0
+Grenade Launcher_22.jpeg,Grenade Launcher_22.txt,2,0
+Grenade Launcher_23.jpeg,Grenade Launcher_23.txt,2,1
+Grenade Launcher_24.jpeg,Grenade Launcher_24.txt,2,1
+Grenade Launcher_25.jpeg,Grenade Launcher_25.txt,2,0
+Grenade Launcher_26.jpeg,Grenade Launcher_26.txt,2,0
+Grenade Launcher_27.png,Grenade Launcher_27.txt,2,1
+Grenade Launcher_28.jpeg,Grenade Launcher_28.txt,2,1
+Grenade Launcher_29.jpeg,Grenade Launcher_29.txt,2,1
+Grenade Launcher_3.jpeg,Grenade Launcher_3.txt,2,1
+Grenade Launcher_30.jpeg,Grenade Launcher_30.txt,2,1
+Grenade Launcher_32.jpeg,Grenade Launcher_32.txt,2,1
+Grenade Launcher_33.png,Grenade Launcher_33.txt,2,1
+Grenade Launcher_34.jpeg,Grenade Launcher_34.txt,2,0
+Grenade Launcher_35.jpeg,Grenade Launcher_35.txt,2,0
+Grenade Launcher_36.jpeg,Grenade Launcher_36.txt,2,1
+Grenade Launcher_37.png,Grenade Launcher_37.txt,2,1
+Grenade Launcher_38.jpeg,Grenade Launcher_38.txt,2,1
+Grenade Launcher_39.png,Grenade Launcher_39.txt,2,1
+Grenade Launcher_4.jpeg,Grenade Launcher_4.txt,2,0
+Grenade Launcher_40.jpeg,Grenade Launcher_40.txt,2,1
+Grenade Launcher_41.jpeg,Grenade Launcher_41.txt,2,1
+Grenade Launcher_42.jpeg,Grenade Launcher_42.txt,2,0
+Grenade Launcher_44.jpeg,Grenade Launcher_44.txt,2,1
+Grenade Launcher_45.jpeg,Grenade Launcher_45.txt,2,1
+Grenade Launcher_46.jpeg,Grenade Launcher_46.txt,2,1
+Grenade Launcher_47.jpeg,Grenade Launcher_47.txt,2,0
+Grenade Launcher_48.jpeg,Grenade Launcher_48.txt,2,1
+Grenade Launcher_49.jpeg,Grenade Launcher_49.txt,2,1
+Grenade Launcher_5.png,Grenade Launcher_5.txt,2,1
+Grenade Launcher_50.jpeg,Grenade Launcher_50.txt,2,1
+Grenade Launcher_51.jpeg,Grenade Launcher_51.txt,2,1
+Grenade Launcher_52.jpeg,Grenade Launcher_52.txt,2,1
+Grenade Launcher_56.jpeg,Grenade Launcher_56.txt,2,1
+Grenade Launcher_57.jpeg,Grenade Launcher_57.txt,2,1
+Grenade Launcher_58.png,Grenade Launcher_58.txt,2,1
+Grenade Launcher_59.jpeg,Grenade Launcher_59.txt,2,1
+Grenade Launcher_6.jpeg,Grenade Launcher_6.txt,2,1
+Grenade Launcher_60.jpeg,Grenade Launcher_60.txt,2,1
+Grenade Launcher_61.png,Grenade Launcher_61.txt,2,1
+Grenade Launcher_62.jpeg,Grenade Launcher_62.txt,2,0
+Grenade Launcher_63.jpeg,Grenade Launcher_63.txt,2,1
+Grenade Launcher_64.jpeg,Grenade Launcher_64.txt,2,1
+Grenade Launcher_65.jpeg,Grenade Launcher_65.txt,2,1
+Grenade Launcher_66.jpeg,Grenade Launcher_66.txt,2,1
+Grenade Launcher_67.jpeg,Grenade Launcher_67.txt,2,1
+Grenade Launcher_68.jpeg,Grenade Launcher_68.txt,2,1
+Grenade Launcher_7.jpeg,Grenade Launcher_7.txt,2,1
+Grenade Launcher_70.png,Grenade Launcher_70.txt,2,1
+Grenade Launcher_71.jpeg,Grenade Launcher_71.txt,2,1
+Grenade Launcher_72.jpeg,Grenade Launcher_72.txt,2,1
+Grenade Launcher_73.jpeg,Grenade Launcher_73.txt,2,1
+Grenade Launcher_74.jpeg,Grenade Launcher_74.txt,2,1
+Grenade Launcher_75.jpeg,Grenade Launcher_75.txt,2,0
+Grenade Launcher_76.jpeg,Grenade Launcher_76.txt,2,1
+Grenade Launcher_78.jpeg,Grenade Launcher_78.txt,2,0
+Grenade Launcher_79.jpeg,Grenade Launcher_79.txt,2,1
+Grenade Launcher_8.png,Grenade Launcher_8.txt,2,1
+Grenade Launcher_80.jpeg,Grenade Launcher_80.txt,2,1
+Grenade Launcher_81.png,Grenade Launcher_81.txt,2,1
+Grenade Launcher_82.jpeg,Grenade Launcher_82.txt,2,1
+Grenade Launcher_83.jpeg,Grenade Launcher_83.txt,2,0
+Grenade Launcher_84.jpeg,Grenade Launcher_84.txt,2,1
+Grenade Launcher_85.jpeg,Grenade Launcher_85.txt,2,1
+Grenade Launcher_86.jpeg,Grenade Launcher_86.txt,2,1
+Grenade Launcher_87.png,Grenade Launcher_87.txt,2,1
+Grenade Launcher_88.jpeg,Grenade Launcher_88.txt,2,1
+Grenade Launcher_89.jpeg,Grenade Launcher_89.txt,2,1
+Grenade Launcher_9.jpeg,Grenade Launcher_9.txt,2,1
+Grenade Launcher_90.jpeg,Grenade Launcher_90.txt,2,1
+Grenade Launcher_92.jpeg,Grenade Launcher_92.txt,2,1
+Grenade Launcher_93.jpeg,Grenade Launcher_93.txt,2,0
+Grenade Launcher_94.png,Grenade Launcher_94.txt,2,1
+Grenade Launcher_95.jpeg,Grenade Launcher_95.txt,2,1
+Grenade Launcher_96.jpeg,Grenade Launcher_96.txt,2,1
+Grenade Launcher_97.jpeg,Grenade Launcher_97.txt,2,1
+Grenade Launcher_98.jpeg,Grenade Launcher_98.txt,2,1
+Grenade Launcher_99.png,Grenade Launcher_99.txt,2,0
+Handgun_10.jpeg,Handgun_10.txt,3,1
+Handgun_11.jpeg,Handgun_11.txt,3,1
+Handgun_12.jpeg,Handgun_12.txt,3,1
+Handgun_13.jpeg,Handgun_13.txt,3,0
+Handgun_14.jpeg,Handgun_14.txt,3,0
+Handgun_15.png,Handgun_15.txt,3,1
+Handgun_16.jpeg,Handgun_16.txt,3,1
+Handgun_17.jpeg,Handgun_17.txt,3,1
+Handgun_18.jpeg,Handgun_18.txt,3,1
+Handgun_19.jpeg,Handgun_19.txt,3,0
+Handgun_20.jpeg,Handgun_20.txt,3,1
+Handgun_21.jpeg,Handgun_21.txt,3,1
+Handgun_22.jpeg,Handgun_22.txt,3,0
+Handgun_23.jpeg,Handgun_23.txt,3,1
+Handgun_24.jpeg,Handgun_24.txt,3,1
+Handgun_25.jpeg,Handgun_25.txt,3,1
+Handgun_26.jpeg,Handgun_26.txt,3,1
+Handgun_27.jpeg,Handgun_27.txt,3,0
+Handgun_28.jpeg,Handgun_28.txt,3,1
+Handgun_29.jpeg,Handgun_29.txt,3,1
+Handgun_3.jpeg,Handgun_3.txt,3,1
+Handgun_30.jpeg,Handgun_30.txt,3,1
+Handgun_31.jpeg,Handgun_31.txt,3,0
+Handgun_32.jpeg,Handgun_32.txt,3,0
+Handgun_33.png,Handgun_33.txt,3,1
+Handgun_34.jpeg,Handgun_34.txt,3,1
+Handgun_35.jpeg,Handgun_35.txt,3,1
+Handgun_36.jpeg,Handgun_36.txt,3,0
+Handgun_37.jpeg,Handgun_37.txt,3,1
+Handgun_38.jpeg,Handgun_38.txt,3,1
+Handgun_39.jpeg,Handgun_39.txt,3,1
+Handgun_4.jpeg,Handgun_4.txt,3,1
+Handgun_40.jpeg,Handgun_40.txt,3,1
+Handgun_41.jpeg,Handgun_41.txt,3,1
+Handgun_43.jpeg,Handgun_43.txt,3,1
+Handgun_44.jpeg,Handgun_44.txt,3,0
+Handgun_45.jpeg,Handgun_45.txt,3,1
+Handgun_46.jpeg,Handgun_46.txt,3,1
+Handgun_5.jpeg,Handgun_5.txt,3,0
+Handgun_58.jpeg,Handgun_58.txt,3,1
+Handgun_6.jpeg,Handgun_6.txt,3,1
+Handgun_60.jpeg,Handgun_60.txt,3,1
+Handgun_61.png,Handgun_61.txt,3,1
+Handgun_67.jpeg,Handgun_67.txt,3,1
+Handgun_7.jpeg,Handgun_7.txt,3,1
+Handgun_71.jpeg,Handgun_71.txt,3,1
+Handgun_76.jpeg,Handgun_76.txt,3,0
+Handgun_77.jpeg,Handgun_77.txt,3,1
+Handgun_78.jpeg,Handgun_78.txt,3,1
+Handgun_8.jpeg,Handgun_8.txt,3,1
+Handgun_80.jpeg,Handgun_80.txt,3,1
+Handgun_81.jpeg,Handgun_81.txt,3,0
+Handgun_82.jpeg,Handgun_82.txt,3,1
+Handgun_83.png,Handgun_83.txt,3,1
+Handgun_84.jpeg,Handgun_84.txt,3,1
+Handgun_85.jpeg,Handgun_85.txt,3,1
+Handgun_86.jpeg,Handgun_86.txt,3,1
+Handgun_87.jpeg,Handgun_87.txt,3,1
+Handgun_88.jpeg,Handgun_88.txt,3,1
+Handgun_89.jpeg,Handgun_89.txt,3,1
+Handgun_9.jpeg,Handgun_9.txt,3,1
+Handgun_90.jpeg,Handgun_90.txt,3,1
+Handgun_91.jpeg,Handgun_91.txt,3,1
+Handgun_92.png,Handgun_92.txt,3,0
+Handgun_93.jpeg,Handgun_93.txt,3,1
+Handgun_94.jpeg,Handgun_94.txt,3,1
+Handgun_96.jpeg,Handgun_96.txt,3,1
+Handgun_97.jpeg,Handgun_97.txt,3,1
+Handgun_98.jpeg,Handgun_98.txt,3,1
+Handgun_99.jpeg,Handgun_99.txt,3,0
+Knife_10.jpeg,Knife_10.txt,4,1
+Knife_11.jpeg,Knife_11.txt,4,0
+Knife_12.jpeg,Knife_12.txt,4,1
+Knife_13.jpeg,Knife_13.txt,4,1
+Knife_14.jpeg,Knife_14.txt,4,1
+Knife_15.jpeg,Knife_15.txt,4,1
+Knife_16.jpeg,Knife_16.txt,4,1
+Knife_18.jpeg,Knife_18.txt,4,0
+Knife_19.jpeg,Knife_19.txt,4,0
+Knife_20.jpeg,Knife_20.txt,4,1
+Knife_23.jpeg,Knife_23.txt,4,1
+Knife_24.jpeg,Knife_24.txt,4,0
+Knife_25.jpeg,Knife_25.txt,4,1
+Knife_26.jpeg,Knife_26.txt,4,1
+Knife_27.png,Knife_27.txt,4,1
+Knife_28.png,Knife_28.txt,4,1
+Knife_3.jpeg,Knife_3.txt,4,1
+Knife_30.jpeg,Knife_30.txt,4,1
+Knife_31.jpeg,Knife_31.txt,4,1
+Knife_33.jpeg,Knife_33.txt,4,1
+Knife_34.png,Knife_34.txt,4,1
+Knife_35.jpeg,Knife_35.txt,4,1
+Knife_36.jpeg,Knife_36.txt,4,0
+Knife_38.jpeg,Knife_38.txt,4,0
+Knife_39.jpeg,Knife_39.txt,4,1
+Knife_4.jpeg,Knife_4.txt,4,1
+Knife_40.jpeg,Knife_40.txt,4,1
+Knife_41.jpeg,Knife_41.txt,4,1
+Knife_42.jpeg,Knife_42.txt,4,1
+Knife_44.jpeg,Knife_44.txt,4,1
+Knife_45.jpeg,Knife_45.txt,4,1
+Knife_46.jpeg,Knife_46.txt,4,1
+Knife_47.jpeg,Knife_47.txt,4,1
+Knife_48.jpeg,Knife_48.txt,4,1
+Knife_49.jpeg,Knife_49.txt,4,1
+Knife_5.jpeg,Knife_5.txt,4,1
+Knife_51.jpeg,Knife_51.txt,4,1
+Knife_52.jpeg,Knife_52.txt,4,1
+Knife_53.jpeg,Knife_53.txt,4,0
+Knife_56.png,Knife_56.txt,4,1
+Knife_57.jpeg,Knife_57.txt,4,1
+Knife_58.jpeg,Knife_58.txt,4,1
+Knife_59.jpeg,Knife_59.txt,4,1
+Knife_6.jpeg,Knife_6.txt,4,1
+Knife_60.jpeg,Knife_60.txt,4,0
+Knife_61.jpeg,Knife_61.txt,4,1
+Knife_65.jpeg,Knife_65.txt,4,1
+Knife_66.jpeg,Knife_66.txt,4,0
+Knife_67.jpeg,Knife_67.txt,4,1
+Knife_68.jpeg,Knife_68.txt,4,1
+Knife_69.jpeg,Knife_69.txt,4,1
+Knife_7.jpeg,Knife_7.txt,4,1
+Knife_70.jpeg,Knife_70.txt,4,1
+Knife_71.jpeg,Knife_71.txt,4,1
+Knife_72.jpeg,Knife_72.txt,4,1
+Knife_73.jpeg,Knife_73.txt,4,1
+Knife_74.jpeg,Knife_74.txt,4,1
+Knife_75.jpeg,Knife_75.txt,4,0
+Knife_76.jpeg,Knife_76.txt,4,0
+Knife_77.jpeg,Knife_77.txt,4,1
+Knife_78.jpeg,Knife_78.txt,4,1
+Knife_8.jpeg,Knife_8.txt,4,1
+Knife_83.jpeg,Knife_83.txt,4,1
+Knife_84.jpeg,Knife_84.txt,4,1
+Knife_85.jpeg,Knife_85.txt,4,1
+Knife_88.jpeg,Knife_88.txt,4,1
+Knife_89.jpeg,Knife_89.txt,4,1
+Knife_9.jpeg,Knife_9.txt,4,1
+Knife_90.jpeg,Knife_90.txt,4,0
+Knife_92.png,Knife_92.txt,4,0
+Knife_93.jpeg,Knife_93.txt,4,0
+Knife_95.jpeg,Knife_95.txt,4,1
+Shotgun_10.png,Shotgun_10.txt,5,1
+Shotgun_100.jpeg,Shotgun_100.txt,5,1
+Shotgun_11.jpeg,Shotgun_11.txt,5,1
+Shotgun_12.jpeg,Shotgun_12.txt,5,1
+Shotgun_13.jpeg,Shotgun_13.txt,5,1
+Shotgun_14.jpeg,Shotgun_14.txt,5,1
+Shotgun_15.jpeg,Shotgun_15.txt,5,0
+Shotgun_16.jpeg,Shotgun_16.txt,5,0
+Shotgun_17.jpeg,Shotgun_17.txt,5,1
+Shotgun_18.png,Shotgun_18.txt,5,1
+Shotgun_21.jpeg,Shotgun_21.txt,5,1
+Shotgun_22.png,Shotgun_22.txt,5,1
+Shotgun_23.jpeg,Shotgun_23.txt,5,1
+Shotgun_25.jpeg,Shotgun_25.txt,5,1
+Shotgun_27.jpeg,Shotgun_27.txt,5,1
+Shotgun_28.jpeg,Shotgun_28.txt,5,1
+Shotgun_29.jpeg,Shotgun_29.txt,5,1
+Shotgun_3.jpeg,Shotgun_3.txt,5,1
+Shotgun_31.jpeg,Shotgun_31.txt,5,1
+Shotgun_32.png,Shotgun_32.txt,5,1
+Shotgun_33.jpeg,Shotgun_33.txt,5,0
+Shotgun_35.jpeg,Shotgun_35.txt,5,0
+Shotgun_36.jpeg,Shotgun_36.txt,5,1
+Shotgun_37.jpeg,Shotgun_37.txt,5,1
+Shotgun_39.jpeg,Shotgun_39.txt,5,1
+Shotgun_4.jpeg,Shotgun_4.txt,5,1
+Shotgun_41.jpeg,Shotgun_41.txt,5,1
+Shotgun_42.png,Shotgun_42.txt,5,1
+Shotgun_43.jpeg,Shotgun_43.txt,5,0
+Shotgun_44.jpeg,Shotgun_44.txt,5,0
+Shotgun_46.jpeg,Shotgun_46.txt,5,0
+Shotgun_47.jpeg,Shotgun_47.txt,5,1
+Shotgun_48.jpeg,Shotgun_48.txt,5,1
+Shotgun_49.jpeg,Shotgun_49.txt,5,1
+Shotgun_5.jpeg,Shotgun_5.txt,5,1
+Shotgun_50.jpeg,Shotgun_50.txt,5,1
+Shotgun_51.jpeg,Shotgun_51.txt,5,1
+Shotgun_52.jpeg,Shotgun_52.txt,5,1
+Shotgun_53.jpeg,Shotgun_53.txt,5,0
+Shotgun_54.jpeg,Shotgun_54.txt,5,1
+Shotgun_55.jpeg,Shotgun_55.txt,5,1
+Shotgun_56.jpeg,Shotgun_56.txt,5,1
+Shotgun_57.jpeg,Shotgun_57.txt,5,0
+Shotgun_58.jpeg,Shotgun_58.txt,5,1
+Shotgun_59.jpeg,Shotgun_59.txt,5,0
+Shotgun_6.png,Shotgun_6.txt,5,1
+Shotgun_60.jpeg,Shotgun_60.txt,5,1
+Shotgun_64.jpeg,Shotgun_64.txt,5,0
+Shotgun_65.jpeg,Shotgun_65.txt,5,1
+Shotgun_66.jpeg,Shotgun_66.txt,5,1
+Shotgun_67.png,Shotgun_67.txt,5,0
+Shotgun_68.jpeg,Shotgun_68.txt,5,1
+Shotgun_69.jpeg,Shotgun_69.txt,5,1
+Shotgun_7.jpeg,Shotgun_7.txt,5,1
+Shotgun_70.jpeg,Shotgun_70.txt,5,1
+Shotgun_72.jpeg,Shotgun_72.txt,5,1
+Shotgun_73.png,Shotgun_73.txt,5,0
+Shotgun_74.jpeg,Shotgun_74.txt,5,1
+Shotgun_76.jpeg,Shotgun_76.txt,5,1
+Shotgun_77.jpeg,Shotgun_77.txt,5,1
+Shotgun_78.jpeg,Shotgun_78.txt,5,1
+Shotgun_79.jpeg,Shotgun_79.txt,5,1
+Shotgun_80.jpeg,Shotgun_80.txt,5,1
+Shotgun_81.jpeg,Shotgun_81.txt,5,1
+Shotgun_82.png,Shotgun_82.txt,5,1
+Shotgun_84.jpeg,Shotgun_84.txt,5,1
+Shotgun_85.png,Shotgun_85.txt,5,1
+Shotgun_86.jpeg,Shotgun_86.txt,5,1
+Shotgun_87.jpeg,Shotgun_87.txt,5,0
+Shotgun_89.jpeg,Shotgun_89.txt,5,1
+Shotgun_9.jpeg,Shotgun_9.txt,5,0
+Shotgun_90.jpeg,Shotgun_90.txt,5,1
+Shotgun_91.jpeg,Shotgun_91.txt,5,1
+Shotgun_92.jpeg,Shotgun_92.txt,5,1
+Shotgun_93.jpeg,Shotgun_93.txt,5,0
+Shotgun_94.jpeg,Shotgun_94.txt,5,1
+Shotgun_96.jpeg,Shotgun_96.txt,5,1
+Shotgun_98.jpeg,Shotgun_98.txt,5,1
+SMG_10.jpeg,SMG_10.txt,6,1
+SMG_100.png,SMG_100.txt,6,1
+SMG_11.jpeg,SMG_11.txt,6,0
+SMG_12.jpeg,SMG_12.txt,6,1
+SMG_13.jpeg,SMG_13.txt,6,1
+SMG_14.jpeg,SMG_14.txt,6,1
+SMG_15.jpeg,SMG_15.txt,6,1
+SMG_16.jpeg,SMG_16.txt,6,0
+SMG_17.jpeg,SMG_17.txt,6,1
+SMG_18.png,SMG_18.txt,6,1
+SMG_19.jpeg,SMG_19.txt,6,0
+SMG_20.jpeg,SMG_20.txt,6,1
+SMG_21.jpeg,SMG_21.txt,6,1
+SMG_22.jpeg,SMG_22.txt,6,0
+SMG_23.jpeg,SMG_23.txt,6,1
+SMG_24.jpeg,SMG_24.txt,6,1
+SMG_25.png,SMG_25.txt,6,1
+SMG_26.jpeg,SMG_26.txt,6,1
+SMG_27.jpeg,SMG_27.txt,6,1
+SMG_28.jpeg,SMG_28.txt,6,1
+SMG_29.png,SMG_29.txt,6,1
+SMG_3.jpeg,SMG_3.txt,6,1
+SMG_30.jpeg,SMG_30.txt,6,1
+SMG_31.jpeg,SMG_31.txt,6,0
+SMG_32.jpeg,SMG_32.txt,6,1
+SMG_33.jpeg,SMG_33.txt,6,0
+SMG_34.jpeg,SMG_34.txt,6,1
+SMG_35.png,SMG_35.txt,6,1
+SMG_36.jpeg,SMG_36.txt,6,1
+SMG_37.jpeg,SMG_37.txt,6,1
+SMG_38.jpeg,SMG_38.txt,6,0
+SMG_39.jpeg,SMG_39.txt,6,1
+SMG_4.jpeg,SMG_4.txt,6,1
+SMG_40.jpeg,SMG_40.txt,6,1
+SMG_41.jpeg,SMG_41.txt,6,1
+SMG_43.jpeg,SMG_43.txt,6,1
+SMG_44.jpeg,SMG_44.txt,6,1
+SMG_45.png,SMG_45.txt,6,1
+SMG_46.jpeg,SMG_46.txt,6,1
+SMG_48.jpeg,SMG_48.txt,6,1
+SMG_49.jpeg,SMG_49.txt,6,1
+SMG_5.png,SMG_5.txt,6,1
+SMG_50.jpeg,SMG_50.txt,6,1
+SMG_51.jpeg,SMG_51.txt,6,1
+SMG_52.png,SMG_52.txt,6,1
+SMG_53.jpeg,SMG_53.txt,6,0
+SMG_54.jpeg,SMG_54.txt,6,1
+SMG_55.jpeg,SMG_55.txt,6,0
+SMG_56.png,SMG_56.txt,6,0
+SMG_57.jpeg,SMG_57.txt,6,1
+SMG_58.png,SMG_58.txt,6,1
+SMG_59.jpeg,SMG_59.txt,6,1
+SMG_6.jpeg,SMG_6.txt,6,1
+SMG_60.jpeg,SMG_60.txt,6,1
+SMG_64.jpeg,SMG_64.txt,6,1
+SMG_65.jpeg,SMG_65.txt,6,1
+SMG_66.jpeg,SMG_66.txt,6,1
+SMG_67.png,SMG_67.txt,6,1
+SMG_68.jpeg,SMG_68.txt,6,1
+SMG_7.jpeg,SMG_7.txt,6,1
+SMG_70.jpeg,SMG_70.txt,6,1
+SMG_73.jpeg,SMG_73.txt,6,1
+SMG_75.jpeg,SMG_75.txt,6,1
+SMG_76.jpeg,SMG_76.txt,6,1
+SMG_77.jpeg,SMG_77.txt,6,1
+SMG_78.jpeg,SMG_78.txt,6,1
+SMG_79.jpeg,SMG_79.txt,6,1
+SMG_8.jpeg,SMG_8.txt,6,1
+SMG_80.jpeg,SMG_80.txt,6,0
+SMG_81.jpeg,SMG_81.txt,6,0
+SMG_82.jpeg,SMG_82.txt,6,1
+SMG_83.jpeg,SMG_83.txt,6,0
+SMG_84.jpeg,SMG_84.txt,6,1
+SMG_86.jpeg,SMG_86.txt,6,0
+SMG_87.jpeg,SMG_87.txt,6,1
+SMG_88.jpeg,SMG_88.txt,6,1
+SMG_89.jpeg,SMG_89.txt,6,1
+SMG_9.jpeg,SMG_9.txt,6,0
+SMG_90.png,SMG_90.txt,6,0
+SMG_91.jpeg,SMG_91.txt,6,1
+SMG_92.jpeg,SMG_92.txt,6,1
+SMG_93.jpeg,SMG_93.txt,6,1
+SMG_94.png,SMG_94.txt,6,1
+SMG_95.jpeg,SMG_95.txt,6,0
+SMG_96.jpeg,SMG_96.txt,6,1
+SMG_97.jpeg,SMG_97.txt,6,1
+SMG_99.jpeg,SMG_99.txt,6,1
+Sniper_10.jpeg,Sniper_10.txt,7,1
+Sniper_100.jpeg,Sniper_100.txt,7,1
+Sniper_11.jpeg,Sniper_11.txt,7,0
+Sniper_12.jpeg,Sniper_12.txt,7,0
+Sniper_13.jpeg,Sniper_13.txt,7,0
+Sniper_14.jpeg,Sniper_14.txt,7,0
+Sniper_15.jpeg,Sniper_15.txt,7,0
+Sniper_16.jpeg,Sniper_16.txt,7,1
+Sniper_17.jpeg,Sniper_17.txt,7,1
+Sniper_18.jpeg,Sniper_18.txt,7,0
+Sniper_19.jpeg,Sniper_19.txt,7,1
+Sniper_20.jpeg,Sniper_20.txt,7,1
+Sniper_21.jpeg,Sniper_21.txt,7,1
+Sniper_22.jpeg,Sniper_22.txt,7,0
+Sniper_23.jpeg,Sniper_23.txt,7,1
+Sniper_24.jpeg,Sniper_24.txt,7,1
+Sniper_25.jpeg,Sniper_25.txt,7,1
+Sniper_26.jpeg,Sniper_26.txt,7,1
+Sniper_27.jpeg,Sniper_27.txt,7,1
+Sniper_28.jpeg,Sniper_28.txt,7,1
+Sniper_29.jpeg,Sniper_29.txt,7,1
+Sniper_3.jpeg,Sniper_3.txt,7,0
+Sniper_30.jpeg,Sniper_30.txt,7,1
+Sniper_31.jpeg,Sniper_31.txt,7,1
+Sniper_32.jpeg,Sniper_32.txt,7,1
+Sniper_33.jpeg,Sniper_33.txt,7,1
+Sniper_35.jpeg,Sniper_35.txt,7,1
+Sniper_36.jpeg,Sniper_36.txt,7,0
+Sniper_37.jpeg,Sniper_37.txt,7,1
+Sniper_38.jpeg,Sniper_38.txt,7,1
+Sniper_39.jpeg,Sniper_39.txt,7,1
+Sniper_4.jpeg,Sniper_4.txt,7,1
+Sniper_40.jpeg,Sniper_40.txt,7,1
+Sniper_42.jpeg,Sniper_42.txt,7,1
+Sniper_44.jpeg,Sniper_44.txt,7,1
+Sniper_45.jpeg,Sniper_45.txt,7,1
+Sniper_46.jpeg,Sniper_46.txt,7,1
+Sniper_47.png,Sniper_47.txt,7,1
+Sniper_48.png,Sniper_48.txt,7,1
+Sniper_49.jpeg,Sniper_49.txt,7,1
+Sniper_5.jpeg,Sniper_5.txt,7,1
+Sniper_50.jpeg,Sniper_50.txt,7,0
+Sniper_52.jpeg,Sniper_52.txt,7,1
+Sniper_53.jpeg,Sniper_53.txt,7,1
+Sniper_54.jpeg,Sniper_54.txt,7,1
+Sniper_55.jpeg,Sniper_55.txt,7,1
+Sniper_59.jpeg,Sniper_59.txt,7,1
+Sniper_6.jpeg,Sniper_6.txt,7,0
+Sniper_60.jpeg,Sniper_60.txt,7,0
+Sniper_61.jpeg,Sniper_61.txt,7,1
+Sniper_62.jpeg,Sniper_62.txt,7,1
+Sniper_63.jpeg,Sniper_63.txt,7,1
+Sniper_64.jpeg,Sniper_64.txt,7,1
+Sniper_65.jpeg,Sniper_65.txt,7,1
+Sniper_66.jpeg,Sniper_66.txt,7,1
+Sniper_67.jpeg,Sniper_67.txt,7,1
+Sniper_68.jpeg,Sniper_68.txt,7,1
+Sniper_69.jpeg,Sniper_69.txt,7,1
+Sniper_7.jpeg,Sniper_7.txt,7,1
+Sniper_70.jpeg,Sniper_70.txt,7,1
+Sniper_72.jpeg,Sniper_72.txt,7,0
+Sniper_73.jpeg,Sniper_73.txt,7,1
+Sniper_74.jpeg,Sniper_74.txt,7,1
+Sniper_75.jpeg,Sniper_75.txt,7,0
+Sniper_76.jpeg,Sniper_76.txt,7,1
+Sniper_77.jpeg,Sniper_77.txt,7,1
+Sniper_78.jpeg,Sniper_78.txt,7,0
+Sniper_79.jpeg,Sniper_79.txt,7,1
+Sniper_8.jpeg,Sniper_8.txt,7,1
+Sniper_80.jpeg,Sniper_80.txt,7,1
+Sniper_81.jpeg,Sniper_81.txt,7,1
+Sniper_82.jpeg,Sniper_82.txt,7,1
+Sniper_83.jpeg,Sniper_83.txt,7,1
+Sniper_84.jpeg,Sniper_84.txt,7,1
+Sniper_85.jpeg,Sniper_85.txt,7,1
+Sniper_86.jpeg,Sniper_86.txt,7,1
+Sniper_87.jpeg,Sniper_87.txt,7,1
+Sniper_88.png,Sniper_88.txt,7,1
+Sniper_89.jpeg,Sniper_89.txt,7,0
+Sniper_9.jpeg,Sniper_9.txt,7,1
+Sniper_90.jpeg,Sniper_90.txt,7,1
+Sniper_91.jpeg,Sniper_91.txt,7,1
+Sniper_92.jpeg,Sniper_92.txt,7,1
+Sniper_93.jpeg,Sniper_93.txt,7,1
+Sniper_95.jpeg,Sniper_95.txt,7,0
+Sniper_96.jpeg,Sniper_96.txt,7,1
+Sniper_97.jpeg,Sniper_97.txt,7,1
+Sniper_98.jpeg,Sniper_98.txt,7,0
+Sniper_99.jpeg,Sniper_99.txt,7,1
+Sword_10.jpeg,Sword_10.txt,8,1
+Sword_100.jpeg,Sword_100.txt,8,1
+Sword_11.jpeg,Sword_11.txt,8,1
+Sword_12.jpeg,Sword_12.txt,8,0
+Sword_13.jpeg,Sword_13.txt,8,1
+Sword_14.jpeg,Sword_14.txt,8,1
+Sword_15.jpeg,Sword_15.txt,8,1
+Sword_16.jpeg,Sword_16.txt,8,0
+Sword_17.jpeg,Sword_17.txt,8,1
+Sword_18.jpeg,Sword_18.txt,8,1
+Sword_19.jpeg,Sword_19.txt,8,1
+Sword_20.jpeg,Sword_20.txt,8,1
+Sword_21.png,Sword_21.txt,8,0
+Sword_22.jpeg,Sword_22.txt,8,1
+Sword_23.jpeg,Sword_23.txt,8,1
+Sword_24.jpeg,Sword_24.txt,8,1
+Sword_25.jpeg,Sword_25.txt,8,1
+Sword_26.jpeg,Sword_26.txt,8,1
+Sword_27.jpeg,Sword_27.txt,8,1
+Sword_28.jpeg,Sword_28.txt,8,1
+Sword_29.jpeg,Sword_29.txt,8,1
+Sword_3.jpeg,Sword_3.txt,8,1
+Sword_30.jpeg,Sword_30.txt,8,1
+Sword_31.jpeg,Sword_31.txt,8,1
+Sword_32.png,Sword_32.txt,8,1
+Sword_33.jpeg,Sword_33.txt,8,1
+Sword_34.jpeg,Sword_34.txt,8,0
+Sword_35.png,Sword_35.txt,8,1
+Sword_36.jpeg,Sword_36.txt,8,1
+Sword_37.jpeg,Sword_37.txt,8,1
+Sword_38.jpeg,Sword_38.txt,8,1
+Sword_39.jpeg,Sword_39.txt,8,1
+Sword_4.jpeg,Sword_4.txt,8,0
+Sword_40.jpeg,Sword_40.txt,8,1
+Sword_41.jpeg,Sword_41.txt,8,1
+Sword_42.jpeg,Sword_42.txt,8,1
+Sword_43.jpeg,Sword_43.txt,8,1
+Sword_44.jpeg,Sword_44.txt,8,1
+Sword_45.jpeg,Sword_45.txt,8,1
+Sword_46.jpeg,Sword_46.txt,8,1
+Sword_48.jpeg,Sword_48.txt,8,1
+Sword_5.png,Sword_5.txt,8,1
+Sword_50.jpeg,Sword_50.txt,8,0
+Sword_51.jpeg,Sword_51.txt,8,1
+Sword_53.jpeg,Sword_53.txt,8,1
+Sword_54.jpeg,Sword_54.txt,8,1
+Sword_55.jpeg,Sword_55.txt,8,1
+Sword_56.jpeg,Sword_56.txt,8,1
+Sword_58.jpeg,Sword_58.txt,8,1
+Sword_59.png,Sword_59.txt,8,0
+Sword_6.jpeg,Sword_6.txt,8,1
+Sword_60.jpeg,Sword_60.txt,8,1
+Sword_62.jpeg,Sword_62.txt,8,1
+Sword_63.jpeg,Sword_63.txt,8,1
+Sword_64.jpeg,Sword_64.txt,8,1
+Sword_65.jpeg,Sword_65.txt,8,1
+Sword_66.jpeg,Sword_66.txt,8,1
+Sword_67.jpeg,Sword_67.txt,8,0
+Sword_68.jpeg,Sword_68.txt,8,1
+Sword_69.jpeg,Sword_69.txt,8,1
+Sword_7.jpeg,Sword_7.txt,8,0
+Sword_74.jpeg,Sword_74.txt,8,1
+Sword_75.png,Sword_75.txt,8,1
+Sword_76.jpeg,Sword_76.txt,8,1
+Sword_77.jpeg,Sword_77.txt,8,0
+Sword_78.jpeg,Sword_78.txt,8,1
+Sword_79.jpeg,Sword_79.txt,8,1
+Sword_8.jpeg,Sword_8.txt,8,1
+Sword_80.jpeg,Sword_80.txt,8,1
+Sword_81.jpeg,Sword_81.txt,8,0
+Sword_82.jpeg,Sword_82.txt,8,1
+Sword_83.jpeg,Sword_83.txt,8,0
+Sword_84.jpeg,Sword_84.txt,8,0
+Sword_85.jpeg,Sword_85.txt,8,1
+Sword_86.jpeg,Sword_86.txt,8,0
+Sword_87.jpeg,Sword_87.txt,8,1
+Sword_88.jpeg,Sword_88.txt,8,1
+Sword_89.jpeg,Sword_89.txt,8,0
+Sword_9.jpeg,Sword_9.txt,8,0
+Sword_90.jpeg,Sword_90.txt,8,1
+Sword_91.png,Sword_91.txt,8,1
+Sword_92.jpeg,Sword_92.txt,8,1
+Sword_93.jpeg,Sword_93.txt,8,1
+Sword_94.jpeg,Sword_94.txt,8,1
+Sword_95.jpeg,Sword_95.txt,8,1
+Sword_96.jpeg,Sword_96.txt,8,0
+Sword_97.jpeg,Sword_97.txt,8,1
+Sword_98.jpeg,Sword_98.txt,8,1
+Sword_99.jpeg,Sword_99.txt,8,0
