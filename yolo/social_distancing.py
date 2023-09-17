@@ -96,7 +96,7 @@ while True:
     violation_count += frame_violation_count
 
     # Draw bounding boxes, lines, and violation count on the frame
-    cv2.putText(frame, f"Violations: {violation_count}", (10, 30), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 0, 255), 2)
+    # cv2.putText(frame, f"Violations: {violation_count}", (10, 30), cv2.FONT_HERSHEY_SIMPLEX, 1, (0, 0, 255), 2)
 
 
     window_aspect_ratio = video_width / video_height
