@@ -1,2 +1,4 @@
 # ignoring any model file
 *.pt
+*.rar
+keras/UCF50/
