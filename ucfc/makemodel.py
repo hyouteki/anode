@@ -26,7 +26,8 @@ from cv2 import (
 SEED = 27
 tensorflowRandomSeed(SEED)
 
-DATASET_NAME = "UCF50"
+# DATASET_NAME = "UCF50"
+DATASET_NAME = "Anomaly-Videos-Part-1"
 allClassNames = listdir(DATASET_NAME)
 samplesInEachClass = [
     listdir(join(DATASET_NAME, className)) for className in allClassNames
@@ -118,7 +119,8 @@ def extractTrainFeaturesAndLabels(trainClasses: list[str]):
 Splitting the features and labels into train and test dataset with \
     `test_size = 0.2` and shuffling enabled.
 """
-trainClasses = ["BenchPress", "CleanAndJerk", "Diving", "BreastStroke"]
+# trainClasses = ["BenchPress", "CleanAndJerk", "Diving", "BreastStroke"]
+trainClasses = allClassNames
 features, oneHotEncodedLabels = extractTrainFeaturesAndLabels(trainClasses)
 featuresTrain, featuresTest, labelsTrain, labelsTest = train_test_split(
     features, oneHotEncodedLabels, test_size=0.2, shuffle=True, random_state=SEED
@@ -223,7 +225,7 @@ model.compile(loss="categorical_crossentropy", optimizer="Adam", metrics=["accur
 modelTrainingHistory = model.fit(
     x=featuresTrain,
     y=labelsTrain,
-    epochs=7,
+    epochs=10,
     batch_size=4,
     shuffle=True,
     validation_split=0.2,
