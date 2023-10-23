@@ -50,7 +50,7 @@ modelTrainingHistory = model.fit(
 )
 ```
 
-``` math
+``` results
 LOSS ~ 2.4
 ACC. ~ 0.2
 ```
