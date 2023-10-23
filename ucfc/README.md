@@ -3,7 +3,13 @@ https://www.dropbox.com/sh/75v5ehq4cdg5g5g/AABvnJSwZI7zXb8_myBA0CLHa?dl=0
 
 ## Installation
 ```console
-pip install tensorflow keras opencv-python termcolor
+pip install -r requirements.txt
+```
+
+## Quick Start
+```console
+python makemodel.py
+python testmodel.py
 ```
 
 ## Dependencies
