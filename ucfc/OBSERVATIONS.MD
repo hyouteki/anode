@@ -46,7 +46,7 @@ modelTrainingHistory = model.fit(
     batch_size=4,
     shuffle=True,
     validation_split=0.2,
-    # callbacks=[earlyStoppingCallback],
+    callbacks=[earlyStoppingCallback],
 )
 ```
 
