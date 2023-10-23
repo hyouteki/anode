@@ -70,7 +70,7 @@ def frameExtraction(videoPath):
     return frames
 
 
-def extractTrainFeaturesAndLabels(trainClasses: list[str]):
+def extractTrainFeaturesAndLabels(trainClasses):
     """
     Extracting features and labels from `CLASSES` (train classses)
 
@@ -121,5 +121,5 @@ MODEL_NAME = "DS_UCFCrimeDataset___DT_2023_10_22__20_37_00.h5"
 model = load_model(MODEL_NAME)
 
 loss, accuracy = model.evaluate(featuresTest, labelsTest)
-print(colored(f"[DEBUG] LOSS = {loss}", "blue"))
-print(colored(f"[DEBUG] ACC. = {accuracy}", "blue"))
+print(colored(f"[RESULT] LOSS = {loss}", "green"))
+print(colored(f"[RESULT] ACC. = {accuracy}", "green"))

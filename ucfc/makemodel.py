@@ -80,7 +80,7 @@ def frameExtraction(videoPath):
     return frames
 
 
-def extractTrainFeaturesAndLabels(trainClasses: list[str]):
+def extractTrainFeaturesAndLabels(trainClasses):
     """
     Extracting features and labels from `CLASSES` (train classses)
 
@@ -214,13 +214,13 @@ def createModelArchitecture():
 
 model = createModelArchitecture()
 
-"""
-- Reference for early stopping: \
-    https://learnopencv.com/introduction-to-video-classification-and-human-activity-recognition/
-"""
-earlyStoppingCallback = EarlyStopping(
-    monitor="val_loss", patience=10, mode="min", restore_best_weights=True
-)
+# """
+# - Reference for early stopping: \
+#     https://learnopencv.com/introduction-to-video-classification-and-human-activity-recognition/
+# """
+# earlyStoppingCallback = EarlyStopping(
+#     monitor="val_loss", patience=10, mode="min", restore_best_weights=True
+# )
 model.compile(loss="categorical_crossentropy", optimizer="Adam", metrics=["accuracy"])
 modelTrainingHistory = model.fit(
     x=featuresTrain,
@@ -229,8 +229,12 @@ modelTrainingHistory = model.fit(
     batch_size=4,
     shuffle=True,
     validation_split=0.2,
-    callbacks=[earlyStoppingCallback],
+    # callbacks=[earlyStoppingCallback],
 )
 
 currentDateTime = dt.datetime.strftime(dt.datetime.now(), "%Y_%m_%d__%H_%M_%S")
 model.save(f"DS_{DATASET_NAME}___DT_{currentDateTime}.h5")
+
+loss, accuracy = model.evaluate(featuresTest, labelsTest)
+print(colored(f"[RESULT] LOSS = {loss}", "green"))
+print(colored(f"[RESULT] ACC. = {accuracy}", "green"))
