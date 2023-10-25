@@ -32,7 +32,7 @@
         "monitor": "val_loss", 
         "patience": 10, 
         "mode": "min", 
-        "restore_best_weights": True,
+        "restore_best_weights": true,
     },
     "compile": {
         "loss":"categorical_crossentropy", 
@@ -42,9 +42,9 @@
     "fit": {
         "epochs": 30,
         "batch_size": 4,
-        "shuffle": True,
+        "shuffle": true,
         "validation_split": 0.2,
-        "callbacks": [earlyStoppingCallback],
+        "callbacks": ["earlyStoppingCallback"],
     },
 }
 ```
@@ -122,7 +122,7 @@ ACC. ~ 0.2
     "fit": {
         "epochs": 10,
         "batch_size": 4,
-        "shuffle": True,
+        "shuffle": true,
         "validation_split": 0.2,
     },
 }
@@ -191,7 +191,7 @@ Epoch 10/10
     "fit": {
         "epochs": 30,
         "batch_size": 15,
-        "shuffle": True,
+        "shuffle": true,
         "validation_split": 0.2,
     },
 }
