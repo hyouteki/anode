@@ -5,7 +5,7 @@ from os.path import join
 from tensorflow.keras.models import Sequential
 from tensorflow.keras.utils import to_categorical
 from tensorflow.keras.callbacks import EarlyStopping
-from keras.optimizers import Adam
+from tensorflow.keras.optimizers import Adam
 from tensorflow.random import set_seed as tensorflowRandomSeed
 from termcolor import colored
 import datetime as dt
