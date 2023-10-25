@@ -1,14 +1,4 @@
-## Model 1
-
-``` python
-trainClasses = allClassNames
-features, oneHotEncodedLabels = extractTrainFeaturesAndLabels(trainClasses)
-featuresTrain, featuresTest, labelsTrain, labelsTest = train_test_split(
-    features, oneHotEncodedLabels, test_size=0.2, shuffle=True, random_state=SEED
-)
-```
-
-Model: "sequential"
+# Model 1: "sequential"
 
 | Layer (type)                         | Output Shape           | Param |
 | :----------------------------------- | :--------------------- | :---- |
@@ -30,33 +20,36 @@ Model: "sequential"
 - Trainable params: 44524 (173.92 KB)
 - Non-trainable params: 0 (0.00 Byte)
 
-``` python
-"""
-- Reference for early stopping: \
-  https://learnopencv.com/introduction-to-video-classification-and-human-activity-recognition/
-"""
-earlyStoppingCallback = EarlyStopping(
-    monitor="val_loss", patience=10, mode="min", restore_best_weights=True
-)
-model.compile(loss="categorical_crossentropy", optimizer="Adam", metrics=["accuracy"])
-modelTrainingHistory = model.fit(
-    x=featuresTrain,
-    y=labelsTrain,
-    epochs=10,
-    batch_size=4,
-    shuffle=True,
-    validation_split=0.2,
-    callbacks=[earlyStoppingCallback],
-)
+## Test 1
+
+``` json
+{
+    "train_test_split": {
+        "test_size": 0.2,
+        "shuffle": true,
+    }, 
+    "EarlyStopping": {
+        "monitor": "val_loss", 
+        "patience": 10, 
+        "mode": "min", 
+        "restore_best_weights": True,
+    },
+    "compile": {
+        "loss":"categorical_crossentropy", 
+        "optimizer": "Adam", 
+        "metrics": ["accuracy"],
+    },
+    "fit": {
+        "epochs": 30,
+        "batch_size": 4,
+        "shuffle": True,
+        "validation_split": 0.2,
+        "callbacks": [earlyStoppingCallback],
+    },
+}
 ```
 
-``` results
-LOSS ~ 2.4
-ACC. ~ 0.2
-```
-
-### nohup.out
-```
+``` console
 2023-10-22 20:09:52.508460: W tensorflow/stream_executor/platform/default/dso_loader.cc:64] Could not load dynamic library 'libcudart.so.11.0'; dlerror: libcudart.so.11.0: cannot open shared object file: No such file or directory; LD_LIBRARY_PATH: /opt/gridengine/lib/lx-amd64:/opt/openmpi/lib
 2023-10-22 20:09:52.508535: I tensorflow/stream_executor/cuda/cudart_stub.cc:29] Ignore above cudart dlerror if you do not have a GPU set up on your machine.
 2023-10-22 20:17:46.153081: W tensorflow/stream_executor/platform/default/dso_loader.cc:64] Could not load dynamic library 'libcuda.so.1'; dlerror: libcuda.so.1: cannot open shared object file: No such file or directory; LD_LIBRARY_PATH: /opt/gridengine/lib/lx-amd64:/opt/openmpi/lib
@@ -106,4 +99,103 @@ Epoch 13/30
 152/152 [==============================] - 81s 534ms/step - loss: 0.7654 - accuracy: 0.7615 - val_loss: 4.3413 - val_accuracy: 0.1316
 Epoch 14/30
 152/152 [==============================] - 82s 542ms/step - loss: 0.5442 - accuracy: 0.8257 - val_loss: 4.2758 - val_accuracy: 0.1250
+```
+
+``` results
+LOSS ~ 2.4
+ACC. ~ 0.2
+```
+
+## Test 2
+
+``` json
+{
+    "train_test_split": {
+        "test_size": 0.2,
+        "shuffle": true,
+    },
+    "compile": {
+        "loss":"categorical_crossentropy", 
+        "optimizer": "Adam", 
+        "metrics": ["accuracy"],
+    },
+    "fit": {
+        "epochs": 10,
+        "batch_size": 4,
+        "shuffle": True,
+        "validation_split": 0.2,
+    },
+}
+```
+
+``` console
+2023-10-25 10:45:45.194827: W tensorflow/stream_executor/platform/default/dso_loader.cc:64] Could not load dynamic library 'libcudart.so.11.0'; dlerror: libcudart.so.11.0: cannot open shared object file: No such file or directory; LD_LIBRARY_PATH: /opt/gridengine/lib/lx-amd64:/opt/openmpi/lib
+2023-10-25 10:45:45.194905: I tensorflow/stream_executor/cuda/cudart_stub.cc:29] Ignore above cudart dlerror if you do not have a GPU set up on your machine.
+2023-10-25 10:53:57.106049: W tensorflow/stream_executor/platform/default/dso_loader.cc:64] Could not load dynamic library 'libcuda.so.1'; dlerror: libcuda.so.1: cannot open shared object file: No such file or directory; LD_LIBRARY_PATH: /opt/gridengine/lib/lx-amd64:/opt/openmpi/lib
+2023-10-25 10:53:57.106168: W tensorflow/stream_executor/cuda/cuda_driver.cc:326] failed call to cuInit: UNKNOWN ERROR (303)
+2023-10-25 10:53:57.106239: I tensorflow/stream_executor/cuda/cuda_diagnostics.cc:156] kernel driver does not appear to be running on this host (hpc.iiitd.edu.in): /proc/driver/nvidia/version does not exist
+2023-10-25 10:53:59.234473: W tensorflow/core/framework/cpu_allocator_impl.cc:80] Allocation of 597688320 exceeds 10% of free system memory.
+2023-10-25 10:54:00.220475: I tensorflow/compiler/mlir/mlir_graph_optimization_pass.cc:176] None of the MLIR Optimization Passes are enabled (registered 2)
+2023-10-25 10:54:00.283508: I tensorflow/core/platform/profile_utils/cpu_utils.cc:114] CPU Frequency: 2499775000 Hz
+[DEBUG] extracting Data of Class: Abuse
+[DEBUG] extracting Data of Class: Stealing
+[DEBUG] extracting Data of Class: Explosion
+[DEBUG] extracting Data of Class: Shoplifting
+[DEBUG] extracting Data of Class: Arson
+[DEBUG] extracting Data of Class: Arrest
+[DEBUG] extracting Data of Class: Robbery
+[DEBUG] extracting Data of Class: Burglary
+[DEBUG] extracting Data of Class: Vandalism
+[DEBUG] extracting Data of Class: RoadAccidents
+[DEBUG] extracting Data of Class: Shooting
+[DEBUG] extracting Data of Class: Assault
+[DEBUG] extracting Data of Class: Fighting
+Epoch 1/10
+152/152 [==============================] - 89s 527ms/step - loss: 2.4824 - accuracy: 0.1661 - val_loss: 2.5022 - val_accuracy: 0.1842
+Epoch 2/10
+152/152 [==============================] - 79s 522ms/step - loss: 2.4603 - accuracy: 0.1826 - val_loss: 2.5009 - val_accuracy: 0.1908
+Epoch 3/10
+152/152 [==============================] - 79s 521ms/step - loss: 2.4114 - accuracy: 0.1891 - val_loss: 2.5009 - val_accuracy: 0.1842
+Epoch 4/10
+152/152 [==============================] - 79s 518ms/step - loss: 2.3753 - accuracy: 0.2204 - val_loss: 2.5228 - val_accuracy: 0.1842
+Epoch 5/10
+152/152 [==============================] - 79s 520ms/step - loss: 2.3353 - accuracy: 0.2368 - val_loss: 2.5067 - val_accuracy: 0.1579
+Epoch 6/10
+152/152 [==============================] - 79s 521ms/step - loss: 2.2447 - accuracy: 0.2286 - val_loss: 2.6385 - val_accuracy: 0.1974
+Epoch 7/10
+152/152 [==============================] - 79s 519ms/step - loss: 2.1309 - accuracy: 0.2895 - val_loss: 2.5328 - val_accuracy: 0.1908
+Epoch 8/10
+152/152 [==============================] - 78s 516ms/step - loss: 1.9414 - accuracy: 0.3536 - val_loss: 2.6524 - val_accuracy: 0.1776
+Epoch 9/10
+152/152 [==============================] - 79s 520ms/step - loss: 1.7439 - accuracy: 0.4095 - val_loss: 2.9583 - val_accuracy: 0.1250
+Epoch 10/10
+152/152 [==============================] - 79s 522ms/step - loss: 1.5074 - accuracy: 0.5132 - val_loss: 3.2953 - val_accuracy: 0.1250
+6/6 [==============================] - 3s 306ms/step - loss: 2.9998 - accuracy: 0.2105
+[RESULT] LOSS = 2.99981427192688
+[RESULT] ACC. = 0.21052631735801697
+```
+
+## Test 3
+
+``` json
+{
+    "train_test_split": {
+        "test_size": 0.2,
+        "shuffle": true,
+    },
+    "compile": {
+        "loss":"categorical_crossentropy", 
+        "optimizer": "Adam", 
+        "metrics": ["accuracy"],
+    },
+    "fit": {
+        "epochs": 30,
+        "batch_size": 15,
+        "shuffle": True,
+        "validation_split": 0.2,
+    },
+}
+```
+
+``` console
 ```

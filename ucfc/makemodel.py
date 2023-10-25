@@ -223,8 +223,8 @@ model.compile(loss="categorical_crossentropy", optimizer="Adam", metrics=["accur
 modelTrainingHistory = model.fit(
     x=featuresTrain,
     y=labelsTrain,
-    epochs=10,
-    batch_size=4,
+    epochs=30,
+    batch_size=15,
     shuffle=True,
     validation_split=0.2,
     # callbacks=[earlyStoppingCallback],
