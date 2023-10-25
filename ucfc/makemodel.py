@@ -5,6 +5,7 @@ from os.path import join
 from tensorflow.keras.models import Sequential
 from tensorflow.keras.utils import to_categorical
 from tensorflow.keras.callbacks import EarlyStopping
+from keras.optimizers import Adam
 from tensorflow.random import set_seed as tensorflowRandomSeed
 from termcolor import colored
 import datetime as dt
@@ -216,18 +217,25 @@ model = createModelArchitecture()
 # - Reference for early stopping: \
 #     https://learnopencv.com/introduction-to-video-classification-and-human-activity-recognition/
 # """
-# earlyStoppingCallback = EarlyStopping(
-#     monitor="val_loss", patience=10, mode="min", restore_best_weights=True
-# )
+earlyStoppingCallback = EarlyStopping(
+    monitor="val_loss",
+    min_delta=0.001,
+    patience=10,
+    verbose=1,
+    mode="min",
+    baseline=None,
+    restore_best_weights=True,
+)
+optimizer = Adam(lr=0.001)
 model.compile(loss="categorical_crossentropy", optimizer="Adam", metrics=["accuracy"])
 modelTrainingHistory = model.fit(
     x=featuresTrain,
     y=labelsTrain,
-    epochs=30,
+    epochs=10000,
     batch_size=15,
     shuffle=True,
     validation_split=0.2,
-    # callbacks=[earlyStoppingCallback],
+    callbacks=[earlyStoppingCallback],
 )
 
 currentDateTime = dt.datetime.strftime(dt.datetime.now(), "%Y_%m_%d__%H_%M_%S")

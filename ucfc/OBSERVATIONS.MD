@@ -283,3 +283,41 @@ Epoch 30/30
 [RESULT] LOSS = 6.2900004386901855
 [RESULT] ACC. = 0.1315789520740509
 ```
+
+### Test 4
+
+``` json
+{
+    "train_test_split": {
+        "test_size": 0.2,
+        "shuffle": true,
+    },
+    "EarlyStopping": {
+        "monitor": "val_loss",
+        "min_delta": 0.001, 
+        "patience": 10, 
+        "verbose": 1,
+        "mode": "min", 
+        "baseline": "None",
+        "restore_best_weights": true
+    },
+    "compile": {
+        "loss":"categorical_crossentropy", 
+        "optimizer": {
+            "name": "Adam",
+            "lr": 0.001,
+        }, 
+        "metrics": ["accuracy"],
+    },
+    "fit": {
+        "epochs": 10000,
+        "batch_size": 15,
+        "shuffle": true,
+        "validation_split": 0.2,
+        "callbacks": ["earlyStoppingCallback"],
+    },
+}
+```
+
+``` console
+```
