@@ -6,6 +6,7 @@ An indigenous system design for anomaly detection from CCTV camera feed.
 git clone --depth 1 --recursive https://github.com/Hyouteki/BTP-project.git
 ```
 ## Check out
+- [Anomaly detection on UCF Crime Dataset](https://github.com/Hyouteki/BTP-project/tree/main/ucfc)
 - [Object Detection using YOLO](https://github.com/Hyouteki/BTP-project/tree/main/yolo)
 - [Object Detection using TensorflowLite](https://github.com/Hyouteki/BTP-project/tree/main/tflite)
 
