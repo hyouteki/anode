@@ -11,7 +11,8 @@ https://github.com/Hyouteki/BTP/blob/main/ucfc/OBSERVATIONS.MD
 
 ## Quick Start
 ```console
-python makemodel.py
+python extfet.py
+python makmodred.py
 ```
 
 ## Dependencies
@@ -25,4 +26,3 @@ python makemodel.py
 - https://bleedaiacademy.com/human-activity-recognition-using-tensorflow-cnn-lstm/
 - https://youtu.be/QmtSkq3DYko?si=6VzZc_NH5glCPi0m
 - https://learnopencv.com/introduction-to-video-classification-and-human-activity-recognition/
-

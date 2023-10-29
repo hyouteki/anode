@@ -1,9 +1,7 @@
-from numpy import asarray, array
+from numpy import load as numpyLoad
 from sklearn.model_selection import train_test_split
 from os import listdir
-from os.path import join
 from tensorflow.keras.models import Sequential
-from tensorflow.keras.utils import to_categorical
 from tensorflow.keras.callbacks import EarlyStopping
 from tensorflow.keras.optimizers import Adam
 from tensorflow.random import set_seed as tensorflowRandomSeed
@@ -17,32 +15,26 @@ from tensorflow.keras.layers import (
     Flatten,
     Dense,
 )
-from cv2 import (
-    VideoCapture,
-    CAP_PROP_FRAME_COUNT,
-    CAP_PROP_POS_FRAMES,
-    resize,
-)
 
 SEED = 27
 tensorflowRandomSeed(SEED)
 
 DATASET_NAME = "UCFCrimeDataset"
 allClassNames = listdir(DATASET_NAME)
+uniqueClassName = [
+    "Abuse",
+    "Arrest",
+    "Arson",
+    "Fighting",
+    "Stealing",
+    "Explosion",
+    "RoadAccidents",
+    "Shooting",
+    "Vandalism",
+]
 
 
 def getClassIdByName(_className):
-    uniqueClassName = [
-        "Abuse",
-        "Arrest",
-        "Arson",
-        "Fighting",
-        "Stealing",
-        "Explosion",
-        "RoadAccidents",
-        "Shooting",
-        "Vandalism",
-    ]
     mappingClassName2ClassName = {
         "Abuse": "Abuse",
         "Arrest": "Arrest",
@@ -61,10 +53,6 @@ def getClassIdByName(_className):
     return uniqueClassName.index(mappingClassName2ClassName[_className])
 
 
-samplesInEachClass = [
-    listdir(join(DATASET_NAME, className)) for className in allClassNames
-]
-
 """
 # Reduced frame dimensions
 # >> Resizing the video frame dimension to a fixed size
@@ -73,86 +61,22 @@ IMAGE_WIDTH = 64
 IMAGE_HEIGHT = 64
 IMAGE_DIMENSION = (IMAGE_WIDTH, IMAGE_HEIGHT)
 
-SEQUENCE_LENGTH = 20
+SEQUENCE_LENGTH = 40
 """
 Extracts a total of `SEQUENCE_LENGTH` number of frames form every video \
     (sample) at every equal interval. 
 """
 
 
-def frameExtraction(videoPath):
-    """
-    Extracts frames from the video at videoPath
-
-    Parameters
-    ----------
-    - videoPath : str
-        - path of the video
-    
-    Returns
-    -------
-    - frames : list 
-        - `SEQUENCE_LENGTH` number of frames that are equally spaced out \
-            in the video.
-    """
-    frames = []
-    videoReader = VideoCapture(videoPath)
-    # total number of frames present in the video
-    frameCount = int(videoReader.get(CAP_PROP_FRAME_COUNT))
-    skipFrameWindow = max(int(frameCount / SEQUENCE_LENGTH), 1)
-    for i in range(SEQUENCE_LENGTH):
-        videoReader.set(CAP_PROP_POS_FRAMES, i * skipFrameWindow)
-        success, frame = videoReader.read()
-        # if not successful in reading the frame break from the loop
-        if not success:
-            break
-        # append the frame on frames after resizing
-        frames.append(resize(frame, IMAGE_DIMENSION) / 255)
-    videoReader.release()
-    return frames
-
-
-def extractFeaturesAndLabels(trainClasses):
-    """
-    Extracting features and labels from `CLASSES` (train classses)
-
-    PARAMETERS
-    ----------
-    - trainClasses : list[str]
-        - Classes on which the model currently being trained upon maybe \
-            equal to `allClassNames`.
-
-    RETURNS
-    -------
-    - features : 2D list
-        - vector of feature (vector of frame in a video)
-    - oneHotEncodedLabels : list[list[int]]
-        - vector of hotEncodedLabel corresponding to a feature.
-        - Ex. [1 0 0 0] : meaning that the corresponding feature belongs to class[0]
-
-    """
-    features, labels = [], []
-    for className in trainClasses:
-        print(colored(f"[DEBUG] extracting Data of Class: {className}", "blue"))
-        files = listdir(join(DATASET_NAME, className))
-        for file in files:
-            videoFilePath = join(DATASET_NAME, className, file)
-            frames = frameExtraction(videoFilePath)
-            if len(frames) == SEQUENCE_LENGTH:
-                features.append(frames)
-                labels.append(getClassIdByName(className))
-    features = asarray(features)
-    labels = array(labels)
-    oneHotEncodedLabels = to_categorical(labels)
-    return features, oneHotEncodedLabels
-
-
 """
 Splitting the features and labels into train and test dataset with \
     `test_size = 0.2` and shuffling enabled.
 """
-trainClasses = allClassNames
-features, oneHotEncodedLabels = extractFeaturesAndLabels(trainClasses)
+trainClasses = uniqueClassName
+features = numpyLoad("features.npy")
+oneHotEncodedLabels = numpyLoad("1hotenclab.npy")
+print(colored(f"[DEBUG] Features shape: {features.shape}", "blue"))
+print(colored(f"[DEBUG] 1HotEncL shape: {oneHotEncodedLabels.shape}", "blue"))
 featuresTrain, featuresTest, labelsTrain, labelsTest = train_test_split(
     features, oneHotEncodedLabels, test_size=0.2, shuffle=True, random_state=SEED
 )
@@ -258,8 +182,11 @@ earlyStoppingCallback = EarlyStopping(
     baseline=None,
     restore_best_weights=True,
 )
-optimizer = Adam(lr=0.001)
-model.compile(loss="categorical_crossentropy", optimizer="Adam", metrics=["accuracy"])
+model.compile(
+    loss="categorical_crossentropy",
+    optimizer=Adam(learning_rate=0.001),
+    metrics=["accuracy"],
+)
 modelTrainingHistory = model.fit(
     x=featuresTrain,
     y=labelsTrain,

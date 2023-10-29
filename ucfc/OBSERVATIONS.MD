@@ -24,6 +24,7 @@
 
 ``` json
 {
+    "SEQUENCE_LENGTH": 20,
     "train_test_split": {
         "test_size": 0.2,
         "shuffle": true,
@@ -56,6 +57,7 @@
 
 ``` json
 {
+    "SEQUENCE_LENGTH": 20,
     "train_test_split": {
         "test_size": 0.2,
         "shuffle": true,
@@ -80,6 +82,7 @@
 
 ``` json
 {
+    "SEQUENCE_LENGTH": 20,
     "train_test_split": {
         "test_size": 0.2,
         "shuffle": true,
@@ -104,6 +107,62 @@
 
 ``` json
 {
+    "SEQUENCE_LENGTH": 20,
+    "train_test_split": {
+        "test_size": 0.2,
+        "shuffle": true,
+    },
+    "EarlyStopping": {
+        "monitor": "val_loss",
+        "min_delta": 0.001, 
+        "patience": 10, 
+        "verbose": 1,
+        "mode": "min", 
+        "baseline": "None",
+        "restore_best_weights": true
+    },
+    "compile": {
+        "loss":"categorical_crossentropy", 
+        "optimizer": "adam", 
+        "metrics": ["accuracy"],
+    },
+    "fit": {
+        "epochs": 10000,
+        "batch_size": 15,
+        "shuffle": true,
+        "validation_split": 0.2,
+        "callbacks": ["earlyStoppingCallback"],
+    },
+}
+```
+
+- LOSS = 2.4563605785369873
+- ACC. = 0.20000000298023224
+
+### Test 5
+
+Reduced classes from 13 to 9 i.e.
+``` python
+mappingClassName2ClassName = {
+      "Abuse": "Abuse",
+      "Arrest": "Arrest",
+      "Arson": "Arson",
+      "Assault": "Fighting",
+      "Burglary": "Stealing",
+      "Explosion": "Explosion",
+      "Fighting": "Fighting",
+      "RoadAccidents": "RoadAccidents",
+      "Robbery": "Stealing",
+      "Shooting": "Shooting",
+      "Shoplifting": "Stealing",
+      "Stealing": "Stealing",
+      "Vandalism": "Vandalism",
+  }
+```
+
+``` json
+{
+    "SEQUENCE_LENGTH": 40,
     "train_test_split": {
         "test_size": 0.2,
         "shuffle": true,
@@ -135,5 +194,5 @@
 }
 ```
 
-- LOSS = 2.4563605785369873
-- ACC. = 0.20000000298023224
+- LOSS = 1.852685570716858
+- ACC. = 0.36315789818763733
