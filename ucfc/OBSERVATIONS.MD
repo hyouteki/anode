@@ -140,8 +140,8 @@
 - ACC. = 0.20000000298023224
 
 ### Test 5
-Click here for [model](models/DS_UCFCrimeDataset___DT_2023_10_29__15_27_45.h5)<br>
-Reduced classes from 13 to 9 i.e.
+> Click [here](models/DS_UCFCrimeDataset___DT_2023_10_29__15_27_45.h5) for model<br>
+> Reduced classes from 13 to 9 i.e.
 ``` python
 mappingClassName2ClassName = {
       "Abuse": "Abuse",
