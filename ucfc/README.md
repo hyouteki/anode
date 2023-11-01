@@ -7,7 +7,7 @@ pip install -r requirements.txt
 ```
 
 ## Observations
-https://github.com/Hyouteki/BTP/blob/main/ucfc/OBSERVATIONS.MD
+https://github.com/Hyouteki/BTP/blob/main/ucfc/OBSERVATIONS.md
 
 ## Quick Start
 ```console
