@@ -20,7 +20,7 @@ python makmodred.py
 - [extfet](https://github.com/Hyouteki/BTP/blob/main/ucfc/extfet.py): Extracts frames from the dataset and saving it to `features.npy` file. Reduces the overhead of extracting frames in each test.
 - [makmodred](https://github.com/Hyouteki/BTP/blob/main/ucfc/makmodred.py): Trains the ConvLSTM based model on the dataset with reduced classes (i.e. combined similar classes into one in which further subdivision is not needed for our purpose).
 - [makemodel](https://github.com/Hyouteki/BTP/blob/main/ucfc/makemodel.py): Older version of training file in which classes are not reduced.
-- [makemodlrcn](https://github.com/Hyouteki/BTP/blob/main/ucfc/makemodlrcn.py): Trains the LRCN based model on the dataset with reduced classes (i.e. combined similar classes into one in which further subdivision is not needed for our purpose).
+- [makemodlrcn](https://github.com/Hyouteki/BTP/blob/main/ucfc/makmodlrcn.py): Trains the LRCN based model on the dataset with reduced classes (i.e. combined similar classes into one in which further subdivision is not needed for our purpose).
 - [vodactrecog](https://github.com/Hyouteki/BTP/blob/main/ucfc/vodactrecog.ipynb): Python notebook from extracting, training and testing UCF50 dataset (just for learing purpose).
 - [OBSERVATIONS](https://github.com/Hyouteki/BTP/blob/main/ucfc/OBSERVATIONS.md): Contains observations and details rearding each test of the model.
 - [models/](https://github.com/Hyouteki/BTP/tree/main/ucfc/models): Contains trained models.
