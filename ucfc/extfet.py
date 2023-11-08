@@ -29,6 +29,7 @@ def getClassIdByName(_className):
         "RoadAccidents",
         "Shooting",
         "Vandalism",
+        "Normal",
     ]
     mappingClassName2ClassName = {
         "Abuse": "Abuse",
@@ -44,6 +45,7 @@ def getClassIdByName(_className):
         "Shoplifting": "Stealing",
         "Stealing": "Stealing",
         "Vandalism": "Vandalism",
+        "Normal": "Normal",
     }
     return uniqueClassName.index(mappingClassName2ClassName[_className])
 
@@ -133,5 +135,5 @@ features, oneHotEncodedLabels = extractFeaturesAndLabels(trainClasses)
 
 print(colored(f"[DEBUG] Features shape: {features.shape}", "magenta"))
 print(colored(f"[DEBUG] 1HotEncL shape: {oneHotEncodedLabels.shape}", "magenta"))
-numpySave("features.npy", features)
-numpySave("1hotenclab.npy", oneHotEncodedLabels)
+numpySave("npyfiles/features.npy", features)
+numpySave("npyfiles/1hotenclab.npy", oneHotEncodedLabels)

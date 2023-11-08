@@ -31,6 +31,7 @@ uniqueClassName = [
     "RoadAccidents",
     "Shooting",
     "Vandalism",
+    "Normal",
 ]
 
 
@@ -49,6 +50,7 @@ def getClassIdByName(_className):
         "Shoplifting": "Stealing",
         "Stealing": "Stealing",
         "Vandalism": "Vandalism",
+        "Normal": "Normal",
     }
     return uniqueClassName.index(mappingClassName2ClassName[_className])
 
@@ -73,8 +75,8 @@ Splitting the features and labels into train and test dataset with \
     `test_size = 0.2` and shuffling enabled.
 """
 trainClasses = uniqueClassName
-features = numpyLoad("features.npy")
-oneHotEncodedLabels = numpyLoad("1hotenclab.npy")
+features = numpyLoad("npyfiles/features.npy")
+oneHotEncodedLabels = numpyLoad("npyfiles/1hotenclab.npy")
 print(colored(f"[DEBUG] Features shape: {features.shape}", "blue"))
 print(colored(f"[DEBUG] 1HotEncL shape: {oneHotEncodedLabels.shape}", "blue"))
 featuresTrain, featuresTest, labelsTrain, labelsTest = train_test_split(
