@@ -1,5 +1,4 @@
-# BTP-project
-An indigenous system design for anomaly detection from CCTV camera feed.
+> An indigenous system design for anomaly detection from CCTV camera feed.
 
 ### For contribution clone this repository using
 ``` bash
