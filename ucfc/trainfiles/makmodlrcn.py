@@ -133,9 +133,13 @@ model = createModelArchitecture()
 """
 # Create an Instance of Early Stopping Callback.
 earlyStoppingCallback = EarlyStopping(
-    monitor="val_loss",
+    monitor="val_accuracy",
     patience=15,
     mode="min",
+    min_delta=0.01,
+    patience=5,
+    verbose=1,
+    baseline=None,
     restore_best_weights=True,
 )
 # Compile the model and specify loss function, optimizer and metrics to the model.

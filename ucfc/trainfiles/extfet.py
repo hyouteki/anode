@@ -1,3 +1,4 @@
+from parameters import *
 from numpy import asarray, array, save as numpySave
 from os import listdir
 from os.path import join
@@ -11,59 +12,7 @@ from cv2 import (
     resize,
 )
 
-SEED = 27
 tensorflowRandomSeed(SEED)
-
-DATASET_NAME = "UCFCrimeDataset"
-allClassNames = listdir(DATASET_NAME)
-
-
-def getClassIdByName(_className):
-    uniqueClassName = [
-        "Abuse",
-        "Arrest",
-        "Arson",
-        "Fighting",
-        "Stealing",
-        "Explosion",
-        "RoadAccidents",
-        "Shooting",
-        "Vandalism",
-        "Normal",
-    ]
-    mappingClassName2ClassName = {
-        "Abuse": "Abuse",
-        "Arrest": "Arrest",
-        "Arson": "Arson",
-        "Assault": "Fighting",
-        "Burglary": "Stealing",
-        "Explosion": "Explosion",
-        "Fighting": "Fighting",
-        "RoadAccidents": "RoadAccidents",
-        "Robbery": "Stealing",
-        "Shooting": "Shooting",
-        "Shoplifting": "Stealing",
-        "Stealing": "Stealing",
-        "Vandalism": "Vandalism",
-        "Normal": "Normal",
-    }
-    return uniqueClassName.index(mappingClassName2ClassName[_className])
-
-
-"""
-# Reduced frame dimensions
-# >> Resizing the video frame dimension to a fixed size
-"""
-IMAGE_WIDTH = 64
-IMAGE_HEIGHT = 64
-IMAGE_DIMENSION = (IMAGE_WIDTH, IMAGE_HEIGHT)
-
-SEQUENCE_LENGTH = 40
-"""
-Extracts a total of `SEQUENCE_LENGTH` number of frames form every video \
-    (sample) at every equal interval. 
-"""
-
 
 def frameExtraction(videoPath):
     """
@@ -117,21 +66,19 @@ def extractFeaturesAndLabels(trainClasses):
 
     """
     features, labels = [], []
-    for className in trainClasses:
+    for classId, className in enumerate(trainClasses):
         print(colored(f"[DEBUG] extracting Data of Class: {className}", "blue"))
         files = listdir(join(DATASET_NAME, className))
         for file in files:
             videoFilePath = join(DATASET_NAME, className, file)
             features.append(frameExtraction(videoFilePath))
-            labels.append(getClassIdByName(className))
+            labels.append(classId)
     features = asarray(features)
     labels = array(labels)
     oneHotEncodedLabels = to_categorical(labels)
     return features, oneHotEncodedLabels
 
-
-trainClasses = allClassNames
-features, oneHotEncodedLabels = extractFeaturesAndLabels(trainClasses)
+features, oneHotEncodedLabels = extractFeaturesAndLabels(TRAIN_CLASSES)
 
 print(colored(f"[DEBUG] Features shape: {features.shape}", "magenta"))
 print(colored(f"[DEBUG] 1HotEncL shape: {oneHotEncodedLabels.shape}", "magenta"))

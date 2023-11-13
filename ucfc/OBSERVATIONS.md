@@ -1,4 +1,4 @@
-# Model 1: "sequential"
+# Model 1: Sequential ConvLSTM
 
 | Layer (type)                         | Output Shape           | Param |
 | :----------------------------------- | :--------------------- | :---- |
@@ -196,3 +196,15 @@ mappingClassName2ClassName = {
 
 - LOSS = 1.852685570716858
 - ACC. = 0.36315789818763733
+
+# Model 2: Sequential LRCN
+
+### Test 1
+
+- LOSS = 2.0005180835723877
+- ACC. = 0.33181819319725037
+
+## Test 2
+
+- LOSS = 2.03981614112854
+- ACC. = 0.3499999940395355
