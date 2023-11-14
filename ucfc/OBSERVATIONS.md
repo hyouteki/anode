@@ -1,24 +1,24 @@
 # Model 1: Sequential ConvLSTM
 
-| Layer (type)                         | Output Shape           | Param |
-| :----------------------------------- | :--------------------- | :---- |
-| conv_lstm2d (ConvLSTM2D)             | (None, 20, 62, 62, 4)  | 1024  |
-| max_pooling3d (MaxPooling3D)         | (None, 20, 31, 31, 4)  | 0     |
-| time_distributed (TimeDistributed)   | (None, 20, 31, 31, 4)  | 0     |
-| conv_lstm2d_1 (ConvLSTM2D)           | (None, 20, 29, 29, 8)  | 3488  |
-| max_pooling3d_1 (MaxPooling3D)       | (None, 20, 15, 15, 8)  | 0     |
-| time_distributed_1 (TimeDistributed) | (None, 20, 15, 15, 8)  | 0     |
-| conv_lstm2d_2 (ConvLSTM2D)           | (None, 20, 13, 13, 14) | 11144 |
-| max_pooling3d_2 (MaxPooling3D)       | (None, 20, 7, 7, 14)   | 0     |
-| time_distributed_2 (TimeDistributed) | (None, 20, 7, 7, 14)   | 0     |
-| conv_lstm2d_3 (ConvLSTM2D)           | (None, 20, 5, 5, 16)   | 17344 |
-| max_pooling3d_3 (MaxPooling3D)       | (None, 20, 3, 3, 16)   | 0     |
-| flatten (Flatten)                    | (None, 2880)           | 0     |
-| dense (Dense)                        | (None, 4)              | 11524 |
-                                                                 
-- Total params: 44524 (173.92 KB)
-- Trainable params: 44524 (173.92 KB)
-- Non-trainable params: 0 (0.00 Byte)
+> | Layer (type)                         | Output Shape           | Param |
+> | :----------------------------------- | :--------------------- | :---- |
+> | conv_lstm2d (ConvLSTM2D)             | (None, 20, 62, 62, 4)  | 1024  |
+> | max_pooling3d (MaxPooling3D)         | (None, 20, 31, 31, 4)  | 0     |
+> | time_distributed (TimeDistributed)   | (None, 20, 31, 31, 4)  | 0     |
+> | conv_lstm2d_1 (ConvLSTM2D)           | (None, 20, 29, 29, 8)  | 3488  |
+> | max_pooling3d_1 (MaxPooling3D)       | (None, 20, 15, 15, 8)  | 0     |
+> | time_distributed_1 (TimeDistributed) | (None, 20, 15, 15, 8)  | 0     |
+> | conv_lstm2d_2 (ConvLSTM2D)           | (None, 20, 13, 13, 14) | 11144 |
+> | max_pooling3d_2 (MaxPooling3D)       | (None, 20, 7, 7, 14)   | 0     |
+> | time_distributed_2 (TimeDistributed) | (None, 20, 7, 7, 14)   | 0     |
+> | conv_lstm2d_3 (ConvLSTM2D)           | (None, 20, 5, 5, 16)   | 17344 |
+> | max_pooling3d_3 (MaxPooling3D)       | (None, 20, 3, 3, 16)   | 0     |
+> | flatten (Flatten)                    | (None, 2880)           | 0     |
+> | dense (Dense)                        | (None, 4)              | 11524 |
+>                                                                  
+> - Total params: 44524 (173.92 KB)
+> - Trainable params: 44524 (173.92 KB)
+> - Non-trainable params: 0 (0.00 Byte)
 
 ## Test 1
 
@@ -196,6 +196,38 @@ mappingClassName2ClassName = {
 
 - LOSS = 1.852685570716858
 - ACC. = 0.36315789818763733
+
+### Test 6
+``` python
+SEED = 666
+DATASET_NAME = "UCFCrimeDataset"
+TRAIN_CLASSES = [
+    "Arson",
+    "RoadAccidents",
+    "Explosion",
+    "Vandalism",
+    "Shooting",
+    "Normal",
+]
+# feature Parameters
+IMAGE_WIDTH = 96
+IMAGE_HEIGHT = 96 
+SEQUENCE_LENGTH = 80 
+TRAIN_TEST_SPLIT = 0.25
+TRAIN_VALID_SPLIT = 0.25
+# early stopping callback parameters
+EARLY_STOPPING_CALLBACK_MONITOR = "val_loss"
+EARLY_STOPPING_CALLBACK_MIN_DELTA = 0.001
+EARLY_STOPPING_CALLBACK_PATIENCE = 15
+# optimizer parameters
+LEARNING_RATE = 0.001
+# training parameters
+EPOCHS = 250
+BATCH_SIZE = 15
+```
+
+- LOSS = 1.4835625886917114
+- ACC. = 0.42741936445236206
 
 # Model 2: Sequential LRCN
 

@@ -35,7 +35,6 @@ featuresTrain, featuresTest, labelsTrain, labelsTest = train_test_split(
     random_state=SEED
 )
 
-
 def createModelArchitecture():
     """
     Model: "sequential"
@@ -119,7 +118,6 @@ def createModelArchitecture():
         ]
     )
     return model
-
 
 model = createModelArchitecture()
 
