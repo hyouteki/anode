@@ -243,6 +243,7 @@ BATCH_SIZE = 15
 - ACC. = 0.3499999940395355
 
 ## Test 3
+> Click [here](models/DS_UCFCrimeDataset___DT_2023_11_14__13_44_36.h5) for model associated with this test.
 ``` python
 SEED = 666
 DATASET_NAME = "UCFCrimeDataset"
@@ -270,6 +271,5 @@ LEARNING_RATE = 0.001
 EPOCHS = 250
 BATCH_SIZE = 15
 ```
-
-- LOSS =
-- ACC. =
+- LOSS = 1.5683043003082275
+- ACC. = 0.4677419364452362
