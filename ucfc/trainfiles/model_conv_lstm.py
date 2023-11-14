@@ -23,8 +23,8 @@ tensorflowRandomSeed(SEED)
 Splitting the features and labels into train and test dataset with \
     `test_size = TRAIN_TEST_SPLIT` and shuffling enabled.
 """
-features = numpyLoad("npyfiles/features.npy")
-oneHotEncodedLabels = numpyLoad("npyfiles/1hotenclab.npy")
+features = numpyLoad("../npyfiles/features.npy")
+oneHotEncodedLabels = numpyLoad("../npyfiles/1hotenclab.npy")
 print(colored(f"[DEBUG] Features shape: {features.shape}", "blue"))
 print(colored(f"[DEBUG] 1HotEncL shape: {oneHotEncodedLabels.shape}", "blue"))
 featuresTrain, featuresTest, labelsTrain, labelsTest = train_test_split(
@@ -150,7 +150,7 @@ modelTrainingHistory = model.fit(
 )
 
 currentDateTime = dt.datetime.strftime(dt.datetime.now(), "%Y_%m_%d__%H_%M_%S")
-model.save(f"DS_{DATASET_NAME}___DT_{currentDateTime}.h5")
+model.save(f"../models/DS_{DATASET_NAME}___DT_{currentDateTime}.h5")
 
 loss, accuracy = model.evaluate(featuresTest, labelsTest)
 print(colored(f"[RESULT] LOSS = {loss}", "green"))

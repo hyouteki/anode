@@ -198,6 +198,7 @@ mappingClassName2ClassName = {
 - ACC. = 0.36315789818763733
 
 ### Test 6
+> Click [here](models/DS_UCFCrimeDataset___DT_2023_11_13__23_46_40.h5) for model associated with this test.
 ``` python
 SEED = 666
 DATASET_NAME = "UCFCrimeDataset"
@@ -240,3 +241,35 @@ BATCH_SIZE = 15
 
 - LOSS = 2.03981614112854
 - ACC. = 0.3499999940395355
+
+## Test 3
+``` python
+SEED = 666
+DATASET_NAME = "UCFCrimeDataset"
+TRAIN_CLASSES = [
+    "Arson",
+    "RoadAccidents",
+    "Explosion",
+    "Vandalism",
+    "Shooting",
+    "Normal",
+]
+# feature Parameters
+IMAGE_WIDTH = 96
+IMAGE_HEIGHT = 96 
+SEQUENCE_LENGTH = 80 
+TRAIN_TEST_SPLIT = 0.25
+TRAIN_VALID_SPLIT = 0.25
+# early stopping callback parameters
+EARLY_STOPPING_CALLBACK_MONITOR = "val_loss"
+EARLY_STOPPING_CALLBACK_MIN_DELTA = 0.001
+EARLY_STOPPING_CALLBACK_PATIENCE = 15
+# optimizer parameters
+LEARNING_RATE = 0.001
+# training parameters
+EPOCHS = 250
+BATCH_SIZE = 15
+```
+
+- LOSS =
+- ACC. =
