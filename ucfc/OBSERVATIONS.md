@@ -214,7 +214,7 @@ TRAIN_CLASSES = [
 IMAGE_WIDTH = 96
 IMAGE_HEIGHT = 96 
 SEQUENCE_LENGTH = 80 
-# dataset divisions 
+# dataset partitions
 TRAIN_TEST_SPLIT = 0.25
 TRAIN_VALID_SPLIT = 0.25
 # early stopping callback parameters
@@ -260,7 +260,7 @@ TRAIN_CLASSES = [
 IMAGE_WIDTH = 96
 IMAGE_HEIGHT = 96 
 SEQUENCE_LENGTH = 80 
-# dataset divisions 
+# dataset partitions
 TRAIN_TEST_SPLIT = 0.25
 TRAIN_VALID_SPLIT = 0.25
 # early stopping callback parameters

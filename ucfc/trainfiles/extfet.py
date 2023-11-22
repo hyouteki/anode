@@ -22,10 +22,10 @@ def frameExtraction(videoPath):
     ----------
     - videoPath : str
         - path of the video
-    
+
     Returns
     -------
-    - frames : list 
+    - frames : list
         - `SEQUENCE_LENGTH` number of frames that are equally spaced out \
             in the video.
     """
@@ -68,9 +68,9 @@ def extractFeaturesAndLabels(trainClasses):
     features, labels = [], []
     for classId, className in enumerate(trainClasses):
         print(colored(f"[DEBUG] extracting Data of Class: {className}", "blue"))
-        files = listdir(join(DATASET_NAME, className))
+        files = listdir(join(DATASET_PATH, className))
         for file in files:
-            videoFilePath = join(DATASET_NAME, className, file)
+            videoFilePath = join(DATASET_PATH, className, file)
             features.append(frameExtraction(videoFilePath))
             labels.append(classId)
     features = asarray(features)
