@@ -275,3 +275,41 @@ BATCH_SIZE = 15
 ```
 - LOSS = 1.5683043003082275
 - ACC. = 0.4677419364452362
+
+
+## Test 4
+> Click [here](models/DS_UCFCrimeDataset___DT_2023_11_22__22_00_30.h5) for model associated with this test.<br>
+> Click [here](trainhistory/TRAIN_HISTORY__DS_UCFCrimeDataset___DT_2023_11_22__22_00_30.txt) for whole traning history.
+``` python
+SEED = 666
+DATASET_NAME = "UCFCrimeDataset"
+DATASET_PATH = "/home/abhishek/SmartCCTV/UCFCrimeDataset/"
+TRAIN_CLASSES = [
+    "Arson",
+    "RoadAccidents",
+    "Explosion",
+    "Vandalism",
+    "Shooting",
+    "Normal",
+]
+# Feature Parameters
+IMAGE_WIDTH = 92
+IMAGE_HEIGHT = 92
+IMAGE_DIMENSION = (IMAGE_WIDTH, IMAGE_HEIGHT)
+SEQUENCE_LENGTH = 92
+# dataset partitions
+TRAIN_TEST_SPLIT = 0.25
+TRAIN_VALID_SPLIT = 0.25
+# early stopping callback parameters
+EARLY_STOPPING_CALLBACK_MONITOR = "val_loss"
+EARLY_STOPPING_CALLBACK_MIN_DELTA = 0.001
+EARLY_STOPPING_CALLBACK_PATIENCE = 15
+# optimizer parameters
+LEARNING_RATE = 0.001
+# training parameters
+EPOCHS = 80
+BATCH_SIZE = 15
+```
+- LOSS = 1.4958889484405518
+- ACC. = 0.4838709533214569
+
