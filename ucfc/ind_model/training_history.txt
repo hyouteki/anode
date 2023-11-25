@@ -1,6 +1,6 @@
 2023-11-17 18:27:12.198972: I tensorflow/stream_executor/platform/default/dso_loader.cc:53] Successfully opened dynamic library libcudart.so.11.0
 2023-11-17 18:35:45.858021: I tensorflow/stream_executor/platform/default/dso_loader.cc:53] Successfully opened dynamic library libcuda.so.1
-2023-11-17 18:35:45.879508: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1733] Found device 0 with properties: 
+2023-11-17 18:35:45.879508: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1733] Found device 0 with properties:
 pciBusID: 0000:04:00.0 name: GeForce RTX 3090 computeCapability: 8.6
 coreClock: 1.695GHz coreCount: 82 deviceMemorySize: 23.70GiB deviceMemoryBandwidth: 871.81GiB/s
 2023-11-17 18:35:45.879615: I tensorflow/stream_executor/platform/default/dso_loader.cc:53] Successfully opened dynamic library libcudart.so.11.0
@@ -14,7 +14,7 @@ coreClock: 1.695GHz coreCount: 82 deviceMemorySize: 23.70GiB deviceMemoryBandwid
 2023-11-17 18:35:46.310244: W tensorflow/core/common_runtime/gpu/gpu_device.cc:1766] Cannot dlopen some GPU libraries. Please make sure the missing libraries mentioned above are installed properly if you would like to use GPU. Follow the guide at https://www.tensorflow.org/install/gpu for how to download and setup the required libraries for your platform.
 Skipping registering GPU devices...
 2023-11-17 18:35:46.312185: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1258] Device interconnect StreamExecutor with strength 1 edge matrix:
-2023-11-17 18:35:46.312240: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1264]      
+2023-11-17 18:35:46.312240: I tensorflow/core/common_runtime/gpu/gpu_device.cc:1264]
 2023-11-17 18:35:49.313965: I tensorflow/compiler/mlir/mlir_graph_optimization_pass.cc:176] None of the MLIR Optimization Passes are enabled (registered 2)
 2023-11-17 18:35:49.314861: I tensorflow/core/platform/profile_utils/cpu_utils.cc:114] CPU Frequency: 2499890000 Hz
 Extracting for class: Arson
