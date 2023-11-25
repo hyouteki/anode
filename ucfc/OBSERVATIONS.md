@@ -1,59 +1,57 @@
 # Model 1: Sequential ConvLSTM
 ``` Python
-Sequential(
-    [
-        ConvLSTM2D(
-            filters=4,
-            kernel_size=(3, 3),
-            activation="tanh",
-            data_format="channels_last",
-            recurrent_dropout=0.2,
-            return_sequences=True,
-            input_shape=(SEQUENCE_LENGTH, IMAGE_HEIGHT, IMAGE_WIDTH, 3),
-        ),
-        MaxPooling3D(
-            pool_size=(1, 2, 2), padding="same", data_format="channels_last"
-        ),
-        TimeDistributed(Dropout(0.2)),
-        ConvLSTM2D(
-            filters=8,
-            kernel_size=(3, 3),
-            activation="tanh",
-            data_format="channels_last",
-            recurrent_dropout=0.2,
-            return_sequences=True,
-        ),
-        MaxPooling3D(
-            pool_size=(1, 2, 2), padding="same", data_format="channels_last"
-        ),
-        TimeDistributed(Dropout(0.2)),
-        ConvLSTM2D(
-            filters=14,
-            kernel_size=(3, 3),
-            activation="tanh",
-            data_format="channels_last",
-            recurrent_dropout=0.2,
-            return_sequences=True,
-        ),
-        MaxPooling3D(
-            pool_size=(1, 2, 2), padding="same", data_format="channels_last"
-        ),
-        TimeDistributed(Dropout(0.2)),
-        ConvLSTM2D(
-            filters=16,
-            kernel_size=(3, 3),
-            activation="tanh",
-            data_format="channels_last",
-            recurrent_dropout=0.2,
-            return_sequences=True,
-        ),
-        MaxPooling3D(
-            pool_size=(1, 2, 2), padding="same", data_format="channels_last"
-        ),
-        Flatten(),
-        Dense(len(TRAIN_CLASSES), activation="softmax"),
-    ]
-)
+Sequential([
+    ConvLSTM2D(
+        filters=4,
+        kernel_size=(3, 3),
+        activation="tanh",
+        data_format="channels_last",
+        recurrent_dropout=0.2,
+        return_sequences=True,
+        input_shape=(SEQUENCE_LENGTH, IMAGE_HEIGHT, IMAGE_WIDTH, 3),
+    ),
+    MaxPooling3D(
+        pool_size=(1, 2, 2), padding="same", data_format="channels_last"
+    ),
+    TimeDistributed(Dropout(0.2)),
+    ConvLSTM2D(
+        filters=8,
+        kernel_size=(3, 3),
+        activation="tanh",
+        data_format="channels_last",
+        recurrent_dropout=0.2,
+        return_sequences=True,
+    ),
+    MaxPooling3D(
+        pool_size=(1, 2, 2), padding="same", data_format="channels_last"
+    ),
+    TimeDistributed(Dropout(0.2)),
+    ConvLSTM2D(
+        filters=14,
+        kernel_size=(3, 3),
+        activation="tanh",
+        data_format="channels_last",
+        recurrent_dropout=0.2,
+        return_sequences=True,
+    ),
+    MaxPooling3D(
+        pool_size=(1, 2, 2), padding="same", data_format="channels_last"
+    ),
+    TimeDistributed(Dropout(0.2)),
+    ConvLSTM2D(
+        filters=16,
+        kernel_size=(3, 3),
+        activation="tanh",
+        data_format="channels_last",
+        recurrent_dropout=0.2,
+        return_sequences=True,
+    ),
+    MaxPooling3D(
+        pool_size=(1, 2, 2), padding="same", data_format="channels_last"
+    ),
+    Flatten(),
+    Dense(len(TRAIN_CLASSES), activation="softmax"),
+])
 ```
 
 ## Test 1
@@ -83,6 +81,7 @@ BATCH_SIZE = 4
 - ACC. = 0.21052631735801697
 
 ## Test 2
+> Increased the batch size from `4` to `15`
 
 ``` Python
 SEED = 666
@@ -104,12 +103,12 @@ LEARNING_RATE = 0.001
 EPOCHS = 30
 BATCH_SIZE = 15
 ```
-> Increased the batch size from `4` to `15`
 
 - LOSS = 6.2900004386901855
 - ACC. = 0.1315789520740509
 
 ### Test 3
+> Increased Epochs from `30` to `10000`
 
 ``` Python
 SEED = 666
@@ -131,14 +130,14 @@ LEARNING_RATE = 0.001
 EPOCHS = 30
 BATCH_SIZE = 15
 ```
-> Increased Epochs from `30` to `10000`
 
 - LOSS = 2.4563605785369873
 - ACC. = 0.20000000298023224
 
 ### Test 4
 > Click [here](models/DS_UCFCrimeDataset___DT_2023_10_29__15_27_45.h5) for model<br>
-> Reduced classes from 13 to 9 i.e.
+> Reduced classes from `13` to `9`.<br>
+> Increase Sequence length from `20` to `40`
 
 ``` Python
 SEED = 666
@@ -175,8 +174,6 @@ LEARNING_RATE = 0.001
 EPOCHS = 30
 BATCH_SIZE = 15
 ```
-
-> Reduced classes and increase Sequence length from `20` to `40`
 
 - LOSS = 1.852685570716858
 - ACC. = 0.36315789818763733
