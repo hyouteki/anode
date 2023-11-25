@@ -17,12 +17,13 @@ python makmodred.py
 ```
 
 ## Basic file overview
-- [extfet](https://github.com/Hyouteki/BTP/blob/main/ucfc/trainfiles/extfet.py): Extracts frames from the dataset and saving it to `features.npy` file. Reduces the overhead of extracting frames in each test.
-- [model_conv_lstm](https://github.com/Hyouteki/BTP/blob/main/ucfc/trainfiles/model_conv_lstm.py): Trains the ConvLSTM based model on the dataset with reduced classes.
-- [model_lrcn](https://github.com/Hyouteki/BTP/blob/main/ucfc/trainfiles/model_lrcn.py): Trains the LRCN based model on the dataset with reduced classes.
-- [OBSERVATIONS](https://github.com/Hyouteki/BTP/blob/main/ucfc/OBSERVATIONS.md): Observations and details rearding each test of the model.
-- [models/](https://github.com/Hyouteki/BTP/tree/main/ucfc/models): Trained models.
-- [trainfiles/old/](https://github.com/Hyouteki/BTP/tree/main/ucfc/trainfiles/old/): Old depricated models.
+- [extfet](trainfiles/extfet.py): Extracts frames from the dataset and saving it to `features.npy` file. Reduces the overhead of extracting frames in each test.
+- [model_conv_lstm](trainfiles/model_conv_lstm.py): Trains the ConvLSTM based model on the dataset with reduced classes.
+- [model_lrcn](trainfiles/model_lrcn.py): Trains the LRCN based model on the dataset with reduced classes.
+- [OBSERVATIONS](OBSERVATIONS.md): Observations and details rearding each test of the model.
+- [models/](models/): Trained models.
+- [ind_model](ind_model/): Contains observations regarding models trained to detect only a signle class.
+- [trainfiles/old/](trainfiles/old/): Depricated models.
 
 ## Dependencies
 - Tensorflow
