@@ -1,7 +1,7 @@
 # Individual models
-> Models trained for detecting just one class.
-> For training history click [here](/training_history.txt)
-> Trained using the [model](/model_ind_lrcn.py)
+> Models trained for detecting just one class.<br>
+> For training history click [here](/training_history.txt).<br>
+> Trained using the [model](/model_ind_lrcn.py).
 
 ## Accuracies
 ### Arson
