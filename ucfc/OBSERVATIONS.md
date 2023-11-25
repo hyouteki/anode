@@ -214,6 +214,27 @@ BATCH_SIZE = 15
 - ACC. = 0.42741936445236206
 
 # Model 2: Sequential LRCN
+``` Python
+Sequential([
+    TimeDistributed(
+        Conv2D(16, (3, 3), padding="same", activation="relu"),
+        input_shape=(SEQUENCE_LENGTH, IMAGE_HEIGHT, IMAGE_WIDTH, 3),
+    ),
+    TimeDistributed(MaxPooling2D((4, 4))),
+    TimeDistributed(Dropout(0.25)),
+    TimeDistributed(Conv2D(32, (3, 3), padding="same", activation="relu")),
+    TimeDistributed(MaxPooling2D((4, 4))),
+    TimeDistributed(Dropout(0.25)),
+    TimeDistributed(Conv2D(64, (3, 3), padding="same", activation="relu")),
+    TimeDistributed(MaxPooling2D((2, 2))),
+    TimeDistributed(Dropout(0.25)),
+    TimeDistributed(Conv2D(64, (3, 3), padding="same", activation="relu")),
+    TimeDistributed(MaxPooling2D((2, 2))),
+    TimeDistributed(Flatten()),
+    LSTM(32),
+    Dense(len(TRAIN_CLASSES), activation="softmax"),
+])
+```
 
 ### Test 1
 
