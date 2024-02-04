@@ -49,7 +49,7 @@ context = {"select_theme_header_visibility": False, "current_theme_index": 6,
            "frame_buffer": [], "video_capture": None, "frame_count": 0, "anomaly_scores": [],
            "model": load_model(os.path.join(os.getcwd(), "models", ALL_MODELS[0])),
            "video_options_header_visibility": True, "prediction_stats_header_visibility": True,
-           "var_fps": f"{FPS}", "var_buffer_size_multiplier": "7", "variables_header_visibility": True}
+           "var_fps": f"{FPS}", "var_buffer_capacity_multiplier": "7", "variables_header_visibility": True}
 
 def compileModel():
     context["model"].compile(
@@ -209,7 +209,7 @@ def showVideoOptions():
         isChanged, value = imgui.slider_float("##video_timeline",
                                               context['frame_count']/video_fps, 0, video_length)
         if isChanged:
-            context['frame_count'] = value*video_fps
+            context['frame_count'] = int(value*video_fps)
             context['video_capture'].set(cv2.CAP_PROP_POS_FRAMES, context['frame_count']-1)
             context['frame_buffer'] = []
             context['anomaly_scores'] = [0, 0]
@@ -221,9 +221,9 @@ def showPredictionStat():
     if context["prediction_stats_header_visibility"]:
         imgui.set_next_item_width(imgui.get_window_size()[0])
         imgui.begin_table("##Prediction_stat_table", 2, imgui.TableFlags_.borders | imgui.TableFlags_.row_bg)
-        showStat("Frame count", f"{context['frame_count']}")
-        showStat("Buffer size (buffer_size_multiplier * FPS)", f"{FRAME_COUNT}")
-        showStat("Seconds passed", f"{context['frame_count']/FRAME_COUNT:.2f} secs")
+        showStat("Frames elapsed", f"{context['frame_count']}")
+        showStat("Current buffer size", f"{len(context['frame_buffer'])}")
+        showStat("Buffer capacity", f"{FRAME_COUNT}")
         showStatWithSlider("Anomaly Probability", "##anomaly_score_slider", context['anomaly_scores'][0])
         showStatWithSlider("Normal Probability", "##normal_score_slider", context['anomaly_scores'][1])
         ExitAnomalyDetection()
@@ -240,16 +240,16 @@ def showVariables():
         imgui.set_next_item_width(imgui.get_column_width())
         _, context["var_fps"] = imgui.input_text("##fps_input_text", context["var_fps"],
                                                  imgui.InputTextFlags_.chars_decimal)
-        showStat("Buffer size multiplier",justLabel=True)
+        showStat("Buffer capacity multiplier",justLabel=True)
         imgui.set_next_item_width(imgui.get_column_width())
-        _, context["var_buffer_size_multiplier"] = imgui.input_text("##buffer_size_multiplier_input_text",
-                                                                    context["var_buffer_size_multiplier"],
-                                                                    imgui.InputTextFlags_.chars_decimal)
+        _, context["var_buffer_capacity_multiplier"] = imgui.input_text("##buffer_capacity_multiplier_input_text",
+                                                                        context["var_buffer_capacity_multiplier"],
+                                                                        imgui.InputTextFlags_.chars_decimal)
         imgui.end_table()
         if imgui.button("Set variables", imgui.ImVec2(imgui.get_window_size()[0], 0)):
             global FPS, FRAME_COUNT
             FPS = int(context["var_fps"])
-            FRAME_COUNT = int(context["var_buffer_size_multiplier"])*FPS
+            FRAME_COUNT = int(context["var_buffer_capacity_multiplier"])*FPS
             restartAnomalyDetection()
             
 def main():
@@ -270,7 +270,7 @@ if __name__ == "__main__":
     immapp.run(
         gui_function=main,
         with_implot=True,
-        window_title="Anomaly Detection & Classification GUI App",
+        window_title="Anode",
         window_size=(500, 700),
         with_markdown=True,
     )
