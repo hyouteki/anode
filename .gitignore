@@ -1,4 +1,5 @@
 # ignoring any model file
 *.pt
 *.rar
+*.ini
 keras/UCF50/

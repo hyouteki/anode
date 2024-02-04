@@ -1,0 +1,8 @@
+imgui_bundle==0.8.7
+keras==2.13.1
+numpy==1.24.3
+opencv_contrib_python==4.8.0.76
+opencv_python==4.8.0.76
+PyGetWindow==0.0.9
+tensorflow==2.13.0
+tensorflow_intel==2.13.0
