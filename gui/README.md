@@ -1,5 +1,6 @@
-## __ANO__maly __DE__tection & classification
+## Anode
 > Simple GUI application for tinkering with model
+
 ![thumbnail](./images/thumbnail.png)
 
 ## Quick start
