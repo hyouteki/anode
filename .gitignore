@@ -3,3 +3,4 @@
 *.rar
 *.ini
 keras/UCF50/
+__pycache__/
