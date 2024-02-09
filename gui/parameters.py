@@ -19,8 +19,8 @@ IMAGE_WIDTH = 92
 IMAGE_HEIGHT = 92
 IMAGE_DIMENSION = (IMAGE_WIDTH, IMAGE_HEIGHT)
 # frame rates
-FPS = 24
-FRAME_COUNT = FPS*7
+FPS = 30
+FRAME_COUNT = FPS*4
 # Extracts a total of `SEQUENCE_LENGTH` number of frames form every video \
 #    (sample) at every equal interval.
 SEQUENCE_LENGTH = 92

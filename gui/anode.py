@@ -1,10 +1,11 @@
-from imgui_bundle import immapp, hello_imgui, imgui, imgui_md, ImVec2
+from imgui_bundle import immapp, hello_imgui, imgui, imgui_md, ImVec2, implot
 from imgui_bundle import portable_file_dialogs as pfd
 
 import os
 import cv2
 import numpy as np
 import pygetwindow
+from vidgear.gears import CamGear
 
 from keras.models import load_model
 from tensorflow.keras.optimizers import Adam
@@ -29,7 +30,6 @@ ALL_THEMES = [
     hello_imgui.ImGuiTheme_.black_is_black,
     hello_imgui.ImGuiTheme_.white_is_white,
 ]
-ALL_THEMES_NAME = [theme.name for theme in ALL_THEMES]
 
 ALL_MODELS = [
     "DS_UCFCrimeDataset___C_Arson___DT_2023_11_22__22_40_51.h5",
@@ -37,19 +37,23 @@ ALL_MODELS = [
     "DS_UCFCrimeDataset___C_RoadAccidents___DT_2023_11_22__23_03_08.h5",
     "DS_UCFCrimeDataset___C_Shooting___DT_2023_11_22__23_57_57.h5",
     "DS_UCFCrimeDataset___C_Vandalism___DT_2023_11_22__23_39_07.h5",
-    "",
 ]
 ALL_MODELS_NAME = ["Individual: Arson", "Individual: Explosion", "Individual: RoadAccidents",
                    "Individual: Shooting", "Individual: Vandalism"]
 
-context = {"select_theme_header_visibility": False, "current_theme_index": 6,
-           "select_window_header_visibility": True, "windows": [], "current_window": 0,
-           "current_model_visibility": True, "current_model_index": 0,
-           "select_video_path_header_visibility": True, "current_video_path": os.getcwd(),
-           "frame_buffer": [], "video_capture": None, "frame_count": 0, "anomaly_scores": [],
-           "model": load_model(os.path.join(os.getcwd(), "models", ALL_MODELS[0])),
-           "video_options_header_visibility": True, "prediction_stats_header_visibility": True,
-           "var_fps": f"{FPS}", "var_buffer_capacity_multiplier": "7", "variables_header_visibility": True}
+context = {"current_theme_index": 0, "current_model_index": 0,
+           "video_type": "path", "video_path": os.getcwd(), "youtube_link": "",
+           "opt_show_video": True, "cam_gear_opt": {}, "anomaly_scores_array": [],
+           "normal_scores_array": [], "show_anomaly_score": True, "show_normal_score": True,
+           "frame_buffer": [], "video_capture": None, "frame_count": 0, "cam_gear": None,
+           "anomaly_scores": [], "model": load_model(os.path.join(os.getcwd(), "models", ALL_MODELS[0])),
+           "details_header_visibility": True, "prediction_stats_header_visibility": True,
+           "var_fps": f"{FPS}", "var_buffer_capacity_multiplier": "4", "variables_header_visibility": True,
+           "var_buffer_capacity": f"{FRAME_COUNT}"}
+
+def generateCamGearOptions():
+    global context
+    context["cam_gear_opt"] = {"CAP_PROP_FPS": FPS}
 
 def compileModel():
     context["model"].compile(
@@ -58,68 +62,42 @@ def compileModel():
         metrics=["accuracy"],
     )
 
-def currentTheme():
+def videoPathHeader():
     global context
-    context["select_theme_header_visibility"] = imgui.collapsing_header("Select application theme")
-    if context["select_theme_header_visibility"]:
-        imgui.set_next_item_width(imgui.get_window_size()[0])
-        isChanged, context["current_theme_index"] = imgui.list_box("##Select_theme_list_box",
-                                                                   context["current_theme_index"],
-                                                                   ALL_THEMES_NAME)
-        if isChanged:
-            hello_imgui.apply_theme(ALL_THEMES[context["current_theme_index"]])
-
-def currentWindow():
-    global context
-    context["select_window_header_visibility"] = imgui.collapsing_header("Select video from window",)
-    if context["select_window_header_visibility"]:
-        context["windows"] = [title for title in pygetwindow.getAllTitles() if len(title) != 0]
-        imgui.set_next_item_width(imgui.get_window_size()[0])
-        _, context["current_window"] = imgui.list_box("##Select_window_to_capture_list_box",
-                                                      context["current_window"], context["windows"])
-        
-def currentModel():
-    global context, ALL_MODELS
-    context["select_model_header_visibility"] = imgui.collapsing_header("Select model for anomaly detection",
-                                                                         imgui.TreeNodeFlags_.default_open)
-    if context["select_model_header_visibility"]:
-        imgui.set_next_item_width(imgui.get_window_size()[0])
-        isChanged, context["current_model_index"] = imgui.list_box(
-            "##Select_model_for_anomaly_detection_list_box", context["current_model_index"], ALL_MODELS_NAME)
-        if isChanged:
-            context["model"] = load_model(os.path.join(os.getcwd(), "models",
-                                                       ALL_MODELS[context["current_model_index"]]))
-            compileModel()
-            endAnomalyDetection()
-        imgui.set_next_item_width(imgui.get_window_size()[0]*0.8)    
-        imgui.input_text("##Model_path_input_text",
-                         os.path.join(os.getcwd(), "models", ALL_MODELS[context["current_model_index"]]),
-                         imgui.InputTextFlags_.read_only)
+    nodeOpen = imgui.tree_node_ex(
+        "Select video via video path",
+        imgui.TreeNodeFlags_.open_on_arrow |
+        imgui.TreeNodeFlags_.selected if context["video_type"] == "path" else 0)
+    if imgui.is_item_clicked() and not imgui.is_item_toggled_open():
+            context["video_type"] = "path"
+    if nodeOpen:
+        imgui.set_next_item_width(imgui.get_window_size()[0]*0.70)
+        _, context["video_path"] = imgui.input_text_with_hint("##video_path", "Video path",
+                                                              context["video_path"])
         imgui.same_line()
-        if imgui.button("Select model", imgui.ImVec2(imgui.get_window_size()[0]*0.18, 0)):
-            fileDialog = pfd.open_file("select model", os.getcwd(), ["*.h5"])
-            if len(fileDialog.result()) > 0:
-                ALL_MODELS[context["current_model_index"]] = fileDialog.result()[0]
-                context["model"] = load_model(fileDialog.result()[0])
-                compileModel()
-                endAnomalyDetection()
-
-def currentVideoPath():
-    global context
-    context["select_video_path_header_visibility"] = imgui.collapsing_header("Select video from path",
-                                                                             imgui.TreeNodeFlags_.default_open)
-    if context["select_video_path_header_visibility"]:
-        imgui.set_next_item_width(imgui.get_window_size()[0]*0.8)    
-        _, context["current_video_path"] = imgui.input_text_with_hint("##Video_path_input_text",
-                                                                      "video path",
-                                                                      context["current_video_path"])
-        imgui.same_line()
-        if imgui.button("Open file", imgui.ImVec2(imgui.get_window_size()[0]*0.18, 0)):
+        if imgui.button("Open file", imgui.ImVec2(imgui.get_window_size()[0]*0.20, 0)):
             fileDialog = pfd.open_file("select video", os.getcwd(), ["*.mp4"])
             if len(fileDialog.result()) > 0:
-                context["current_video_path"] = fileDialog.result()[0]
+                context["video_path"] = fileDialog.result()[0]
                 endAnomalyDetection()
+        imgui.tree_pop()
 
+def youtubeLinkHeader():
+    global context
+    nodeOpen = imgui.tree_node_ex(
+        "Select video via youtube link",
+        imgui.TreeNodeFlags_.open_on_arrow |
+        imgui.TreeNodeFlags_.selected if context["video_type"] == "youtube" else 0)
+    if imgui.is_item_clicked() and not imgui.is_item_toggled_open():
+        context["video_type"] = "path"
+    if nodeOpen:
+        if imgui.is_item_clicked() and not imgui.is_item_toggled_open():
+            context["video_type"] = "youtube"
+        imgui.set_next_item_width(imgui.get_window_size()[0]*0.72)
+        _, context["youtube_link"] = imgui.input_text_with_hint("##youtube_link", "Youtube link",
+                                                                context["youtube_link"])
+        imgui.tree_pop()
+        
 def frameReduction(frames):
     skipFrameWindow = max(int(FRAME_COUNT / SEQUENCE_LENGTH), 1)
     return np.array([cv2.resize(np.array(frames[i*skipFrameWindow]), IMAGE_DIMENSION) / 255
@@ -129,56 +107,102 @@ def startAnomalyDetection():
     global context
     if imgui.button("Start anomaly detection & classification", imgui.ImVec2(imgui.get_window_size()[0], 0)):
         context["frame_buffer"] = []
-        context["video_capture"] = cv2.VideoCapture(context["current_video_path"])
         context["anomaly_scores"] = [0, 0]
-        
-def processAnomalyDetection():
+        context["anomaly_scores_array"] = []
+        context["normal_scores_array"] = []
+        if context["video_type"] == "path":
+            context["video_capture"] = cv2.VideoCapture(context["video_path"])
+        elif context["video_type"] == "youtube":
+            generateCamGearOptions()
+            context["cam_gear"] = CamGear(source=context["youtube_link"], stream_mode=True,
+                                          time_delay=1, logging=True, **context["cam_gear_opt"]).start()
+    if context["video_capture"] is not None or context["cam_gear"] is not None:
+        if imgui.button("Restart", imgui.ImVec2(imgui.get_window_size()[0]*0.49, 0)):
+            restartAnomalyDetection()
+        imgui.same_line()
+        if imgui.button("End", imgui.ImVec2(imgui.get_window_size()[0]*0.49, 0)):
+            endAnomalyDetection()
+
+def processOptions():
     global context
-    if context["video_capture"] != None:
+    if len(context["frame_buffer"]) > 0:
+        if context["opt_show_video"]:
+            cv2.imshow(context["cam_gear"].ytv_metadata["title"] if context[
+                "video_type"] == "youtube" else context["video_path"], context["frame_buffer"][-1])
+        else:
+            cv2.destroyAllWindows()
+            
+def processAnomalyDetection():
+    if context["video_type"] == "path" and context["video_capture"] is not None:
         if context["video_capture"].isOpened():
             ret, frame = context["video_capture"].read()
             context["frame_count"] += 1
             if ret == False:
                 context["video_capture"].release()
                 context["video_capture"] = None
+                cv2.destroyAllWindows()
+                return
             if len(context["frame_buffer"]) < FRAME_COUNT:
                 context["frame_buffer"].append(frame)
                 return
             frames = frameReduction(context["frame_buffer"])
             context["anomaly_scores"] = context["model"].predict(np.array([frames]))[0]
+            context["anomaly_scores_array"].append(context["anomaly_scores"][0])
+            context["normal_scores_array"].append(context["anomaly_scores"][1])
             context["frame_buffer"].append(frame)
             context["frame_buffer"] = context["frame_buffer"][1:]
         else:
             context["video_capture"].release()
             context["video_capture"] = None
+    if context["video_type"] == "youtube" and context["cam_gear"] is not None:
+        frame = context["cam_gear"].read()
+        if frame is None:
+            context["cam_gear"].stop()
+            context["cam_gear"] = None
+            cv2.destroyAllWindows()
+            return
+        context["frame_count"] += 1
+        if len(context["frame_buffer"]) < FRAME_COUNT:
+            context["frame_buffer"].append(frame)
+            return
+        frames = frameReduction(context["frame_buffer"])
+        context["anomaly_scores"] = context["model"].predict(np.array([frames]))[0]
+        context["anomaly_scores_array"].append(context["anomaly_scores"][0])
+        context["normal_scores_array"].append(context["anomaly_scores"][1])
+        context["frame_buffer"].append(frame)
+        context["frame_buffer"] = context["frame_buffer"][1:]
 
 def restartAnomalyDetection():
     global context
     context["frame_buffer"] = []
-    context["video_capture"].release()
-    context["video_capture"] = None
-    context["video_capture"] = cv2.VideoCapture(context["current_video_path"])
     context["anomaly_scores"] = [0, 0]
+    context["anomaly_scores_array"] = []
+    context["normal_scores_array"] = []
     context["frame_count"] = 0
+    if context["video_type"] == "path":
+        context["video_capture"].release()
+        context["video_capture"] = cv2.VideoCapture(context["video_path"])
+    elif context["video_type"] == "youtube":
+        if context["cam_gear"] is not None:
+            context["cam_gear"].stop()
+        context["cam_gear"] = CamGear(source=context["youtube_link"], stream_mode=True,
+                                      time_delay=1, logging=True).start()
 
 def endAnomalyDetection():
     global context
     if context["video_capture"] is not None:
         context["video_capture"].release()
         context["video_capture"] = None
+    if context["cam_gear"] is not None:
+        context["cam_gear"].stop()
+        context["cam_gear"] = None
     context["frame_buffer"] = []
     context["anomaly_scores"] = [0, 0]
+    context["anomaly_scores_array"] = []
+    context["normal_scores_array"] = []
     context["frame_count"] = 0
+    cv2.destroyAllWindows()
     
-def ExitAnomalyDetection():
-    global context
-    imgui.table_next_column()
-    if imgui.button("Restart", imgui.ImVec2(imgui.get_column_width(), 0)):
-        restartAnomalyDetection()
-    imgui.table_next_column()
-    if imgui.button("End", imgui.ImVec2(imgui.get_column_width(), 0)):
-        endAnomalyDetection()
-        
 def showStat(fieldName, fieldValue="", justLabel=False):
     imgui.table_next_column()
     imgui.text(fieldName)
@@ -192,27 +216,40 @@ def showStatWithSlider(fieldName, fieldLabel, fieldValue):
     imgui.set_next_item_width(imgui.get_column_width())
     imgui.slider_float(fieldLabel, fieldValue, 0, 1, flags=imgui.SliderFlags_.no_input)
 
-def showVideoOptions():
+def showDetails():
     global context
-    context["video_options_header_visibility"] = imgui.collapsing_header("Video Options",
-                                                                         imgui.TreeNodeFlags_.default_open)
-    if context["video_options_header_visibility"]:
-        video_fps = int(context['video_capture'].get(cv2.CAP_PROP_FPS))
-        video_length = int(context['video_capture'].get(cv2.CAP_PROP_FRAME_COUNT))/context[
-            'video_capture'].get(cv2.CAP_PROP_FPS)
-        imgui.set_next_item_width(imgui.get_window_size()[0])
-        imgui.begin_table("##Video_options_table", 2, imgui.TableFlags_.borders | imgui.TableFlags_.row_bg)
-        showStat("Video frame rate", f"{video_fps}")
-        showStat("Video length", f"{video_length:.2f} secs")
-        imgui.end_table()
+    context["details_header_visibility"] = imgui.collapsing_header("Details", imgui.TreeNodeFlags_.default_open)
+    if not context["details_header_visibility"]:
+        return
+    imgui.set_next_item_width(imgui.get_window_size()[0])
+    imgui.begin_table("##details_table", 2, imgui.TableFlags_.borders
+                      | imgui.TableFlags_.row_bg | imgui.TableFlags_.resizable)
+    showStat("Model", ALL_MODELS_NAME[context["current_model_index"]])
+    if context["video_type"] == "path":
+        showStat("Video path", context["video_path"])
+        if context["video_capture"] is not None:
+            video_fps = int(context['video_capture'].get(cv2.CAP_PROP_FPS))
+            video_length = int(context['video_capture'].get(cv2.CAP_PROP_FRAME_COUNT))/\
+                context['video_capture'].get(cv2.CAP_PROP_FPS)
+            showStat("Video frame rate", f"{video_fps}")
+            showStat("Video length", f"{video_length:.2f} secs")
+    elif context["video_type"] == "youtube":
+        showStat("Youtube link", context["youtube_link"])
+        if context["cam_gear"] is not None:
+            showStat("Youtube video title", context["cam_gear"].ytv_metadata["title"])
+            showStat("Seconds elapsed", f"{(context['frame_count']/FPS):.2f}")
+    imgui.end_table()
+    if context["video_type"] == "path" and context["video_capture"] is not None:
         imgui.set_next_item_width(imgui.get_window_size()[0])
         isChanged, value = imgui.slider_float("##video_timeline",
-                                              context['frame_count']/video_fps, 0, video_length)
+                                              context["frame_count"]/video_fps, 0, video_length)
         if isChanged:
-            context['frame_count'] = int(value*video_fps)
-            context['video_capture'].set(cv2.CAP_PROP_POS_FRAMES, context['frame_count']-1)
-            context['frame_buffer'] = []
-            context['anomaly_scores'] = [0, 0]
+            context["frame_count"] = int(value*video_fps)
+            context["video_capture"].set(cv2.CAP_PROP_POS_FRAMES, context["frame_count"]-1)
+            context["frame_buffer"] = []
+            context["anomaly_scores"] = [0, 0]
+            context["anomaly_scores_array"] = []
+            context["normal_scores_array"] = []
     
 def showPredictionStat():
     global FPS
@@ -226,8 +263,19 @@ def showPredictionStat():
         showStat("Buffer capacity", f"{FRAME_COUNT}")
         showStatWithSlider("Anomaly Probability", "##anomaly_score_slider", context['anomaly_scores'][0])
         showStatWithSlider("Normal Probability", "##normal_score_slider", context['anomaly_scores'][1])
-        ExitAnomalyDetection()
+        imgui.table_next_column()
+        _, context["show_anomaly_score"] = imgui.checkbox("Show anomaly score", context["show_anomaly_score"])
+        imgui.table_next_column()
+        _, context["show_normal_score"] = imgui.checkbox("Show normal score", context["show_normal_score"])
         imgui.end_table()
+        implot.begin_plot("scores")
+        if context["show_anomaly_score"]:
+            implot.plot_line("Anomaly", np.array(context["anomaly_scores_array"]), xscale=0.001,
+                             flags=implot.LineFlags_.shaded)
+        if context["show_normal_score"]:
+            implot.plot_line("Normal", np.array(context["normal_scores_array"]), xscale=0.001,
+                             flags=implot.LineFlags_.shaded)
+        implot.end_plot()
         
 def showVariables():
     global context
@@ -245,23 +293,65 @@ def showVariables():
         _, context["var_buffer_capacity_multiplier"] = imgui.input_text("##buffer_capacity_multiplier_input_text",
                                                                         context["var_buffer_capacity_multiplier"],
                                                                         imgui.InputTextFlags_.chars_decimal)
+        showStat("Buffer capacity",justLabel=True)
+        imgui.set_next_item_width(imgui.get_column_width())
+        _, context["var_buffer_capacity"] = imgui.input_text("##buffer_capacity_input_text",
+                                                             context["var_buffer_capacity"],
+                                                             imgui.InputTextFlags_.chars_decimal)
         imgui.end_table()
         if imgui.button("Set variables", imgui.ImVec2(imgui.get_window_size()[0], 0)):
             global FPS, FRAME_COUNT
             FPS = int(context["var_fps"])
             FRAME_COUNT = int(context["var_buffer_capacity_multiplier"])*FPS
+            FRAME_COUNT = int(context["var_buffer_capacity"])
             restartAnomalyDetection()
+
+def themesMenuItem():
+    global context
+    for i, theme in enumerate(ALL_THEMES):
+        if imgui.menu_item(theme.name, "", context["current_theme_index"] == i, True)[0]:
+            context["current_theme_index"] = i
+            hello_imgui.apply_theme(theme)
+
+def modelMenuItem():
+    global context
+    for i, modelPath in enumerate(ALL_MODELS):
+        if imgui.menu_item(ALL_MODELS_NAME[i], "", context["current_model_index"] == i, True)[0]:
+            context["current_model_index"] = i
+            context["model"] = load_model(os.path.join(os.getcwd(), "models", modelPath))
+            compileModel()
+
+def optionsMenuItem():
+    global context
+    if imgui.menu_item("Show video", "", context["opt_show_video"], True)[0]:
+        context["opt_show_video"] = not context["opt_show_video"]
+            
+def mainMenu():
+    if imgui.begin_main_menu_bar():
+        if imgui.begin_menu("View", True):
+            if imgui.begin_menu("Themes", True):
+                themesMenuItem()
+                imgui.end_menu()
+            imgui.end_menu()
+        if imgui.begin_menu("Model", True):
+            modelMenuItem()
+            imgui.end_menu()
+        if imgui.begin_menu("Options", True):
+            optionsMenuItem()
+            imgui.end_menu()
+        imgui.end_main_menu_bar()
             
 def main():
     hello_imgui.apply_theme(ALL_THEMES[context["current_theme_index"]])
-    currentTheme()
-    currentModel()
-    currentWindow()
-    currentVideoPath()
+    mainMenu()
+    imgui.dummy((0, 20))
+    videoPathHeader()
+    youtubeLinkHeader()
     startAnomalyDetection()
+    processOptions()
     processAnomalyDetection()
-    if context["video_capture"] != None:
-        showVideoOptions()
+    showDetails()
+    if context["video_capture"] is not None or context["cam_gear"] is not None:
         showPredictionStat()
         showVariables()
     
@@ -271,6 +361,6 @@ if __name__ == "__main__":
         gui_function=main,
         with_implot=True,
         window_title="Anode",
-        window_size=(500, 700),
+        window_size=(500, 850),
         with_markdown=True,
     )
