@@ -6,7 +6,7 @@
 git clone --depth 1 --recursive https://github.com/Hyouteki/BTP-project.git
 ```
 
-> **IMPORTANT** 
+> [!IMPORTANT]
 > | Models | Maintained | Directory |
 > | :- | :- | :- |
 > | Anomaly detection on **UCF Crime Dataset** | ✔️ | [ucfc](https://github.com/Hyouteki/BTP-project/tree/main/ucfc) |
