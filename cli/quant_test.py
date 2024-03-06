@@ -74,7 +74,6 @@ if __name__ == "__main__":
         frames = reduce_buffer(buffer)
         prediction = predict_output(np.array([frames], dtype=np.float32))[0]
         print(f"\tPrediction: {prediction}")
-        sys.stdout.flush()
         anomaly_scores.append(prediction[0])
         normal_scores.append(prediction[1])
         # break
