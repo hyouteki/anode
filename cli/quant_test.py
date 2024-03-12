@@ -8,14 +8,14 @@ import tensorflow as tf
 from parameters import *
 
 MODELS = {
-    "arson": "DS_UCFCrimeDataset___C_Arson___DT_2023_11_22__22_40_51.h5",
-    "explosion": "DS_UCFCrimeDataset___C_Explosion___DT_2023_11_22__23_22_08.h5", 
-    "road_accidents": "DS_UCFCrimeDataset___C_RoadAccidents___DT_2023_11_22__23_03_08.h5",
-    "shooting": "DS_UCFCrimeDataset___C_Shooting___DT_2023_11_22__23_57_57.h5",
-    "vandalism": "DS_UCFCrimeDataset___C_Vandalism___DT_2023_11_22__23_39_07.h5",
-    "explosion_quant": "explosion_quant_model.tflite",
+    "arson": "Arson.tflite",
+    "explosion": "Explosion.tflite", 
+    "road_accidents": "RoadAccidents.tflite",
+    "shooting": "Shooting.tflite",
+    "vandalism": "Vandalism.tflite",
 }
 
+FRAME_COUNT = SEQUENCE_LENGTH
 SKIP_FRAME_WINDOW = max(int(FRAME_COUNT / SEQUENCE_LENGTH), 1)
 
 def resize_frame(frame):
@@ -23,7 +23,7 @@ def resize_frame(frame):
 
 def reduce_buffer(frames):
     return [frames[i * SKIP_FRAME_WINDOW] for i in range(SEQUENCE_LENGTH)]
-    
+
 if __name__ == "__main__":
     if len(sys.argv) < 7:
         print("usage: anodecli -m <model> -v <videopath> -o <predictions.pickle>")
@@ -33,6 +33,8 @@ if __name__ == "__main__":
     video_path = sys.argv[4]
     out_file_name = sys.argv[6]
 
+    predictions = 0
+    
     interpreter = tf.lite.Interpreter(model_path=os.path.join("models", MODELS[model_name]))
     interpreter.allocate_tensors()
     input_details = interpreter.get_input_details()
@@ -48,17 +50,19 @@ if __name__ == "__main__":
         interpreter.set_tensor(input_details[0]['index'], frames)
         interpreter.invoke()
         end_time = current_milli_time()
-        print(f"\tPrediction time: {(end_time-start_time)/1000:.2f} secs")
+        print(f"\tPrediction_time: {(end_time-start_time)/1000:.4f} secs")
         sys.stdout.flush()
         return interpreter.get_tensor(output_details[0]['index'])
     
     # exit(0)
     buffer = []
     video_capture = cv2.VideoCapture(video_path)
-
+    
     i = 0
     anomaly_scores = []
     normal_scores = []
+    start = current_milli_time()
+    fps = video_capture.get(cv2.CAP_PROP_FPS)
     while video_capture.isOpened():
         i += 1
         print(f"Frame: {i}")
@@ -76,6 +80,15 @@ if __name__ == "__main__":
         print(f"\tPrediction: {prediction}")
         anomaly_scores.append(prediction[0])
         normal_scores.append(prediction[1])
-        # break
+        buffer = buffer[FRAME_COUNT//3: ]
+        predictions += 1
+    end = current_milli_time()
+    time_taken = (end-start)/1000
+    video_length = i/fps
+    print(f"Video_length: {video_length} secs")
+    print(f"Time_elapsed: {time_taken:.4f} secs")
+    print(f"Time_realtime_ratio: {time_taken/video_length:.4f}")
+    print(f"Predictions: {predictions}")
+    print(f"Prediction_ratio: {predictions/i:.4f}")
     with open(out_file_name, "wb") as file:
         pickle.dump({"anomaly_scores": anomaly_scores, "normal_scores": normal_scores}, file)
