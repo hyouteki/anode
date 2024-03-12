@@ -1,6 +1,7 @@
 import time
 import sys
 import cv2
+from vidgear.gears import CamGear
 import os
 import numpy as np
 import pickle
@@ -26,11 +27,11 @@ def reduce_buffer(frames):
 
 if __name__ == "__main__":
     if len(sys.argv) < 7:
-        print("usage: anodecli -m <model> -v <videopath> -o <predictions.pickle>")
+        print("usage: anodeyt -m <model> -yt <youtube-link> -o <predictions.pickle>")
         exit(1)
 
     model_name = sys.argv[2]
-    video_path = sys.argv[4]
+    youtube_link = sys.argv[4]
     out_file_name = sys.argv[6]
 
     predictions = 0
@@ -50,25 +51,26 @@ if __name__ == "__main__":
         interpreter.set_tensor(input_details[0]['index'], frames)
         interpreter.invoke()
         end_time = current_milli_time()
-        print(f"\tPrediction_time: {(end_time-start_time)/1000:.4f} secs")
+        print(f"Prediction_time: {(end_time-start_time)/1000:.4f} secs\n\n")
         sys.stdout.flush()
         return interpreter.get_tensor(output_details[0]['index'])
     
     # exit(0)
     buffer = []
-    video_capture = cv2.VideoCapture(video_path)
+    fps = 30
+    cam_gear_options = {"CAP_PROP_FPS": fps}
+    cam_gear = CamGear(source=youtube_link, stream_mode=True, time_delay=1,
+                       logging=True, **cam_gear_options).start()
     
     i = 0
     anomaly_scores = []
     normal_scores = []
     start = current_milli_time()
-    fps = video_capture.get(cv2.CAP_PROP_FPS)
-    while video_capture.isOpened():
+    while True:
         i += 1
-        print(f"Frame: {i}")
-        success, frame = video_capture.read()
-        if not success:
-            video_capture.release()
+        frame = cam_gear.read()
+        if frame is None:
+            cam_gear.stop()
             break
         buffer.append(resize_frame(frame))
         if len(buffer) < FRAME_COUNT:
@@ -77,10 +79,11 @@ if __name__ == "__main__":
             buffer = buffer[1:]
         frames = reduce_buffer(buffer)
         prediction = predict_output(np.array([frames], dtype=np.float32))[0]
-        print(f"\tPrediction: {prediction}")
+        print(f"Frame: {i}; Time: {i/fps:.4f} secs")
+        print(f"Prediction: {prediction}")
         anomaly_scores.append(prediction[0])
         normal_scores.append(prediction[1])
-        buffer = buffer[FRAME_COUNT//3: ]
+        buffer = buffer[FRAME_COUNT//2: ]
         predictions += 1
     end = current_milli_time()
     time_taken = (end-start)/1000
