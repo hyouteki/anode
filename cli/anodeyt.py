@@ -27,6 +27,7 @@ def reduce_buffer(frames):
 
 def run(model_name, youtube_link, out_file_name):
     predictions = 0
+    past_predictions = []
     
     interpreter = tf.lite.Interpreter(model_path=os.path.join("models", MODELS[model_name]))
     interpreter.allocate_tensors()
@@ -77,6 +78,22 @@ def run(model_name, youtube_link, out_file_name):
         anomaly_scores.append(prediction[0])
         normal_scores.append(prediction[1])
         buffer = buffer[FRAME_COUNT//7: ]
+        
+        past_predictions.append(prediction)
+        if len(past_predictions) == 3:
+            anomaly = True
+            for p in past_predictions:
+                if p[0] <= p[1]:
+                    anomaly = False
+                    break
+                
+            # if prob(anomaly) > prob(normal) for atleast 3 consecutive predictions
+            past_predictions = past_predictions[1:]
+            if anomaly: 
+                print("<=============================>")
+                print("<=========> ANOMALY <=========>")
+                print("<=============================>")
+            
         predictions += 1
 
         print(f"Frame: {i}; Time: {i/fps:.4f} secs")
