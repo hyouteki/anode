@@ -14,6 +14,7 @@ MODELS = {
     "road_accidents": "RoadAccidents.tflite",
     "shooting": "Shooting.tflite",
     "vandalism": "Vandalism.tflite",
+    "fighting": "Fighting.tflite",
 }
 
 FRAME_COUNT = SEQUENCE_LENGTH
