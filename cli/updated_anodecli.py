@@ -7,7 +7,8 @@ import pickle
 import tensorflow as tf
 from termcolor import colored
 from parameters import *
-
+from gpiozero import Buzzer
+buzzer = Buzzer(17)
 MODELS = {
     "arson": "Arson.tflite",
     "explosion": "Explosion.tflite", 
@@ -100,10 +101,12 @@ if __name__ == "__main__":
             # if prob(anomaly) > prob(normal) for atleast 5 consecutive predictions
             past_predictions = past_predictions[1:]
             if anomaly: 
+                buzzer.on()
                 print(colored("<=============================>", "red"))
                 print(colored("<=========> ANOMALY <=========>", "red"))
                 print(colored("<=============================>", "red"))
-            
+            else:
+                buzzer.off()
         predictions += 1
         
     end = current_milli_time()
