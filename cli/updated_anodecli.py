@@ -7,8 +7,7 @@ import pickle
 import tensorflow as tf
 from termcolor import colored
 from parameters import *
-from gpiozero import Buzzer
-buzzer = Buzzer(17)
+
 MODELS = {
     "arson": "Arson.tflite",
     "explosion": "Explosion.tflite", 
@@ -18,104 +17,122 @@ MODELS = {
     "fighting": "Fighting.tflite",
 }
 
+ENABLE_BUZZER = False
+if ENABLE_BUZZER:
+    from gpiozero import Buzzer
+    buzzer = Buzzer(17)
+
+WINDOW_SCALE = 8
+SEQUENCE_LENGTH = 39
 FRAME_COUNT = SEQUENCE_LENGTH
+IMAGE_DIMENSION = (128, 128)
 SKIP_FRAME_WINDOW = max(int(FRAME_COUNT / SEQUENCE_LENGTH), 1)
 
-def resize_frame(frame):
-    return cv2.resize(frame, IMAGE_DIMENSION) / 255
+def computeOpticalFlow(lastFrame, frame):
+    return cv2.calcOpticalFlowFarneback(lastFrame, frame, None, 0.5, 3, 15, 3, 5, 1.2, 0)
 
-def reduce_buffer(frames):
-    return [frames[i * SKIP_FRAME_WINDOW] for i in range(SEQUENCE_LENGTH)]
+def preprocessFrames(frames):
+    accumulatedFlow = np.zeros((*IMAGE_DIMENSION, 2))
+    for i, frame in enumerate(frames[1: ]):
+        lastFrame = frames[i-1]
+        accumulatedFlow += computeOpticalFlow(lastFrame, frame)
+    accumulatedFlow = np.transpose(accumulatedFlow, (2, 0, 1))
+    frames = frames[1: ]
+    frames.extend(accumulatedFlow)
+    return np.expand_dims(frames, axis=-1)
 
 if __name__ == "__main__":
-    #if len(sys.argv) < 7:
-    #    print("usage: anodecli -m <model> -v <videopath> -o <predictions.pickle>")
-    #    exit(1)
+    if len(sys.argv) < 7:
+       print("usage: anodecli -m <model> -v <videopath> -o <predictions.pickle>")
+       exit(1)
 
-    model_name = sys.argv[1]
-    #video_path = sys.argv[4]
-    #out_file_name = sys.argv[6]
+    modelName = sys.argv[2]
+    videoPath = sys.argv[4]
+    outFileName = sys.argv[6]
 
     predictions = 0
-    past_predictions = []
-    interpreter = tf.lite.Interpreter(model_path=os.path.join("models", MODELS[model_name]))
+    pastPredictions = []
+    interpreter = tf.lite.Interpreter(model_path=os.path.join("models", MODELS[modelName]))
     interpreter.allocate_tensors()
-    input_details = interpreter.get_input_details()
-    output_details = interpreter.get_output_details()
-    print(input_details)
-    print(output_details)
+    inputDetails = interpreter.get_input_details()
+    outputDetails = interpreter.get_output_details()
+    print(inputDetails)
+    print(outputDetails)
 
-    def current_milli_time():
+    def currentMilliTime():
         return round(time.time() * 1000)
     
-    def predict_output(frames):
-        start_time = current_milli_time()
-        interpreter.set_tensor(input_details[0]['index'], frames)
+    def predictOutput(frames):
+        startTime = currentMilliTime()
+        interpreter.set_tensor(inputDetails[0]['index'], frames)
         interpreter.invoke()
-        end_time = current_milli_time()
-        print(colored(f"Prediction_time: {(end_time-start_time)/1000:.4f} secs", "green"))
+        endTime = currentMilliTime()
+        print(colored(f"PredictionTime({(endTime-startTime)/1000:.4f} secs)", "green"))
         sys.stdout.flush()
-        return interpreter.get_tensor(output_details[0]['index'])
+        return interpreter.get_tensor(outputDetails[0]['index'])
     
-    # exit(0)
     buffer = []
-    video_capture = cv2.VideoCapture(0)
-    
+    videoCapture = cv2.VideoCapture(0 if videoPath == "cam" else videoPath)    
     i = 0
-    anomaly_scores = []
-    normal_scores = []
-    start = current_milli_time()
-    fps = video_capture.get(cv2.CAP_PROP_FPS)
-    while video_capture.isOpened():
+    anomalyScores = []
+    normalScores = []
+    start = currentMilliTime()
+    fps = videoCapture.get(cv2.CAP_PROP_FPS)
+    
+    while videoCapture.isOpened():
         i += 1
-        print(f"Frame: {i}")
-        success, frame = video_capture.read()
+        print(f"Frame({i})")
+
+        success, frame = videoCapture.read()
         if not success:
-            video_capture.release()
+            videoCapture.release()
             break
         cv2.imshow('Frame',frame)
         if(cv2.waitKey(1) & 0xFF == ord('q')):
             break
-        buffer.append(resize_frame(frame))
+        
+        frame = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
+        frame = cv2.resize(frame, IMAGE_DIMENSION) / 255
+
+        buffer.append(frame)
         if len(buffer) < FRAME_COUNT:
             continue
-        if len(buffer) > FRAME_COUNT:
-            buffer = buffer[1:]
-        frames = reduce_buffer(buffer)
-        prediction = predict_output(np.array([frames], dtype=np.float32))[0]
-        print(colored(f"Prediction: {prediction}", "green"))
-        anomaly_scores.append(prediction[0])
-        normal_scores.append(prediction[1])
-        buffer = buffer[FRAME_COUNT//8: ]
+
+        frames = preprocessFrames(buffer)
+        prediction = predictOutput(np.array([frames], dtype=np.float32))[0]
+        print(colored(f"Prediction({prediction})", "green"))
+        anomalyScores.append(prediction[0])
+        normalScores.append(prediction[1])
+        buffer = buffer[FRAME_COUNT//WINDOW_SCALE: ]
         predictions += 1
-        
-        print(colored(f"Frame: {i}; Time: {i/fps:.4f} secs", "green"))
-        past_predictions.append(prediction)
-        if len(past_predictions) == 5:
+        print(colored(f"TimeElapsed({i/fps:.4f} secs)", "green"))
+
+        pastPredictions.append(prediction)
+        if len(pastPredictions) == 5:
             anomaly = True
-            for p in past_predictions:
+            for p in pastPredictions:
                 if p[0] <= p[1] or p[0] <= 0.65:
                     anomaly = False
                     break
                 
-            # if prob(anomaly) > prob(normal) for atleast 5 consecutive predictions
-            past_predictions = past_predictions[1:]
-            if anomaly: 
-                buzzer.on()
+            pastPredictions = pastPredictions[1:]
+            if anomaly:
+                if ENABLE_BUZZER:
+                    buzzer.on()
                 print(colored("<=============================>", "red"))
                 print(colored("<=========> ANOMALY <=========>", "red"))
                 print(colored("<=============================>", "red"))
             else:
-                buzzer.off()
+                if ENABLE_BUZZER:
+                    buzzer.off()
+                    
         predictions += 1
         
-    end = current_milli_time()
-    time_taken = (end-start)/1000
-    video_length = i/fps
-    print(f"Video_length: {video_length} secs")
-    print(f"Time_elapsed: {time_taken:.4f} secs")
-    print(f"Time_realtime_ratio: {time_taken/video_length:.4f}")
-    print(f"Predictions: {predictions}")
-    print(f"Prediction_ratio: {predictions/i:.4f}")
-    with open(out_file_name, "wb") as file:
-        pickle.dump({"anomaly_scores": anomaly_scores, "normal_scores": normal_scores}, file)
+    end = currentMilliTime()
+    timeTaken = (end-start)/1000
+    videoLength = i/fps
+    print(f"VideoLength({videoLength} secs), TimeElapsed({timeTaken:.4f} secs)")
+    print(f"TimeRealtimeRatio({timeTaken/videoLength:.4f})")
+    print(f"NumPredictions({predictions}), PredictionRatio({predictions/i:.4f})")
+    with open(outFileName, "wb") as file:
+        pickle.dump({"anomalyScores": anomalyScores, "normalScores": normalScores}, file)

@@ -13,7 +13,7 @@ from tensorflow.keras.layers import (TimeDistributed, Dropout, Flatten, Dense,
 
 tensorflowRandomSeed(SEED)
 
-SEQUENCE_LENGTH = 91
+SEQUENCE_LENGTH = 39
 IMAGE_HEIGHT = 128
 IMAGE_WIDTH = 128
 IMAGE_DIMENSION = (IMAGE_HEIGHT, IMAGE_WIDTH)
@@ -130,13 +130,13 @@ def makeModelForIndividualClass(trainClass, normalFeatures, normalLabels):
         validation_split=TRAIN_VALID_SPLIT,
         callbacks=[earlyStoppingCallback],
     )
-    model.save(f"../models/individual/opticalflow/{trainClasses[0]}")
+    model.save(f"../models/individual/opticalflow/{trainClass}")
     loss, accuracy = model.evaluate(featuresTest, labelsTest)
     with open("ind_of_obs.md", "a") as file:
-        file.write(f"## {trainClasses[0]}\n")
+        file.write(f"## {trainClass}\n")
         file.write(f"- LOSS = {loss}\n")
         file.write(f"- ACC. = {accuracy}\n")
-        print(f"## {trainClasses[0]}")
+        print(f"## {trainClass}")
         print(f"- LOSS = {loss}")
         print(f"- ACC. = {accuracy}")
 

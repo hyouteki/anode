@@ -1,7 +1,6 @@
 import tensorflow as tf
 
-# models = ["Arson", "Explosion", "RoadAccidents", "Shooting", "Vandalism", "Fighting"]
-models = ["Fighting"]
+models = ["Arson", "Explosion", "RoadAccidents", "Shooting", "Vandalism"]
 prefix = "./models/"
 
 def transformer(model_path):
