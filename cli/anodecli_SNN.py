@@ -97,7 +97,8 @@ if __name__ == "__main__":
         numPredictions += 1
         buffer = buffer[FRAME_COUNT//WINDOW_SCALE: ]
         
-        print(colored(f"Prediction({prediction})\nTimeElapsed({frameCount/fps:.4f} secs)", "green"))
+        print(colored(f"NormalScore({prediction[0]:.5f}), AnomalyScore({prediction[1]:.5f})", "green"))
+        print(colored(f"TimeElapsed({frameCount/fps:.4f} secs)", "green"))
 
         checkPastPredictionCount = 5
         if len(predictions) >= checkPastPredictionCount:
@@ -116,9 +117,7 @@ if __name__ == "__main__":
             else:
                 if ENABLE_BUZZER:
                     buzzer.off()
-                    
-        numPredictions += 1
-        
+                            
     end = currentMilliTime()
     timeTaken = (end-start)/1000
     videoLength = frameCount/fps

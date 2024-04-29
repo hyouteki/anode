@@ -114,9 +114,7 @@ if __name__ == "__main__":
             else:
                 if ENABLE_BUZZER:
                     buzzer.off()
-                    
-    numPredictions += 1
-        
+                            
     end = currentMilliTime()
     timeTaken = (end-start)/1000
     videoLength = frameCount/fps

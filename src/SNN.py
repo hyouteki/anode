@@ -10,8 +10,8 @@ from tensorflow.keras.optimizers import Adam
 from tensorflow.random import set_seed as tensorflowRandomSeed
 from spkeras.models import cnn_to_snn
 import pickle
-from tensorflow.keras.layers import (TimeDistributed, Dropout, Flatten, Dense, GlobalAveragePooling1D,
-                                     Reshape, Conv2D, AveragePooling2D, LSTM, Activation, BatchNormalization)
+from tensorflow.keras.layers import (Dropout, Flatten, Dense, Conv2D, AveragePooling2D,
+                                     Activation, BatchNormalization)
 
 tensorflowRandomSeed(SEED)
 
@@ -29,12 +29,14 @@ def computeOpticalFlow(lastFrame, frame):
 def extractOpticalFlowFeatures(flow):
     return [np.mean(flow), np.std(flow), np.max(flow), np.min(flow)]   
 
+def preprocessFrame(frame):
+    return cv2.resize(cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY), IMAGE_DIMENSION) / 255
+
 def frameExtraction(videoPath):
     frames = []
     videoReader = cv2.VideoCapture(videoPath)
     frameCount = int(videoReader.get(cv2.CAP_PROP_FRAME_COUNT))
     skipFrameWindow = max(int(frameCount/SEQUENCE_LENGTH), 1)
-    lastFrame = None
     accumulatedFlow = np.zeros((*IMAGE_DIMENSION, 2))
     
     for i in range(SEQUENCE_LENGTH):
@@ -42,18 +44,15 @@ def frameExtraction(videoPath):
         success, frame = videoReader.read()
         if not success:
             break
-        frame = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
-        frame = cv2.resize(frame, IMAGE_DIMENSION) / 255
-        if lastFrame is None:
-            lastFrame = frame
+        frames.append(preprocessFrame(frame))
+        if len(frames) == 1:
             continue
-        accumulatedFlow += computeOpticalFlow(lastFrame, frame)
-        frames.append(frame)
+        accumulatedFlow += computeOpticalFlow(frames[-2], frames[-1])
     videoReader.release()
 
     accumulatedFlow = np.transpose(accumulatedFlow, (2, 0, 1))
     frames.extend(accumulatedFlow)
-    return frames
+    return frames[1: ]
 
 def extractFeaturesAndLabels(className, classId, force=False):
     if os.path.exists(f"{className}.cache.pkl") and not force:
@@ -161,19 +160,18 @@ def makeModelForIndividualClass(trainClass, normalFeatures, normalLabels, force=
     model.save(f"../models/individual/snn/{trainClass}.cnn.h5")
     loss, accuracy = model.evaluate(featuresTest, labelsTest)
     print(f"Debug: {trainClass} CNN model constructed")
-    with open("cnn_obs.md", "a") as file:
+    with open("CNN.md", "a") as file:
         file.write(f"## {trainClass}\n")
         file.write(f"- LOSS = {loss}\n")
         file.write(f"- ACC. = {accuracy}\n")
         print(f"## {trainClass} CNN")
-        print(f"- LOSS = {loss}")
-        print(f"- ACC. = {accuracy}")
+        print(f"|\tLOSS - {loss}")
+        print(f"|\tACC. - {accuracy}")
     return model
         
 def applySNN(trainClass, normalFeatures, normalLabels, cnnModel):
     featuresTrain, featuresTest, labelsTrain, labelsTest = \
         prepareModelInput(trainClass, normalFeatures, normalLabels)
-    # print(featuresTrain.shape, labelsTrain.shape)
     
     trainClasses = ["Normal", trainClass]
 
@@ -182,7 +180,7 @@ def applySNN(trainClass, normalFeatures, normalLabels, cnnModel):
     loss, accuracy = snnModel.evaluate(featuresTest, labelsTest, timesteps=256)
     sMax, s = snnModel.SpikeCounter(featuresTrain, timesteps=256)
     n = snnModel.NeuronNumbers(mode=0)
-    with open("snn_obs.md", "a") as file:
+    with open("SNN.md", "a") as file:
         file.write(f"## {trainClass}\n")
         file.write(f"- LOSS = {loss}\n")
         file.write(f"-  ACC = {accuracy}\n")
@@ -190,8 +188,8 @@ def applySNN(trainClass, normalFeatures, normalLabels, cnnModel):
         file.write(f"-    s = {s}\n")
         file.write(f"-    n = {n}\n")
         print(f"## {trainClass} SNN")
-        print(f"- LOSS = {loss}")
-        print(f"- ACC. = {accuracy}")
+        print(f"|\tLOSS - {loss}")
+        print(f"|\tACC. - {accuracy}")
 
 normalFeatures, normalLabels = extractFeaturesAndLabels("Normal", 0)
 for trainClass in TRAIN_CLASSES[: -1]:

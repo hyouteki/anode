@@ -131,7 +131,7 @@ def makeModelForIndividualClass(trainClass, normalFeatures, normalLabels):
     )
     model.save(f"../models/individual/opticalflow/{trainClass}")
     loss, accuracy = model.evaluate(featuresTest, labelsTest)
-    with open("OF-CNNLSTM_obs.md", "a") as file:
+    with open("OF-CNNLSTM.md", "a") as file:
         file.write(f"## {trainClass}\n")
         file.write(f"- LOSS = {loss}\n")
         file.write(f"- ACC. = {accuracy}\n")
@@ -141,5 +141,5 @@ def makeModelForIndividualClass(trainClass, normalFeatures, normalLabels):
 
 
 normalFeatures, normalLabels = extractFeaturesAndLabels("Normal", 0)
-for trainClass in TRAIN_CLASSES[3: -1]:
+for trainClass in TRAIN_CLASSES[: -1]:
     makeModelForIndividualClass(trainClass, normalFeatures, normalLabels)
