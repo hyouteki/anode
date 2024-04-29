@@ -70,7 +70,7 @@ if __name__ == "__main__":
     videoCapture = cv2.VideoCapture(0 if videoPath == "cam" else videoPath)    
     frameCount = 0
     start = currentMilliTime()
-    fps = videoCapture.get(cv2.CAP_PROP_FPS)
+    fps = 30 if (fps := videoCapture.get(cv2.CAP_PROP_FPS)) == 0 else fps
     
     while videoCapture.isOpened():
         frameCount += 1

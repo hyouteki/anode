@@ -122,6 +122,7 @@ def prepareModelInput(trainClass, normalFeatures, normalLabels):
 
 def makeModelForIndividualClass(trainClass, normalFeatures, normalLabels, force=False):
     if os.path.exists(f"../models/individual/snn/{trainClass}.cnn.h5") and not force:
+        print(f"Info: Cached CNN({trainClass})")
         return load_model(f"../models/individual/snn/{trainClass}.cnn.h5")
     featuresTrain, featuresTest, labelsTrain, labelsTest = \
         prepareModelInput(trainClass, normalFeatures, normalLabels)

@@ -9,6 +9,10 @@ from tensorflow.keras.models import load_model
 from termcolor import colored
 from parameters import *
 
+import sys
+sys.path.append("../src/spkeras/")
+from spkeras.models import cnn_to_snn
+
 ENABLE_BUZZER = False
 if ENABLE_BUZZER:
     from gpiozero import Buzzer
@@ -25,13 +29,26 @@ SKIP_FRAME_WINDOW = max(int(FRAME_COUNT / SEQUENCE_LENGTH), 1)
 def currentMilliTime():
     return round(time.time() * 1000)
 
-class CnnModel:
-    def __init__(self, modelName):
-        self.model = load_model(f"../models/OF-CNN/{modelName}.cnn.h5")
+class MyModel:
+    def __init__(self, modelName, architecture):
+        cnnModel = load_model(f"../models/OF-CNN/{modelName}.cnn.h5")
+        self.architecture = architecture
+        if architecture == "OF-CNN":
+            self.model = cnnModel
+        elif architecture == "OF-SNN":
+            self.model = cnn_to_snn(cnnModel)
+        elif architecture == "OF-SNNLSTM":
+            self.model = cnn_to_snn(cnnModel)
+            self.modelLstm = load_model(f"models/OF-SNNLSTM/{modelName}.snn-lstm.h5")
+        else:
+            print("Error: invalid architecture expected(OF-CNN, OF-SNN, OF-SNNLSTM)")
+            exit(1)
+            
     def predict(self, features):
         startTime = currentMilliTime()
         predictions = self.model.predict(features)
-        predictions = [np.mean(predictions[:, 0]), np.mean(predictions[:, 1])]
+        predictions = self.modelLstm.predict(predictions) if architecture == "OF-SNNLSTM" \
+            else [np.mean(predictions[:, 0]), np.mean(predictions[:, 1])]
         endTime = currentMilliTime()
         print(colored(f"PredictionTime({(endTime-startTime)/1000:.4f} secs)", "green"))
         return predictions
@@ -69,9 +86,8 @@ if __name__ == "__main__":
     videoCapture = cv2.VideoCapture(0 if videoPath == "cam" else videoPath)    
     frameCount = 0
     start = currentMilliTime()
-    fps = videoCapture.get(cv2.CAP_PROP_FPS)
-    model = CnnModel(modelName) if architecture == "OF-CNN" else None
-    assert model != None
+    fps = 30 if (fps := videoCapture.get(cv2.CAP_PROP_FPS)) == 0 else fps
+    model = MyModel(modelName, architecture)
     
     while videoCapture.isOpened():
         frameCount += 1
@@ -117,7 +133,7 @@ if __name__ == "__main__":
             else:
                 if ENABLE_BUZZER:
                     buzzer.off()
-                            
+
     end = currentMilliTime()
     timeTaken = (end-start)/1000
     videoLength = frameCount/fps
