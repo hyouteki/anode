@@ -19,18 +19,19 @@ IMAGE_WIDTH = 128
 IMAGE_DIMENSION = (IMAGE_HEIGHT, IMAGE_WIDTH)
 
 def computeOpticalFlow(lastFrame, frame):
-    return cv2.calcOpticalFlowFarneback(lastFrame, frame, None,
-                                        0.5, 3, 15, 3, 5, 1.2, 0)
+    return cv2.calcOpticalFlowFarneback(lastFrame, frame, None, 0.5, 3, 15, 3, 5, 1.2, 0)
 
 def extractOpticalFlowFeatures(flow):
     return [np.mean(flow), np.std(flow), np.max(flow), np.min(flow)]   
+
+def preprocessFrame(frame):
+    return cv2.resize(cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY), IMAGE_DIMENSION) / 255
 
 def frameExtraction(videoPath):
     frames = []
     videoReader = cv2.VideoCapture(videoPath)
     frameCount = int(videoReader.get(cv2.CAP_PROP_FRAME_COUNT))
     skipFrameWindow = max(int(frameCount/SEQUENCE_LENGTH), 1)
-    lastFrame = None
     accumulatedFlow = np.zeros((*IMAGE_DIMENSION, 2))
     
     for i in range(SEQUENCE_LENGTH):
@@ -38,18 +39,15 @@ def frameExtraction(videoPath):
         success, frame = videoReader.read()
         if not success:
             break
-        frame = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
-        frame = cv2.resize(frame, IMAGE_DIMENSION) / 255
-        if lastFrame is None:
-            lastFrame = frame
+        frames.append(preprocessFrame(frame))
+        if len(frames) == 1:
             continue
-        accumulatedFlow += computeOpticalFlow(lastFrame, frame)
-        frames.append(frame)
+        accumulatedFlow += computeOpticalFlow(frames[-2], frames[-1])
     videoReader.release()
 
     accumulatedFlow = np.transpose(accumulatedFlow, (2, 0, 1))
     frames.extend(accumulatedFlow)
-    return frames
+    return frames[1: ]
 
 def extractFeaturesAndLabels(className, classId):
     features, labels = [], []
@@ -65,23 +63,25 @@ def extractFeaturesAndLabels(className, classId):
     return features, labels
 
 def createModelArchitecture(trainClasses):
+    inputShape = (SEQUENCE_LENGTH+1, *IMAGE_DIMENSION, 1)
+    conv2dParams = {"padding": "same", "activation": "relu"}
     model = Sequential()
-    model.add(TimeDistributed(Conv2D(16, (3, 3), padding="same", activation="relu"),
-                              input_shape=(SEQUENCE_LENGTH+1, *IMAGE_DIMENSION, 1)))
+
+    model.add(TimeDistributed(Conv2D(16, (3, 3), **conv2dParams), input_shape=inputShape))
     model.add(TimeDistributed(MaxPooling2D((4, 4))))
     model.add(TimeDistributed(Dropout(0.25)))
 
-    model.add(TimeDistributed(Conv2D(32, (3, 3), padding="same", activation="relu")))
+    model.add(TimeDistributed(Conv2D(32, (3, 3), **conv2dParams)))
     model.add(TimeDistributed(MaxPooling2D((4, 4))))
     model.add(TimeDistributed(Dropout(0.25)))
 
-    model.add(TimeDistributed(Conv2D(64, (3, 3), padding="same", activation="relu")))
+    model.add(TimeDistributed(Conv2D(64, (3, 3), **conv2dParams)))
     model.add(TimeDistributed(MaxPooling2D((2, 2))))
     model.add(TimeDistributed(Dropout(0.25)))
 
-    model.add(TimeDistributed(Conv2D(64, (3, 3), padding="same", activation="relu")))
+    model.add(TimeDistributed(Conv2D(64, (3, 3), **conv2dParams)))
     model.add(TimeDistributed(MaxPooling2D((2, 2))))
-    # model.add(TimeDistributed(Dropout(0.25)))
+    model.add(TimeDistributed(Dropout(0.25)))
 
     model.add(TimeDistributed(Flatten()))
     model.add(LSTM(32))
@@ -131,15 +131,15 @@ def makeModelForIndividualClass(trainClass, normalFeatures, normalLabels):
     )
     model.save(f"../models/individual/opticalflow/{trainClass}")
     loss, accuracy = model.evaluate(featuresTest, labelsTest)
-    with open("ind_of_obs.md", "a") as file:
+    with open("OF-CNNLSTM_obs.md", "a") as file:
         file.write(f"## {trainClass}\n")
         file.write(f"- LOSS = {loss}\n")
         file.write(f"- ACC. = {accuracy}\n")
         print(f"## {trainClass}")
-        print(f"- LOSS = {loss}")
-        print(f"- ACC. = {accuracy}")
+        print(f"|\tLOSS - {loss}")
+        print(f"|\tACC. - {accuracy}")
 
 
 normalFeatures, normalLabels = extractFeaturesAndLabels("Normal", 0)
-for trainClass in TRAIN_CLASSES[:-1]:
+for trainClass in TRAIN_CLASSES[3: -1]:
     makeModelForIndividualClass(trainClass, normalFeatures, normalLabels)
