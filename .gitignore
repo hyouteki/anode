@@ -4,3 +4,4 @@
 *.ini
 keras/UCF50/
 __pycache__/
+3rdparty/

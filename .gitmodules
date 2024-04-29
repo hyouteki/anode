@@ -1,0 +1,3 @@
+[submodule "src/spkeras"]
+	path = src/spkeras
+	url = https://github.com/hyouteki/spkeras

@@ -8,7 +8,7 @@ import tensorflow as tf
 from parameters import *
 
 MODELS = {
-    "arson": "Arson.tflite",
+    "arson": "Arson92.tflite",
     "explosion": "Explosion.tflite", 
     "road_accidents": "RoadAccidents.tflite",
     "shooting": "Shooting.tflite",

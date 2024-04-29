@@ -1,2 +1,0 @@
-install:
-	pip install fvcore

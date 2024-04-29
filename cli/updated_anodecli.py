@@ -22,6 +22,8 @@ if ENABLE_BUZZER:
     from gpiozero import Buzzer
     buzzer = Buzzer(17)
 
+ENABLE_IMSHOW = False
+    
 WINDOW_SCALE = 8
 SEQUENCE_LENGTH = 39
 FRAME_COUNT = SEQUENCE_LENGTH
@@ -87,7 +89,8 @@ if __name__ == "__main__":
         if not success:
             videoCapture.release()
             break
-        cv2.imshow('Frame',frame)
+        if ENABLE_IMSHOW:
+            cv2.imshow("Frame", frame)
         if(cv2.waitKey(1) & 0xFF == ord('q')):
             break
         
