@@ -1,4 +1,15 @@
-## Inference Analysis
-VideoLength(27.266666666666666 secs), TimeElapsed(53.1570 secs)
-TimeRealtimeRatio(1.9495)
-NumPredictions(390), PredictionRatio(0.4768)
+## Arson
+- LOSS = 0.05438957363367081
+- ACC. = 0.9780611991882324
+## RoadAccidents
+- LOSS = 0.03845454007387161
+- ACC. = 0.9729729890823364
+## Explosion
+- LOSS = 0.05511627346277237
+- ACC. = 0.9780611991882324
+## Vandalism
+- LOSS = 0.05811372771859169
+- ACC. = 0.9765306115150452
+## Shooting
+- LOSS = 0.04025588557124138
+- ACC. = 0.9846938848495483

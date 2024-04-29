@@ -27,14 +27,16 @@ def computeOpticalFlow(lastFrame, frame):
                                         0.5, 3, 15, 3, 5, 1.2, 0)
 
 def extractOpticalFlowFeatures(flow):
-    return [np.mean(flow), np.std(flow), np.max(flow), np.min(flow)]   
+    return [np.mean(flow), np.std(flow), np.max(flow), np.min(flow)]
+
+def preprocessFrame(frame):
+    return cv2.resize(cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY), IMAGE_DIMENSION) / 255
 
 def frameExtraction(videoPath):
     frames = []
     videoReader = cv2.VideoCapture(videoPath)
     frameCount = int(videoReader.get(cv2.CAP_PROP_FRAME_COUNT))
     skipFrameWindow = max(int(frameCount/SEQUENCE_LENGTH), 1)
-    lastFrame = None
     accumulatedFlow = np.zeros((*IMAGE_DIMENSION, 2))
     
     for i in range(SEQUENCE_LENGTH):
@@ -42,18 +44,15 @@ def frameExtraction(videoPath):
         success, frame = videoReader.read()
         if not success:
             break
-        frame = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
-        frame = cv2.resize(frame, IMAGE_DIMENSION) / 255
-        if lastFrame is None:
-            lastFrame = frame
+        frames.append(preprocessFrame(frame))
+        if len(frames) == 1:
             continue
-        accumulatedFlow += computeOpticalFlow(lastFrame, frame)
-        frames.append(frame)
+        accumulatedFlow += computeOpticalFlow(frames[-2], frames[-1])
     videoReader.release()
 
     accumulatedFlow = np.transpose(accumulatedFlow, (2, 0, 1))
     frames.extend(accumulatedFlow)
-    return frames
+    return frames[1: ]
 
 def extractFeaturesAndLabels(className, classId, force=False):
     if os.path.exists(f"{className}.cache.pkl") and not force:
@@ -182,7 +181,7 @@ def makeModelForIndividualClass(trainClass, normalFeatures, normalLabels, force=
     )
     model.save(f"../models/individual/snn/{trainClass}.cnn.h5")
     loss, accuracy = model.evaluate(featuresTest, labelsTest)
-    with open("cnn.obs.md", "a") as file:
+    with open("CNN.md", "a") as file:
         file.write(f"## {trainClass}\n")
         file.write(f"- LOSS = {loss}\n")
         file.write(f"- ACC. = {accuracy}\n")
@@ -206,7 +205,7 @@ def applySNN(trainClass, normalFeatures, normalLabels, cnnModel, force=True):
     sMax, s = snnModel.SpikeCounter(featuresTrain, timesteps=256)
     n = snnModel.NeuronNumbers(mode=0)
     
-    with open("snn.obs.md", "a") as file:
+    with open("SNN.md", "a") as file:
         file.write(f"## {trainClass}\n")
         file.write(f"- LOSS = {loss}\n")
         file.write(f"-  ACC = {accuracy}\n")
@@ -228,7 +227,7 @@ def makeSnnLstmModel(trainClass, snnModel, force=False):
     
     featuresTrain, featuresTest, labelsTrain, labelsTest = \
         prepareLstmInput(trainClass, normalFeatures, normalLabels, snnModel)
-    print(f"Debug: CNN({trainClass}) featuresTrain.shape({featuresTrain.shape}), ",
+    print(f"Debug: SNNLSTM({trainClass}) featuresTrain.shape({featuresTrain.shape}), ",
           f"labelsTrain.shape({labelsTrain.shape})")
     
     model = createLstmModelArchitecture()
@@ -262,11 +261,11 @@ def makeSnnLstmModel(trainClass, snnModel, force=False):
     )
     model.save(f"../models/individual/snn/{trainClass}.snn-lstm.h5")
     loss, accuracy = model.evaluate(featuresTest, labelsTest)
-    with open("snn-lstm.obs.md", "a") as file:
+    with open("SNNLSTM.md", "a") as file:
         file.write(f"## {trainClass}\n")
         file.write(f"- LOSS = {loss}\n")
         file.write(f"- ACC. = {accuracy}\n")
-    print(f"Obs: SNN.LSTM({trainClass}) model constructed")
+    print(f"Obs: SNNLSTM({trainClass}) model constructed")
     print(f"|\tLOSS - {loss}")
     print(f"|\tACC. - {accuracy}")
     return model

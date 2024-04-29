@@ -161,7 +161,7 @@ def makeModelForIndividualClass(trainClass, normalFeatures, normalLabels, force=
     model.save(f"../models/individual/snn/{trainClass}.cnn.h5")
     loss, accuracy = model.evaluate(featuresTest, labelsTest)
     print(f"Debug: {trainClass} CNN model constructed")
-    with open("CNN.md", "a") as file:
+    with open("OF-CNN.md", "a") as file:
         file.write(f"## {trainClass}\n")
         file.write(f"- LOSS = {loss}\n")
         file.write(f"- ACC. = {accuracy}\n")
@@ -181,7 +181,7 @@ def applySNN(trainClass, normalFeatures, normalLabels, cnnModel):
     loss, accuracy = snnModel.evaluate(featuresTest, labelsTest, timesteps=256)
     sMax, s = snnModel.SpikeCounter(featuresTrain, timesteps=256)
     n = snnModel.NeuronNumbers(mode=0)
-    with open("SNN.md", "a") as file:
+    with open("OF-SNN.md", "a") as file:
         file.write(f"## {trainClass}\n")
         file.write(f"- LOSS = {loss}\n")
         file.write(f"-  ACC = {accuracy}\n")
