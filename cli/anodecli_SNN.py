@@ -6,6 +6,7 @@ import numpy as np
 import pickle
 import tensorflow as tf
 from tensorflow.keras.models import load_model
+from sklearn.model_selection import train_test_split
 from termcolor import colored
 from parameters import *
 
@@ -32,13 +33,25 @@ def currentMilliTime():
 class MyModel:
     def __init__(self, modelName, architecture):
         cnnModel = load_model(f"../models/OF-CNN/{modelName}.cnn.h5")
+
         self.architecture = architecture
         if architecture == "OF-CNN":
             self.model = cnnModel
-        elif architecture == "OF-SNN":
-            self.model = cnn_to_snn(cnnModel)
+            return
+
+        print("Debug: Extracting featuresTrain from ds cache")
+        normalFeatures, normalLabels = pickle.load(open(f"../ds/ucfc/Normal.cache.pkl", "rb"))
+        features, labels = pickle.load(open(f"../ds/ucfc/{modelName}.cache.pkl", "rb"))        
+        features = np.concatenate((features, normalFeatures), axis=0)
+        features = np.expand_dims(features, axis=-1)
+        labels = np.concatenate((labels, normalLabels), axis=0)
+        featuresTrain = train_test_split(features, labels, test_size=TRAIN_TEST_SPLIT,
+                                         shuffle=True, random_state=SEED)[0]
+        print(f"Debug: Started building SNN({modelName})")
+        self.model = cnn_to_snn(signed_bit=0)(cnnModel, featuresTrain)
+        if architecture == "OF-SNN":
+            return
         elif architecture == "OF-SNNLSTM":
-            self.model = cnn_to_snn(cnnModel)
             self.modelLstm = load_model(f"models/OF-SNNLSTM/{modelName}.snn-lstm.h5")
         else:
             print("Error: invalid architecture expected(OF-CNN, OF-SNN, OF-SNNLSTM)")
