@@ -15,7 +15,7 @@ from tensorflow.keras.layers import (
     Flatten,
     Dense,
     Conv2D,
-    conv3D,
+    Conv3D,
     MaxPooling2D,
     MaxPooling3D,
     LSTM,
